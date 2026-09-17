@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="728" height="90" viewBox="0 0 728 90" role="img" aria-labelledby="klookBannerTitle">
+  <title id="klookBannerTitle">클룩 렌터카 예약 배너</title>
+  <defs>
+    <linearGradient id="klookBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff9457"/>
+      <stop offset="55%" stop-color="#ff7a3d"/>
+      <stop offset="100%" stop-color="#f2602a"/>
+    </linearGradient>
+    <linearGradient id="klookGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect x="0" y="0" width="728" height="90" rx="10" fill="url(#klookBg)"/>
+  <rect x="0" y="0" width="728" height="45" rx="10" fill="url(#klookGloss)"/>
+
+  <!-- decorative road stripe along the bottom -->
+  <rect x="0" y="78" width="728" height="12" rx="0" fill="#00000014"/>
+  <g stroke="#ffffff" stroke-opacity="0.55" stroke-width="3" stroke-linecap="round">
+    <line x1="20" y1="84" x2="46" y2="84"/>
+    <line x1="66" y1="84" x2="92" y2="84"/>
+    <line x1="112" y1="84" x2="138" y2="84"/>
+    <line x1="158" y1="84" x2="184" y2="84"/>
+    <line x1="204" y1="84" x2="230" y2="84"/>
+    <line x1="250" y1="84" x2="276" y2="84"/>
+  </g>
+
+  <!-- simple original car icon (not a brand logo) -->
+  <g transform="translate(22,22)">
+    <ellipse cx="34" cy="52" rx="34" ry="6" fill="#00000022"/>
+    <path d="M6 34 C6 27 11 26 16 22 C20 19 25 12 34 12 C43 12 47 18 51 22 C58 24 62 27 62 34 C62 39 59 41 55 41 L13 41 C9 41 6 39 6 34 Z" fill="#fffaf5"/>
+    <path d="M20 22 C23 17 27 15 34 15 C41 15 45 18 48 22 L44 22 C41 19 38 18 34 18 C30 18 27 19 24 22 Z" fill="#f2602a"/>
+    <circle cx="19" cy="41" r="8" fill="#2c2622"/>
+    <circle cx="19" cy="41" r="3.2" fill="#fffaf5"/>
+    <circle cx="49" cy="41" r="8" fill="#2c2622"/>
+    <circle cx="49" cy="41" r="3.2" fill="#fffaf5"/>
+    <circle cx="10" cy="30" r="2.6" fill="#ffe6a8"/>
+  </g>
+
+  <!-- text block -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" fill="#ffffff">
+    <text x="104" y="32" font-size="12.5" font-weight="600" fill="#fff1e6" opacity="0.92">든든한 여행의 시작</text>
+    <text x="104" y="55" font-size="21" font-weight="700" fill="#ffffff">클룩(Klook) 렌터카 예약하기</text>
+    <text x="104" y="73" font-size="10.5" fill="#fff1e6" opacity="0.85">제휴 링크 · 예약하시면 트콤 가이드 제작에 도움이 돼요</text>
+  </g>
+
+  <!-- CTA pill -->
+  <g transform="translate(566,27)">
+    <rect x="0" y="0" width="140" height="36" rx="18" fill="#ffffff"/>
+    <text x="70" y="23" font-family="-apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="14" font-weight="700" fill="#e35a1f" text-anchor="middle">지금 예약하기 &#8599;</text>
+  </g>
+</svg>

@@ -1,0 +1,654 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 아직 준비 단계라 검색엔진에는 노출하지 않습니다. 공개할 때 사람이 index, follow로 바꿉니다. -->
+<meta name="robots" content="noindex, nofollow">
+<title>카가와 여행, 뭘 보고 뭘 버릴까 · 트립콤파니 여행지도</title>
+<meta name="description" content="다카마츠를 베이스로 카가와 현의 여기저기를 돌아다니는 형태.">
+<link rel="canonical" href="https://tripcompany.world/city/jp-kagawa/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:title" content="카가와, 뭘 보고 뭘 버릴까">
+<meta property="og:url" content="https://tripcompany.world/city/jp-kagawa/">
+<meta property="og:image" content="https://tripcompany.world/images/og-image.jpg">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "name": "카가와 여행 가이드 · 트립콤파니 여행지도",
+  "url": "https://tripcompany.world/city/jp-kagawa/",
+  "about": { "@type": "Place", "name": "카가와", "address": { "@type": "PostalAddress", "addressCountry": "JP" } },
+  "publisher": { "@type": "Organization", "name": "트립콤파니" }
+}</script>
+<style>
+  :root{
+    --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
+    --ink:#1f2523; --ink-soft:#5b655f; --bg:#f7f7f4; --panel:#ffffff;
+    --border:#e3e2dc; --money:#96692a; --money-soft:#f1e4cc; --money-line:#e3cfa0;
+    --warn:#b4451f; --warn-soft:#fdeee7; --warn-line:#f3cfc1;
+    --slot:#8a7ab8; --slot-soft:#f1eefa;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  a{ color:var(--accent-strong); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  section{ padding:52px 0; scroll-margin-top:64px; }
+  h2{ font-size:1.45rem; font-weight:800; margin:0 0 4px; letter-spacing:-0.01em; }
+  .section-sub{ color:var(--ink-soft); font-size:0.92rem; margin:0 0 24px; }
+
+  .preview-bar{ background:#2b2f2d; color:#fff; font-size:0.84rem; padding:10px 24px; text-align:center; }
+  .preview-bar b{ color:#ffd9a0; }
+
+  .hero{ background:linear-gradient(150deg,var(--accent-strong) 0%,var(--accent) 62%,#2c8570 100%); color:#fff; padding:56px 0 48px; }
+  .hero .eyebrow{ font-size:0.8rem; font-weight:700; opacity:0.9; letter-spacing:0.02em; }
+  .hero h1{ font-size:2.4rem; font-weight:800; margin:10px 0 14px; letter-spacing:-0.02em; }
+  .hero .tagline{ font-size:1.08rem; max-width:52ch; margin:0; }
+  .hero .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .hero .chips a{ color:#fff; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.28);
+    border-radius:999px; padding:5px 13px; font-size:0.82rem; font-weight:600; text-decoration:none; }
+  .checked{ display:inline-block; margin-top:18px; font-size:0.78rem; background:rgba(0,0,0,0.18);
+    border-radius:6px; padding:4px 10px; }
+
+  .slot{ display:inline-flex; align-items:center; gap:6px; background:var(--slot-soft); color:var(--slot);
+    border:1px dashed var(--slot); border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
+  .slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+  .slot-hint{ font-weight:500; opacity:0.85; }
+
+  .tc{ margin:6px 0 0; font-size:0.94rem; color:var(--ink); font-weight:600; }
+  .tc-empty{ font-weight:400; }
+  .tc-warn{ color:var(--warn); }
+  .fact{ margin:6px 0 0; font-size:0.86rem; color:var(--ink-soft); padding-left:10px; border-left:2px solid var(--border); }
+
+  .timing{ background:var(--warn-soft); border-top:1px solid var(--warn-line); border-bottom:1px solid var(--warn-line); }
+  .timing h2{ color:var(--warn); }
+  .timing-list{ list-style:none; padding:0; margin:0; display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .timing-item{ background:#fff; border:1px solid var(--warn-line); border-radius:12px; padding:16px 18px; }
+  .timing-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .timing-target{ font-weight:700; }
+  .ttype{ font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:999px; }
+  .ttype-book{ background:#fde2d6; color:#a53b12; }
+  .ttype-tide{ background:#d8e8f6; color:#1c567f; }
+  .ttype-hours{ background:#f5e6c4; color:#8a6412; }
+  .ttype-closed{ background:#e6e3ef; color:#54497a; }
+  .ttype-transit{ background:#dcebe3; color:#1f6f5c; }
+
+  .area{ margin-bottom:34px; scroll-margin-top:64px; }
+  .area-name{ font-size:1.05rem; margin:0 0 12px; display:flex; align-items:baseline; gap:8px; }
+  .area-count{ font-size:0.8rem; color:var(--ink-soft); font-weight:500; }
+  .spot-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:15px 17px; }
+  .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .spot-name{ font-weight:700; }
+  .spot-alt{ font-size:0.78rem; color:var(--ink-soft); }
+  .grade{ font-size:0.74rem; font-weight:800; padding:3px 10px; border-radius:999px; }
+  .grade-must{ background:var(--accent-soft); color:var(--accent-strong); }
+  .grade-maybe{ background:#eeece4; color:#6b6555; }
+  .grade-reco{ background:#d8e8f6; color:#1c567f; }
+  .grade-skip{ background:#f0e4e0; color:#8d4b33; }
+  .ts{ font-size:0.76rem; font-weight:700; background:#eceae2; border-radius:5px; padding:2px 7px; text-decoration:none; }
+
+  .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
+  .cond{ margin:6px 0 0; font-size:0.83rem; color:var(--money); }
+  .stayed{ font-size:0.74rem; padding:2px 8px; border-radius:999px; }
+  .stayed.yes{ background:var(--accent-soft); color:var(--accent-strong); font-weight:700; }
+  .stayed.no{ background:#eeece4; color:var(--ink-soft); }
+
+  table{ width:100%; border-collapse:collapse; font-size:0.9rem; background:var(--panel);
+    border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--border); }
+  th{ background:#f2f1ec; font-size:0.8rem; color:var(--ink-soft); }
+  td.num{ text-align:right; font-variant-numeric:tabular-nums; font-weight:700; }
+  td.muted{ color:var(--ink-soft); font-weight:400; }
+  .diff{ font-size:0.82rem; color:var(--ink-soft); }
+  .diff.up{ color:var(--warn); font-weight:700; }
+
+  .vi-item{ display:flex; align-items:center; gap:10px; background:var(--panel);
+    border:1px solid var(--border); border-radius:10px; padding:10px 14px; }
+  .is-example{ opacity:0.72; }
+  .ex-tag{ font-size:0.7rem; background:#eceae2; color:var(--ink-soft); border-radius:5px; padding:2px 7px; margin-left:6px; }
+  .empty-note{ color:var(--ink-soft); font-size:0.9rem; background:var(--panel);
+    border:1px dashed var(--border); border-radius:12px; padding:18px; }
+
+  footer{ background:var(--accent-strong); color:#fff; padding:40px 0; font-size:0.88rem; }
+  footer a{ color:#fff; }
+
+  @media (max-width:820px){
+    .hero h1{ font-size:1.9rem; }
+    .timing-list, .spot-list, .rule-list{ grid-template-columns:1fr; }
+    table{ display:block; overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">일본 · 카가와</p>
+    <h1>카가와, 뭘 보고 뭘 버릴까</h1>
+    <p class="tagline">우동과 현대미술의 지역. 일본에서도 유니크한 포지션.</p>
+    <p class="tagline" style="font-size:0.95rem; opacity:0.92;">다카마츠를 베이스로 카가와 현의 여기저기를 돌아다니는 형태.</p>
+    <div class="chips">
+      <a href="#area-1">다카마쓰</a><a href="#area-2">나오시마</a><a href="#area-3">데시마</a><a href="#area-4">쇼도시마</a><a href="#area-5">서부</a>
+    </div>
+    <span class="checked">정보 기준: 2026-09-01 00:00:00</span>
+  </div>
+</div>
+
+<section class="timing" id="timing"><div class="wrap"><h2>놓치면 여행이 망가지는 것</h2><p class="section-sub">예약·간조·영업시간처럼 <strong>가서 알면 늦는 것</strong>만 모았습니다. 회색 글은 사전조사한 사실, 굵은 글은 트립콤파니가 직접 덧붙인 경고입니다.</p><ul class="timing-list">
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">지추미술관</span>
+        </div>
+        <p class="fact">온라인 사전예약 필수. 온라인 평일 ¥2,500 / 주말 ¥2,700, 현장 ¥2,800 / ¥3,000. 정원 제한.</p>
+        <p class="tc">휴대폰, 카메라 모두 촬영 금지</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">이우환미술관</span>
+        </div>
+        <p class="fact">예약 필수. 온라인 ¥1,200 / 현장 ¥1,400.</p>
+        <p class="tc">실내는 촬영 금지, 앞마당 조형물은 촬영 가능</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">베네세하우스 뮤지엄</span>
+        </div>
+        <p class="fact">예약 필수. 온라인 ¥1,300 / 현장 ¥1,500.</p>
+        <p class="tc">같은 티켓으로 밸리 갤러리까지 입장가능</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">이에프로젝트 킨자</span>
+        </div>
+        <p class="fact">예약 필수. 시간당 1명만 입장. 온라인 ¥600 / 현장 ¥700.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">이에프로젝트 미나미데라</span>
+        </div>
+        <p class="fact">예약 필수. 정원 제한. 온라인 ¥600 / 현장 ¥700.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">데시마미술관</span>
+        </div>
+        <p class="fact">예약 필수. 온라인 ¥1,800 / 현장 ¥2,000. 정원 제한.</p>
+        <p class="tc">본 건물은 촬영 금지, 그 외 부지나 카페는 촬영 가능</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-hours">영업시간</span>
+          <span class="timing-target">사누키 우동 가게 전반</span>
+        </div>
+        <p class="fact">가가와현 공식 안내: 당일 준비분 소진 시 영업 종료. 이른 시간 방문 권장. 점심 장사만 하는 곳 다수.</p>
+        <p class="tc">1타마(소), 2타마(중), 3타마(대). 그러나 2타마도 양이 많다</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-tide">간조</span>
+          <span class="timing-target">엔젤로드 (쇼도시마)</span>
+        </div>
+        <p class="fact">간조 시간에만 길이 드러남. 방문일 간조만조 시간 확인 필요.</p>
+        <p class="tc">물 때에 맞춰 여길 먼저 가거나, 올리브 공원 갔다가 돌아오거나</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-tide">간조+일몰</span>
+          <span class="timing-target">치치부가하마</span>
+        </div>
+        <p class="fact">선셋, 바람 안부는 날, 물이 적당히 빠졌을 때가 최고의 순간</p>
+        <p class="tc">조건을 맞추기가 까다롭다. 너무 기대하지 말자</p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-closed">휴관일</span>
+          <span class="timing-target">나오시마 미술관 휴관일</span>
+        </div>
+        <p class="fact">확인 필요 — 월요일 휴관이 일반적이나 시설·시즌별로 다름.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-transit">운행</span>
+          <span class="timing-target">다카마쓰항 ↔ 나오시마 페리</span>
+        </div>
+        <p class="fact">막차 시간 확인 필요. 오후 늦은 편에 승객 몰림.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li></ul></div></section>
+
+<section id="rules"><div class="wrap"><h2>당신의 조건이면 이렇게 하세요</h2><p class="section-sub">같은 도시라도 렌터카 유무와 일정 길이에 따라 답이 달라집니다.</p><ul class="rule-list">
+      <li class="rule">
+        <p class="rule-q">렌터카 있음</p>
+        <p class="tc">치치부가하마 갈 것 아니면 굳이?</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">렌터카 없음 (뚜벅이)</p>
+        <p class="tc">이게 보편적인 다카마츠 여행자</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">2박 3일 이하</p>
+        <p class="tc">중간 하루는 무조건 섬에 가자</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">3박 4일 이상</p>
+        <p class="tc">치치부가하마, 타카야 신사 등 현 서쪽까지 고려 가능</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">나오시마 당일치기</p>
+        <p class="tc">우선 순위는 베네세 아트 사이트 - 나오시마조</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">나오시마 1박</p>
+        <p class="tc">베네세 하우스라는 독특한 호텔 숙박이 가능</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">쇼도시마까지 넣을 것인가</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Rules.recommendation</span><span class="slot-hint">이 조건이면 어떻게 하라고 할 것인가</span></span></p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">예술 위주로 왔다</p>
+        <p class="tc">나오시마가 최우선으로 챙기고 그 다음 데시마 미술관</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">우동 위주로 왔다</p>
+        <p class="tc">렌터카를 빌려 교외지역 우동가게들을 돌아다녀도 좋다</p>
+      </li>
+      <li class="rule">
+        <p class="rule-q">하늘이 맑을 때</p>
+        <p class="tc">치치부가하마의 간조만조를 체크해볼 것</p>
+      </li></ul></div></section>
+
+<section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">(24/24곳 판정 완료)</span></h2>
+    <p class="section-sub">
+      <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
+      <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
+      <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
+      <span class="grade grade-skip">굳이</span> 유명한데 우리는 추천 안 함
+    </p>
+    
+      <div class="area" id="area-1">
+        <h3 class="area-name">다카마쓰 <span class="area-count">5곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">리쓰린공원</span>
+            <span class="spot-alt">Ritsurin Garden · 栗林公園</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">특별명승. 미슐랭 그린가이드 3스타.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">다카마쓰성(다마모공원)</span>
+            <span class="spot-alt">Tamamo Park (Takamatsu Castle Ruins) · 高松城跡 玉藻公園</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">바닷물을 끌어들인 해자성.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">야시마</span>
+            <span class="spot-alt">Yashima · 屋島</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">마루가메마치 상점가</span>
+            <span class="spot-alt">Marugamemachi Shopping Street · 丸亀町商店街</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">선포트 다카마쓰</span>
+            <span class="spot-alt">Sunport Takamatsu · サンポート高松</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">페리 터미널 인접.</p>
+        </li></ul>
+      </div>
+      <div class="area" id="area-2">
+        <h3 class="area-name">나오시마 <span class="area-count">9곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">지추미술관</span>
+            <span class="spot-alt">Chichu Art Museum · 地中美術館</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">예약 필수 — Timing 탭 참조.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">이우환미술관</span>
+            <span class="spot-alt">Lee Ufan Museum · 李禹煥美術館</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">예약 필수.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">베네세하우스 뮤지엄</span>
+            <span class="spot-alt">Benesse House Museum · ベネッセハウス ミュージアム</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">예약 필수.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">이에프로젝트 킨자</span>
+            <span class="spot-alt">Art House Project – Kinza · 家プロジェクト きんざ</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">예약 필수. 시간당 1명.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">이에프로젝트 미나미데라</span>
+            <span class="spot-alt">Art House Project – Minamidera · 家プロジェクト 南寺</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">예약 필수.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">노란 호박</span>
+            <span class="spot-alt">Yellow Pumpkin · 黄かぼちゃ</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">베네세하우스 방면 해안.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">빨간 호박</span>
+            <span class="spot-alt">Red Pumpkin · 赤かぼちゃ</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">미야노우라항 앞.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">나오시마 신미술관</span>
+            <span class="spot-alt">直島新美術館</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">2025년 개관.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">혼무라 지구</span>
+            <span class="spot-alt">Honmura District · 本村地区</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">이에프로젝트 집결지.</p>
+        </li></ul>
+      </div>
+      <div class="area" id="area-3">
+        <h3 class="area-name">데시마 <span class="area-count">1곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">데시마미술관</span>
+            <span class="spot-alt">Teshima Art Museum · 豊島美術館</span>
+            
+          </div>
+          <p class="tc">다카마쓰 여행의 하이라이트</p>
+          
+          <p class="fact">예약 필수.</p>
+        </li></ul>
+      </div>
+      <div class="area" id="area-4">
+        <h3 class="area-name">쇼도시마 <span class="area-count">4곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">엔젤로드</span>
+            <span class="spot-alt">Angel Road · エンジェルロード</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">간조 시간 제약.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">올리브공원</span>
+            <span class="spot-alt">Shodoshima Olive Park · 小豆島オリーブ公園</span>
+            
+          </div>
+          <p class="tc">쇼도시마 가면 꼭 들러야 함</p>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">간카케이 로프웨이</span>
+            <span class="spot-alt">Kankakei Ropeway · 寒霞渓ロープウェイ</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">단풍철 혼잡.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">24의 눈동자 영화마을</span>
+            <span class="spot-alt">Twenty-Four Eyes Movie Village · 二十四の瞳映画村</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          
+        </li></ul>
+      </div>
+      <div class="area" id="area-5">
+        <h3 class="area-name">서부 <span class="area-count">5곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">고토히라궁(곤피라산)</span>
+            <span class="spot-alt">Kotohira-gu Shrine (Konpira-san) · 金刀比羅宮</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">본궁까지 785계단, 오쿠샤까지 1,368계단.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">젠쓰지</span>
+            <span class="spot-alt">Zentsuji Temple · 善通寺</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">시코쿠 88개소 75번 사찰.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">마루가메성</span>
+            <span class="spot-alt">Marugame Castle · 丸亀城</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">현존 천수 12성 중 하나.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">치치부가하마</span>
+            <span class="spot-alt">Chichibugahama Beach · 父母ヶ浜</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">간조+일몰 조건.</p>
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-reco">권장</span>
+            <span class="spot-name">타카야 신사</span>
+            <span class="spot-alt">Takaya Shrine (Sky Torii Gate) · 高屋神社</span>
+            
+          </div>
+          <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+          
+          <p class="fact">차량 통행 제한 시기 확인 필요.</p>
+        </li></ul>
+      </div>
+  </div>
+</section>
+
+<section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>어느 구역에 묵을까</h2>
+    <p class="section-sub">호텔 하나를 찍어주지 않고 <strong>구역</strong>으로 답합니다. 직접 묵은 곳과 그렇지 않은 곳을 구분해서 표시합니다.</p>
+    <p class="section-sub" style="margin-top:-14px;">
+      <span class="grade grade-must">추천</span> 고민되면 여기, 도시당 1곳만 ·
+      <span class="grade grade-maybe">조건부</span> 특정 조건일 때만 ·
+      <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
+    </p>
+    <ul class="stay-list">
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-must">추천</span>
+          <span class="spot-name">JR 다카마츠역 주변</span>
+          <span class="stayed no">직접 투숙하지 않음 · 구역 기준 추천</span>
+        </div>
+        <p class="cond">조건: 몸이 가장 편하다</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-maybe">조건부</span>
+          <span class="spot-name">가와라마치·마루가메마치</span>
+          <span class="stayed no">직접 투숙하지 않음 · 구역 기준 추천</span>
+        </div>
+        <p class="cond">조건: 밤에 술</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-maybe">조건부</span>
+          <span class="spot-name">나오시마 섬내</span>
+          <span class="stayed no">직접 투숙하지 않음 · 구역 기준 추천</span>
+        </div>
+        <p class="cond">조건: 베네세 아트</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-skip">비추천</span>
+          <span class="spot-name">쇼도시마 섬내</span>
+          <span class="stayed no">직접 투숙하지 않음 · 구역 기준 추천</span>
+        </div>
+        
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-skip">비추천</span>
+          <span class="spot-name">공항 근처</span>
+          <span class="stayed no">직접 투숙하지 않음 · 구역 기준 추천</span>
+        </div>
+        
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li></ul>
+  </div>
+</section>
+
+<section id="video-index" style="background:var(--panel); border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2>영상에서 바로 찾아보기</h2>
+    <p class="section-sub">글로 옮기지 않고 해당 장면으로 보냅니다.</p>
+    <ul class="vi-list">
+      <li class="vi-item is-example">
+        <span class="ts">4:12</span>
+        <span>(예시) 숙소 구역 비교</span>
+        <span class="ex-tag">예시</span>
+      </li></ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+    <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

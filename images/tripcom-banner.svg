@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="400" height="70" viewBox="0 0 400 70" role="img" aria-labelledby="tripcomBannerTitle">
+  <title id="tripcomBannerTitle">트립닷컴 호텔 특가 예약 배너</title>
+  <defs>
+    <linearGradient id="tripcomBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3a8dff"/>
+      <stop offset="55%" stop-color="#2166e0"/>
+      <stop offset="100%" stop-color="#153f8c"/>
+    </linearGradient>
+    <linearGradient id="tripcomGloss" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="400" height="70" rx="10" fill="url(#tripcomBg)"/>
+  <rect x="0" y="0" width="400" height="34" rx="10" fill="url(#tripcomGloss)"/>
+
+  <!-- simple original hotel-building icon (not a brand logo) -->
+  <g transform="translate(14,12)">
+    <ellipse cx="19" cy="49" rx="19" ry="4" fill="#00000022"/>
+    <rect x="2" y="4" width="34" height="42" rx="5" fill="#fffaf5"/>
+    <rect x="9" y="12" width="7" height="7" rx="1.5" fill="#2166e0"/>
+    <rect x="22" y="12" width="7" height="7" rx="1.5" fill="#2166e0"/>
+    <rect x="9" y="24" width="7" height="7" rx="1.5" fill="#2166e0"/>
+    <rect x="22" y="24" width="7" height="7" rx="1.5" fill="#2166e0"/>
+    <rect x="14" y="36" width="10" height="10" rx="1.5" fill="#2166e0"/>
+  </g>
+
+  <!-- text block -->
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" fill="#ffffff">
+    <text x="64" y="32" font-size="16.5" font-weight="700" fill="#ffffff">트립닷컴 호텔 특가 예약</text>
+    <text x="64" y="49" font-size="9.3" fill="#eaf2ff" opacity="0.88">제휴 링크 · 예약하시면 트콤 가이드 제작에 도움이 돼요</text>
+  </g>
+
+  <!-- CTA pill -->
+  <g transform="translate(316,20)">
+    <rect x="0" y="0" width="72" height="30" rx="15" fill="#ffffff"/>
+    <text x="36" y="20" font-family="-apple-system, BlinkMacSystemFont, 'Pretendard', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif" font-size="12.5" font-weight="700" fill="#1a52b8" text-anchor="middle">예약 &#8599;</text>
+  </g>
+</svg>

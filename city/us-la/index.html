@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 아직 준비 단계라 검색엔진에는 노출하지 않습니다. 공개할 때 사람이 index, follow로 바꿉니다. -->
+<meta name="robots" content="noindex, nofollow">
+<title>로스앤젤레스 여행, 뭘 보고 뭘 버릴까 · 트립콤파니 여행지도</title>
+<meta name="description" content="넓게 퍼진 해안가 대도시 여기저기 현대적인 것들이 조금씩 흩어져 있다.">
+<link rel="canonical" href="https://tripcompany.world/city/us-la/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:title" content="로스앤젤레스, 뭘 보고 뭘 버릴까">
+<meta property="og:url" content="https://tripcompany.world/city/us-la/">
+<meta property="og:image" content="https://tripcompany.world/images/og-image.jpg">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "name": "로스앤젤레스 여행 가이드 · 트립콤파니 여행지도",
+  "url": "https://tripcompany.world/city/us-la/",
+  "about": { "@type": "Place", "name": "로스앤젤레스", "address": { "@type": "PostalAddress", "addressCountry": "US" } },
+  "publisher": { "@type": "Organization", "name": "트립콤파니" }
+}</script>
+<style>
+  :root{
+    --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
+    --ink:#1f2523; --ink-soft:#5b655f; --bg:#f7f7f4; --panel:#ffffff;
+    --border:#e3e2dc; --money:#96692a; --money-soft:#f1e4cc; --money-line:#e3cfa0;
+    --warn:#b4451f; --warn-soft:#fdeee7; --warn-line:#f3cfc1;
+    --slot:#8a7ab8; --slot-soft:#f1eefa;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  a{ color:var(--accent-strong); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  section{ padding:52px 0; scroll-margin-top:64px; }
+  h2{ font-size:1.45rem; font-weight:800; margin:0 0 4px; letter-spacing:-0.01em; }
+  .section-sub{ color:var(--ink-soft); font-size:0.92rem; margin:0 0 24px; }
+
+  .preview-bar{ background:#2b2f2d; color:#fff; font-size:0.84rem; padding:10px 24px; text-align:center; }
+  .preview-bar b{ color:#ffd9a0; }
+
+  .hero{ background:linear-gradient(150deg,var(--accent-strong) 0%,var(--accent) 62%,#2c8570 100%); color:#fff; padding:56px 0 48px; }
+  .hero .eyebrow{ font-size:0.8rem; font-weight:700; opacity:0.9; letter-spacing:0.02em; }
+  .hero h1{ font-size:2.4rem; font-weight:800; margin:10px 0 14px; letter-spacing:-0.02em; }
+  .hero .tagline{ font-size:1.08rem; max-width:52ch; margin:0; }
+  .hero .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .hero .chips a{ color:#fff; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.28);
+    border-radius:999px; padding:5px 13px; font-size:0.82rem; font-weight:600; text-decoration:none; }
+  .checked{ display:inline-block; margin-top:18px; font-size:0.78rem; background:rgba(0,0,0,0.18);
+    border-radius:6px; padding:4px 10px; }
+
+  .slot{ display:inline-flex; align-items:center; gap:6px; background:var(--slot-soft); color:var(--slot);
+    border:1px dashed var(--slot); border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
+  .slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+  .slot-hint{ font-weight:500; opacity:0.85; }
+
+  .tc{ margin:6px 0 0; font-size:0.94rem; color:var(--ink); font-weight:600; }
+  .tc-empty{ font-weight:400; }
+  .tc-warn{ color:var(--warn); }
+  .fact{ margin:6px 0 0; font-size:0.86rem; color:var(--ink-soft); padding-left:10px; border-left:2px solid var(--border); }
+
+  .timing{ background:var(--warn-soft); border-top:1px solid var(--warn-line); border-bottom:1px solid var(--warn-line); }
+  .timing h2{ color:var(--warn); }
+  .timing-list{ list-style:none; padding:0; margin:0; display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .timing-item{ background:#fff; border:1px solid var(--warn-line); border-radius:12px; padding:16px 18px; }
+  .timing-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .timing-target{ font-weight:700; }
+  .ttype{ font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:999px; }
+  .ttype-book{ background:#fde2d6; color:#a53b12; }
+  .ttype-tide{ background:#d8e8f6; color:#1c567f; }
+  .ttype-hours{ background:#f5e6c4; color:#8a6412; }
+  .ttype-closed{ background:#e6e3ef; color:#54497a; }
+  .ttype-transit{ background:#dcebe3; color:#1f6f5c; }
+
+  .area{ margin-bottom:34px; scroll-margin-top:64px; }
+  .area-name{ font-size:1.05rem; margin:0 0 12px; display:flex; align-items:baseline; gap:8px; }
+  .area-count{ font-size:0.8rem; color:var(--ink-soft); font-weight:500; }
+  .spot-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:15px 17px; }
+  .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .spot-name{ font-weight:700; }
+  .spot-alt{ font-size:0.78rem; color:var(--ink-soft); }
+  .grade{ font-size:0.74rem; font-weight:800; padding:3px 10px; border-radius:999px; }
+  .grade-must{ background:var(--accent-soft); color:var(--accent-strong); }
+  .grade-maybe{ background:#eeece4; color:#6b6555; }
+  .grade-reco{ background:#d8e8f6; color:#1c567f; }
+  .grade-skip{ background:#f0e4e0; color:#8d4b33; }
+  .ts{ font-size:0.76rem; font-weight:700; background:#eceae2; border-radius:5px; padding:2px 7px; text-decoration:none; }
+
+  .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
+  .cond{ margin:6px 0 0; font-size:0.83rem; color:var(--money); }
+  .stayed{ font-size:0.74rem; padding:2px 8px; border-radius:999px; }
+  .stayed.yes{ background:var(--accent-soft); color:var(--accent-strong); font-weight:700; }
+  .stayed.no{ background:#eeece4; color:var(--ink-soft); }
+
+  table{ width:100%; border-collapse:collapse; font-size:0.9rem; background:var(--panel);
+    border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--border); }
+  th{ background:#f2f1ec; font-size:0.8rem; color:var(--ink-soft); }
+  td.num{ text-align:right; font-variant-numeric:tabular-nums; font-weight:700; }
+  td.muted{ color:var(--ink-soft); font-weight:400; }
+  .diff{ font-size:0.82rem; color:var(--ink-soft); }
+  .diff.up{ color:var(--warn); font-weight:700; }
+
+  .vi-item{ display:flex; align-items:center; gap:10px; background:var(--panel);
+    border:1px solid var(--border); border-radius:10px; padding:10px 14px; }
+  .is-example{ opacity:0.72; }
+  .ex-tag{ font-size:0.7rem; background:#eceae2; color:var(--ink-soft); border-radius:5px; padding:2px 7px; margin-left:6px; }
+  .empty-note{ color:var(--ink-soft); font-size:0.9rem; background:var(--panel);
+    border:1px dashed var(--border); border-radius:12px; padding:18px; }
+
+  footer{ background:var(--accent-strong); color:#fff; padding:40px 0; font-size:0.88rem; }
+  footer a{ color:#fff; }
+
+  @media (max-width:820px){
+    .hero h1{ font-size:1.9rem; }
+    .timing-list, .spot-list, .rule-list{ grid-template-columns:1fr; }
+    table{ display:block; overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+
+<div class="preview-bar">
+  <b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.
+</div>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">미국 · 로스앤젤레스</p>
+    <h1>로스앤젤레스, 뭘 보고 뭘 버릴까</h1>
+    <p class="tagline">LA는 렌터카 없으면 반나절이 도로 위에서 그냥 날아갑니다.</p>
+    <p class="tagline" style="font-size:0.95rem; opacity:0.92;">넓게 퍼진 해안가 대도시 여기저기 현대적인 것들이 조금씩 흩어져 있다.</p>
+    <div class="chips">
+      
+    </div>
+    <span class="checked">정보 기준: 2026-06</span>
+  </div>
+</div>
+
+<section class="timing" id="timing"><div class="wrap"><h2>놓치면 여행이 망가지는 것</h2><p class="section-sub">예약·간조·영업시간처럼 <strong>가서 알면 늦는 것</strong>만 모았습니다. 회색 글은 사전조사한 사실, 굵은 글은 트립콤파니가 직접 덧붙인 경고입니다.</p><ul class="timing-list">
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">디즈니랜드</span>
+        </div>
+        <p class="fact">만 3세 이상은 입장권과 파크 예약 모두 필요. 날짜마다 별도 예약 필요. 인기 날짜 조기 마감.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">유니버설 스튜디오</span>
+        </div>
+        <p class="fact">날짜별 변동요금 적용. 일반권 $109부터. Express $199부터. 일부 체험은 별도 티켓 필요.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-hours">무료 예약</span>
+          <span class="timing-target">게티 센터</span>
+        </div>
+        <p class="fact">입장 무료. 시간 지정 예약 필요. 주차 유료. 현금 결제 불가.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-hours">무료 예약</span>
+          <span class="timing-target">게티 빌라</span>
+        </div>
+        <p class="fact">입장 무료. 시간 지정 예약 필수. 주차 유료. 예약 없이 도보 입장 불가.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-book">예약</span>
+          <span class="timing-target">영화 스튜디오 투어</span>
+        </div>
+        <p class="fact">스튜디오별 사전 예약 필요. 워너브라더스 $76부터. 상품별 연령·신분증 조건 확인 필요.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li>
+      <li class="timing-item">
+        <div class="timing-head">
+          <span class="ttype ttype-hours">경기별 티켓</span>
+          <span class="timing-target">각종 스포츠 관람</span>
+        </div>
+        <p class="fact">좌석 지정 티켓 필요. 인기 경기 조기 매진 가능. 구매 후 환불·교환 제한.</p>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Timing.tc_warn</span><span class="slot-hint">트콤이 직접 겪은 주의점 한 줄</span></span></p>
+      </li></ul></div></section>
+
+
+
+<section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">(0/0곳 판정 완료)</span></h2>
+    <p class="section-sub">
+      <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
+      <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
+      <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
+      <span class="grade grade-skip">굳이</span> 유명한데 우리는 추천 안 함
+    </p>
+    <p class="empty-note">Spots 탭이 비어 있습니다.</p>
+  </div>
+</section>
+
+<section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>어느 구역에 묵을까</h2>
+    <p class="section-sub">호텔 하나를 찍어주지 않고 <strong>구역</strong>으로 답합니다. 직접 묵은 곳과 그렇지 않은 곳을 구분해서 표시합니다.</p>
+    <p class="section-sub" style="margin-top:-14px;">
+      <span class="grade grade-must">추천</span> 고민되면 여기, 도시당 1곳만 ·
+      <span class="grade grade-maybe">조건부</span> 특정 조건일 때만 ·
+      <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
+    </p>
+    <p class="empty-note">Stay 탭이 비어 있습니다.</p>
+  </div>
+</section>
+
+<section id="video-index" style="background:var(--panel); border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2>영상에서 바로 찾아보기</h2>
+    <p class="section-sub">글로 옮기지 않고 해당 장면으로 보냅니다.</p>
+    <p class="empty-note">VideoIndex 탭이 비어 있습니다.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+    <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

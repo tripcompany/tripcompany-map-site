@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title id="page-title">도시 가이드 · 트립콤파니 여행지도</title>
+
+<!-- ===== SEO 기본 메타 태그 =====
+     title/description/canonical/OG/트위터 태그/JSON-LD는 전부 city.js의
+     renderHero()가 도시 데이터를 불러온 뒤 도시별로 다시 채워 넣습니다
+     (아래 내용은 city.js 실행 전 잠깐 보이는 기본값일 뿐입니다). 이 페이지는
+     아직 공개 전이라 검색엔진이 못 보게 막아뒀습니다(robots: noindex,
+     nofollow). 실제로 공개할 때 이 값을 "index, follow"로 바꾸면 되고,
+     canonical/OG/JSON-LD는 이미 도시별로 채워지도록 만들어둔 상태라 그때
+     따로 손댈 건 없습니다. 자세한 설명은 README "도시 페이지 검색 노출"
+     항목 참고. -->
+<meta id="meta-description" name="description" content="트립콤파니 여행지도 도시 가이드">
+<meta name="robots" content="noindex, nofollow"><!-- 공개 전까지는 검색엔진에 안 잡히게 막아둡니다. 실제로 공개할 때 이 줄을 "index, follow"로 바꾸세요. -->
+<link id="page-canonical" rel="canonical" href="https://tripcompany.world/city.html">
+<meta name="theme-color" content="#1f6f5c">
+
+<!-- ===== Open Graph / 트위터(X) 카드 — 도시별 값은 city.js가 채웁니다 ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:locale" content="ko_KR">
+<meta id="og-title" property="og:title" content="도시 가이드 · 트립콤파니 여행지도">
+<meta id="og-description" property="og:description" content="트립콤파니 여행지도 도시 가이드">
+<meta id="og-url" property="og:url" content="https://tripcompany.world/city.html">
+<meta property="og:image" content="https://tripcompany.world/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta id="twitter-title" name="twitter:title" content="도시 가이드 · 트립콤파니 여행지도">
+<meta id="twitter-description" name="twitter:description" content="트립콤파니 여행지도 도시 가이드">
+<meta name="twitter:image" content="https://tripcompany.world/images/og-image.jpg">
+
+<!-- ===== 구조화 데이터(JSON-LD) — city.js가 도시별 내용으로 채웁니다 ===== -->
+<script id="page-jsonld" type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "도시 가이드 · 트립콤파니 여행지도",
+  "url": "https://tripcompany.world/city.html",
+  "inLanguage": "ko-KR",
+  "isPartOf": { "@type": "WebSite", "name": "트립콤파니 여행지도", "url": "https://tripcompany.world/" }
+}
+</script>
+
+<link rel="icon" href="favicon.ico" sizes="any">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<style>
+  :root{
+    --accent:#1f6f5c;
+    --accent-strong:#164e41;
+    --accent-soft:#cfe3de;
+    --ink:#1f2523;
+    --ink-soft:#5b655f;
+    --bg:#f7f7f4;
+    --panel:#ffffff;
+    --border:#e3e2dc;
+    --money:#96692a;
+    --money-soft:#f1e4cc;
+    --money-line:#e3cfa0;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  a{ color:var(--accent-strong); text-decoration:none; }
+  a:hover{ color:var(--accent); }
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 32px; }
+  section{ padding:64px 0; scroll-margin-top:74px; }
+  h2{ font-size:1.5rem; font-weight:800; margin:0 0 6px; letter-spacing:-0.01em; }
+  .section-sub{ color:var(--ink-soft); font-size:0.95rem; margin:0 0 28px; }
+
+  .toc-sticky{ position:sticky; top:0; z-index:100; background:var(--bg); box-shadow:0 2px 12px rgba(22,78,65,0.08); }
+  .toc-nav{ max-width:1040px; margin:0 auto; padding:16px 32px; display:flex; flex-wrap:wrap; gap:6px 22px; font-size:0.84rem; }
+  .toc-nav a{ color:var(--ink-soft); font-weight:600; padding:3px 1px; border-bottom:2px solid transparent; transition:color .15s ease, border-color .15s ease; }
+  .toc-nav a:hover{ color:var(--accent-strong); }
+  .toc-nav a.active{ color:var(--accent-strong); border-bottom-color:var(--accent); }
+
+  .money-badge, .seo-badge{
+    display:inline-flex; align-items:center; gap:5px;
+    font-size:0.72rem; font-weight:700; letter-spacing:0.02em;
+    padding:3px 10px; border-radius:999px; margin-bottom:12px;
+  }
+  .money-badge{ background:var(--money-soft); color:var(--money); border:1px solid var(--money-line); }
+  .seo-badge{ background:var(--accent-soft); color:var(--accent-strong); border:1px solid var(--accent-soft); }
+
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; border-radius:9px; font-weight:700; font-size:0.92rem; padding:13px 22px; cursor:pointer; border:1px solid transparent; white-space:nowrap; }
+  .btn-sm{ padding:9px 16px; font-size:0.84rem; border-radius:8px; }
+  .btn-money{ background:var(--money); color:#fff; }
+  .card{ background:var(--panel); border:1px solid var(--border); border-radius:14px; }
+  .grid{ display:grid; gap:20px; }
+
+  .video-thumb{ aspect-ratio:16/10; position:relative; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--accent),var(--accent-strong)); }
+  .play-dot{ width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.92); display:flex; align-items:center; justify-content:center; }
+  .channel-pill{ display:inline-flex; width:fit-content; font-size:0.68rem; font-weight:700; padding:2px 8px; border-radius:999px; }
+  .channel-pill.trip{ background:var(--accent-soft); color:var(--accent-strong); }
+  .channel-pill.trekom{ background:#fde7d3; color:#a4560f; }
+
+  .stay-card{ padding:22px; display:flex; flex-direction:column; gap:10px; }
+  .tour-card{ padding:16px; display:flex; flex-direction:column; gap:10px; align-items:flex-start; }
+  .prep-card{ padding:20px; display:flex; flex-direction:column; gap:10px; }
+  .prep-icon{ width:40px; height:40px; border-radius:10px; background:var(--money-soft); color:var(--money); display:flex; align-items:center; justify-content:center; }
+  .timeslot-card{ padding:20px; display:flex; flex-direction:column; gap:14px; }
+  .timeslot-icon{ width:34px; height:34px; border-radius:9px; background:var(--accent-soft); color:var(--accent-strong); display:flex; align-items:center; justify-content:center; }
+  .timeslot-spot{ display:flex; flex-direction:column; gap:3px; padding-top:12px; border-top:1px solid var(--border); }
+  .timeslot-spot:first-of-type{ padding-top:0; border-top:none; }
+
+  .comment-note{ font-size:0.78rem; font-style:italic; color:var(--ink-soft); line-height:1.55; border-left:2px solid var(--accent-soft); padding-left:8px; }
+
+  .budget-item{ padding:14px 0; border-bottom:1px solid var(--border); display:flex; flex-direction:column; gap:8px; }
+  .budget-row{ display:grid; grid-template-columns:1fr 1fr; align-items:center; }
+
+  .faq-item{ border-top:1px solid var(--border); padding:18px 0; }
+  .faq-item summary{ list-style:none; cursor:pointer; display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .faq-item summary::-webkit-details-marker{ display:none; }
+  .faq-item summary svg{ transition:transform .15s ease; flex-shrink:0; }
+  .faq-item[open] summary svg{ transform:rotate(180deg); }
+  .faq-item .faq-answer{ margin:12px 0 0; color:var(--ink-soft); font-size:0.88rem; line-height:1.7; }
+  .faq-answer p{ margin:0 0 10px; }
+  .faq-answer p:last-child{ margin-bottom:0; }
+
+  .empty-note{ color:var(--ink-soft); font-size:0.88rem; padding:18px 0; }
+
+  @media (max-width:860px){
+    .grid{ grid-template-columns:1fr !important; }
+
+    /* 영상이 8~10개까지 늘어나면 세로로 쭉 나열될 때 화면이 너무 길어져서,
+       모바일에서는 옆으로 넘겨보는 가로 스크롤 줄로 바꿉니다(유튜브·넷플릭스
+       앱의 영상 목록과 같은 방식). 카드 하나가 화면의 78%만 차지해서 다음
+       카드가 오른쪽에 살짝 보이기 때문에, 넘길 수 있다는 걸 안내 문구 없이도
+       바로 알 수 있습니다. */
+    #videos-grid{
+      display:flex !important;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:10px;
+    }
+    #videos-grid > a{
+      flex:0 0 78%;
+      scroll-snap-align:start;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ 히어로 ============ -->
+  <div id="hero-band" style="background:linear-gradient(150deg,var(--accent-strong) 0%,var(--accent) 62%,#2c8570 100%); position:relative; overflow:hidden;">
+    <div class="wrap" style="position:relative; padding:76px 32px 84px; display:flex; flex-direction:column; gap:22px; color:#fff;">
+      <div id="hero-eyebrow" style="display:flex; align-items:center; gap:10px; font-size:0.82rem; font-weight:600; opacity:0.9;"></div>
+      <h1 id="hero-title" style="font-size:2.7rem; font-weight:800; margin:0; letter-spacing:-0.015em; max-width:14ch;"></h1>
+      <p id="hero-tagline" style="font-size:1.1rem; max-width:46ch; margin:0; opacity:0.95;"></p>
+      <div id="hero-chips" style="display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;"></div>
+    </div>
+  </div>
+
+  <!-- ============ 목차 (플로팅) ============ -->
+  <div class="toc-sticky">
+    <nav class="toc-nav" id="toc-nav">
+      <a href="#videos" data-toc>영상</a>
+      <a href="#stay" data-toc>숙소</a>
+      <a href="#tours" data-toc>투어&amp;액티비티</a>
+      <a href="#prep" data-toc>여행 준비물</a>
+      <a href="#spots" data-toc>시간대별 추천</a>
+      <a href="#budget" data-toc>예산</a>
+      <a href="#faq" data-toc>FAQ</a>
+    </nav>
+  </div>
+
+  <!-- ============ 영상 모음 ============ -->
+  <section id="videos">
+    <div class="wrap">
+      <h2>트립콤파니가 다녀왔어요</h2>
+      <p class="section-sub" id="videos-sub"></p>
+      <div class="grid" id="videos-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));"></div>
+    </div>
+  </section>
+
+  <!-- ============ 숙소 제안 ============ -->
+  <section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="wrap">
+      <span class="money-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        제휴 · 예약 수익
+      </span>
+      <h2>어디서 묵을까</h2>
+      <p class="section-sub">성격이 다른 지역들을 미리 소개해드리고, 예약은 숙소 검색 결과 전체로 한 번에 연결해드려요</p>
+      <div class="grid" id="stay-grid" style="grid-template-columns:repeat(3,minmax(0,1fr));"></div>
+      <div id="stay-cta" style="display:flex; justify-content:center; margin-top:24px;"></div>
+    </div>
+  </section>
+
+  <!-- ============ 투어 & 액티비티 ============ -->
+  <section id="tours">
+    <div class="wrap">
+      <span class="money-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        제휴 · 예약 수익
+      </span>
+      <h2>가면 꼭 해야 할 것</h2>
+      <p class="section-sub">순위는 트립콤파니가 직접 정했어요 — 왜 이 순서인지도 짧게 남겼어요</p>
+      <div class="grid" id="tours-grid" style="grid-template-columns:repeat(5,minmax(0,1fr));"></div>
+    </div>
+  </section>
+
+  <!-- ============ 여행 준비물 ============ -->
+  <section id="prep" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="wrap">
+      <span class="money-badge">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        제휴 · 신규
+      </span>
+      <h2>떠나기 전 이것만 챙기세요</h2>
+      <p class="section-sub">준비물 2가지, 한 번에 예약할 수 있어요</p>
+      <div class="grid" id="prep-grid" style="grid-template-columns:repeat(2,minmax(0,1fr)); max-width:560px;"></div>
+    </div>
+  </section>
+
+  <!-- ============ 시간대별 추천 장소 ============ -->
+  <section id="spots">
+    <div class="wrap">
+      <h2>시간대별 가볼만한 곳</h2>
+      <p class="section-sub">일정은 사람마다 다르니까, 시간대에 맞춰 골라 보세요</p>
+      <div class="grid" id="spots-grid" style="grid-template-columns:repeat(4,minmax(0,1fr));"></div>
+    </div>
+  </section>
+
+  <!-- ============ 예산 가이드 ============ -->
+  <section id="budget" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+    <div class="wrap" style="max-width:800px;">
+      <h2 id="budget-title">1인 예상 경비</h2>
+      <p class="section-sub" id="budget-sub"></p>
+      <div style="display:flex; flex-direction:column;">
+        <div style="display:grid; grid-template-columns:1fr 1fr; padding:10px 0; border-bottom:2px solid var(--ink); font-size:0.78rem; font-weight:700; color:var(--ink-soft); text-transform:uppercase; letter-spacing:0.03em;">
+          <span>항목</span><span style="text-align:right;">예상 범위</span>
+        </div>
+        <div id="budget-list"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 로컬 특가 ============ -->
+  <section id="localad-section" style="padding:40px 0; display:none;">
+    <div class="wrap" id="localad-slot"></div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq">
+    <div class="wrap" style="max-width:760px;">
+      <h2>자주 묻는 질문</h2>
+      <p class="section-sub" id="faq-sub"></p>
+      <div id="faq-list" style="display:flex; flex-direction:column;"></div>
+    </div>
+  </section>
+
+  <!-- ============ 하단 (여행하는트콤 홍보) ============ -->
+  <section style="background:var(--accent-strong); padding:56px 0;">
+    <div class="wrap" style="display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap;">
+      <div style="display:flex; flex-direction:column; gap:8px;">
+        <span style="display:inline-flex; align-items:center; gap:6px; width:fit-content; background:rgba(255,255,255,0.14); border:1px solid rgba(255,255,255,0.3); color:#fff; font-size:0.72rem; font-weight:700; letter-spacing:0.03em; padding:4px 11px; border-radius:999px;">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 5l13 7-13 7z"/></svg>
+          자매 채널
+        </span>
+        <span style="color:#fff; font-weight:800; font-size:1.2rem;">이 여행, 브이로그로도 만나보세요</span>
+        <span id="footer-sub" style="color:rgba(255,255,255,0.75); font-size:0.88rem;"></span>
+      </div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a id="footer-subscribe" href="#" target="_blank" rel="noopener" class="btn" style="background:#fff; color:var(--accent-strong);">여행하는트콤 구독하기</a>
+        <a href="index.html" class="btn" style="background:rgba(255,255,255,0.12); color:#fff; border:1px solid rgba(255,255,255,0.5);">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20L3 12l6-8M3 12h18"/></svg>
+          지도에서 보기
+        </a>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<script src="city.js"></script>
+</body>
+</html>

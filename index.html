@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="naver-site-verification" content="224876f62c20b25342251d616c655dda12570a8b" />
+
+<title>트립콤파니 여행지도 · 도시를 누르면 그 지역 여행 영상이 전부</title>
+
+<!-- ===== SEO 기본 메타 태그 ===== -->
+<meta name="description" content="트립콤파니와 여행하는트콤의 나라별·도시별 여행 가이드 영상을 세계지도에서 한눈에 찾아보세요. 국가를 클릭하면 그 지역 현지 가이드 영상을 바로 볼 수 있습니다.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://tripcompany.world/">
+<meta name="theme-color" content="#1f6f5c">
+
+<!-- 검색엔진 소유 확인(선택 사항) — Google 서치 콘솔 / 네이버 서치어드바이저에서
+     사이트를 등록하면 <meta name="google-site-verification" content="..."> 또는
+     <meta name="naver-site-verification" content="..."> 형태의 태그를 발급해줍니다.
+     발급받으면 이 주석 아래에 그대로 붙여넣으세요. README 16번 항목 참고. -->
+
+<!-- ===== Open Graph (카카오톡·페이스북 등 공유 미리보기) ===== -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:locale" content="ko_KR">
+<meta property="og:title" content="트립콤파니 여행지도 · 도시를 누르면 그 지역 여행 영상이 전부">
+<meta property="og:description" content="나라를 선택하고, 도시별 현지 가이드 영상을 만나보세요.">
+<meta property="og:url" content="https://tripcompany.world/">
+<meta property="og:image" content="https://tripcompany.world/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+
+<!-- ===== 트위터(X) 카드 ===== -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="트립콤파니 여행지도 · 도시를 누르면 그 지역 여행 영상이 전부">
+<meta name="twitter:description" content="나라를 선택하고, 도시별 현지 가이드 영상을 만나보세요.">
+<meta name="twitter:image" content="https://tripcompany.world/images/og-image.jpg">
+
+<!-- ===== 파비콘 ===== -->
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+<!-- 첫 화면을 그리는 데 꼭 필요한 바깥 서버들에 미리 연결해둡니다(preconnect).
+     주소를 찾고(DNS) 연결하고 암호화 협상하는 시간이 실제 파일을 내려받기
+     전에 미리 끝나 있어서, 특히 모바일에서 지도와 영상 목록이 눈에 띄게
+     빨리 뜹니다. README 40번 항목 참고.
+       - cdn.jsdelivr.net : 지도 라이브러리(Leaflet)와 세계 국경 데이터
+       - docs.google.com  : 구글시트 CSV(나라/도시/영상 목록)
+       - img.youtube.com  : 영상 카드 썸네일 -->
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
+<link rel="preconnect" href="https://docs.google.com">
+<link rel="preconnect" href="https://img.youtube.com">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="style.css">
+
+<!-- ===== Google tag (gtag.js) — 측정 ID: G-54V354TPYY =====
+     실제 통계 수집 여부는 화면 하단 쿠키 동의 배너 선택에 따라 켜지고 꺼집니다.
+     자세한 설명은 analytics.js 주석과 README 16번 항목 참고. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="analytics.js"></script>
+
+<!-- ===== 구조화 데이터(JSON-LD) — 검색 결과에 사이트 이름/설명이 더 잘 표시되도록 돕습니다 ===== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "트립콤파니 여행지도",
+  "url": "https://tripcompany.world/",
+  "description": "트립콤파니와 여행하는트콤의 나라별·도시별 여행 가이드 영상을 세계지도에서 찾아보는 사이트",
+  "inLanguage": "ko-KR",
+  "publisher": {
+    "@type": "Organization",
+    "name": "트립콤파니",
+    "url": "https://tripcompany.world/",
+    "logo": "https://tripcompany.world/images/icon-512.png",
+    "sameAs": [
+      "https://www.youtube.com/@tripcompany93",
+      "https://www.youtube.com/@Tripcompany2"
+    ]
+  }
+}
+</script>
+</head>
+<body>
+
+<header class="site-header">
+  <!-- 사이트의 대표 제목(h1)입니다. 검색엔진이 "이 페이지가 무엇에 대한
+       페이지인지" 판단할 때 가장 먼저 보는 자리라, 보이는 모양은 그대로
+       두고 태그만 div → h1으로 바꿨습니다(README 40번 항목). -->
+  <h1 class="brand">트립콤파니 여행지도</h1>
+  <p class="brand-sub">나라를 선택하고, 도시별 현지 가이드 영상을 만나보세요</p>
+  <p id="site-stats" class="site-stats" aria-live="polite"></p>
+</header>
+
+<main class="layout">
+  <section class="map-pane">
+    <button id="back-btn" class="back-btn" type="button" title="내 위치 주변으로 이동">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
+      </svg>
+      <span class="back-btn-label">내 위치</span>
+    </button>
+    <button id="random-btn" class="random-btn" type="button" title="무작위로 다른 여행지 보기">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="3" y="3" width="18" height="18" rx="4"></rect>
+        <circle cx="8.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"></circle>
+        <circle cx="15.5" cy="8.5" r="1.4" fill="currentColor" stroke="none"></circle>
+        <circle cx="12" cy="12" r="1.4" fill="currentColor" stroke="none"></circle>
+        <circle cx="8.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"></circle>
+        <circle cx="15.5" cy="15.5" r="1.4" fill="currentColor" stroke="none"></circle>
+      </svg>
+      <span class="random-btn-label">랜덤 여행지</span>
+    </button>
+    <!-- 지도 위 도시 검색. 한글 이름(오사카), 영문(osaka), 나라 이름(일본)으로
+         찾을 수 있고, 고르면 주변 도시와의 거리에 맞춰 적당한 배율로 이동합니다. -->
+    <div class="map-search">
+      <div class="map-search-box">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="7"></circle>
+          <path d="M20 20l-3.5-3.5"></path>
+        </svg>
+        <input id="city-search-input" class="map-search-input" type="text"
+               placeholder="도시 검색" autocomplete="off" spellcheck="false"
+               aria-label="도시 검색" role="combobox" aria-expanded="false"
+               aria-controls="city-search-results" aria-autocomplete="list">
+        <button id="city-search-clear" class="map-search-clear" type="button" aria-label="검색어 지우기" hidden>&times;</button>
+      </div>
+      <ul id="city-search-results" class="map-search-results" role="listbox" aria-label="도시 검색 결과" hidden></ul>
+    </div>
+
+    <div id="map" role="application" aria-label="트립콤파니 여행지도"></div>
+    <div id="map-skeleton" class="map-skeleton" aria-hidden="true"></div>
+    <div id="map-status" class="map-status">
+      <span id="map-status-spinner" class="map-status-spinner"></span>
+      <span id="map-status-text" class="map-status-text">지도를 불러오는 중입니다&hellip;</span>
+    </div>
+    <div class="map-legend">
+      <span class="legend-item"><span class="legend-dot legend-dot-trip"></span>트립콤파니</span>
+      <span class="legend-item"><span class="legend-dot legend-dot-trekom"></span>여행하는트콤</span>
+      <span class="legend-item">
+        <span class="legend-combo">
+          <span class="legend-dot legend-dot-trip"></span>
+          <span class="legend-dot legend-dot-trekom"></span>
+        </span>
+        두 채널 모두
+      </span>
+      <span class="legend-item"><span class="legend-dot legend-dot-empty"></span>영상 준비중</span>
+      <span class="legend-item"><span class="legend-new-badge" aria-hidden="true">N</span>최근 업데이트</span>
+    </div>
+
+    <div id="video-modal" class="video-modal" hidden>
+      <div id="video-modal-backdrop" class="video-modal-backdrop"></div>
+      <div class="video-modal-dialog" role="dialog" aria-modal="true" aria-label="영상 재생">
+        <button id="video-modal-close" class="video-modal-close" type="button" aria-label="닫기">&times;</button>
+        <div class="video-modal-player">
+          <iframe id="video-modal-iframe" src="" title=""
+            allow="autoplay; encrypted-media; picture-in-picture; clipboard-write"
+            allowfullscreen></iframe>
+        </div>
+        <div class="video-modal-footer">
+          <p id="video-modal-title" class="video-modal-title"></p>
+          <a id="video-modal-yt-link" class="video-modal-yt-link" href="#" target="_blank" rel="noopener noreferrer">유튜브에서 보기 ↗</a>
+        </div>
+        <div id="video-modal-related" class="video-modal-related" hidden>
+          <p class="video-modal-related-label">이어서 볼 영상</p>
+          <div id="video-modal-related-list" class="video-modal-related-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <aside class="side-panel">
+    <div class="panel-heading-row">
+      <h2 id="panel-heading" class="panel-heading">지도에서 국가를 선택해보세요</h2>
+      <!-- 나라/도시를 고른 상태에서만 보이는 공유 버튼. 휴대폰에서는 카카오톡 등으로
+           바로 보낼 수 있는 기본 공유창이 뜨고, PC에서는 주소가 복사됩니다. -->
+      <button id="share-btn" class="share-btn" type="button" title="지금 보고 있는 지역의 링크 공유하기" hidden>
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="18" cy="5" r="3"></circle>
+          <circle cx="6" cy="12" r="3"></circle>
+          <circle cx="18" cy="19" r="3"></circle>
+          <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path>
+        </svg>
+        <span class="share-btn-label">공유</span>
+      </button>
+    </div>
+
+    <!-- 나라/도시를 고른 상태에서만 보이는 채널별 필터 탭입니다(app.js의
+         renderChannelTabs). 트립콤파니(오렌지)/여행하는트콤(파랑) 색은
+         .channel-tag-trip/.channel-tag-trekom과 통일했습니다. -->
+    <div id="channel-tabs" class="channel-tabs" role="tablist" aria-label="채널별로 영상 보기" hidden>
+      <button type="button" class="channel-tab channel-tab-all is-active" data-channel-filter="all" role="tab" aria-selected="true" aria-controls="video-list" tabindex="0">전체보기</button>
+      <button type="button" class="channel-tab channel-tab-trip" data-channel-filter="trip" role="tab" aria-selected="false" aria-controls="video-list" tabindex="-1">트립콤파니</button>
+      <button type="button" class="channel-tab channel-tab-trekom" data-channel-filter="trekom" role="tab" aria-selected="false" aria-controls="video-list" tabindex="-1">여행하는트콤</button>
+    </div>
+
+    <div id="video-list" class="video-list" role="tabpanel" aria-label="선택한 채널의 영상 목록">
+      <p class="panel-empty">짙게 표시된 국가를 클릭(모바일은 터치)하면 관련 가이드 영상을 보실 수 있습니다.</p>
+    </div>
+  </aside>
+</main>
+
+<div id="ad-slot-top" class="ad-slot ad-slot-leaderboard" aria-hidden="true">
+  <span>광고 영역 (728×90)</span>
+</div>
+
+<section class="latest-videos" aria-label="채널별 최신 영상">
+  <h2 class="latest-videos-heading"></h2>
+  <div class="latest-videos-row">
+    <div class="latest-video-frame">
+      <p class="latest-video-label">트콤 근황을 알려드림</p>
+      <div class="latest-video-embed">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=UUz4VpUpJdmIlWaUgAwIARGA"
+          title="여행하는트콤 최신 영상"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="latest-video-frame">
+      <p class="latest-video-label"></p>
+      <div class="latest-video-embed latest-video-ad">
+        <iframe
+          src="https://kr.trip.com/partners/ad/S19768275?Allianceid=10516094&SID=330926814&trip_sub1=%ED%95%98%EB%8B%A8"
+          id="S19768275"
+          title="트립닷컴 광고"
+          width="320" height="320"
+          frameborder="0" scrolling="no"
+          style="width:320px;height:320px;border:none;"
+          loading="lazy"></iframe>
+      </div>
+    </div>
+
+    <div class="latest-video-frame">
+      <p class="latest-video-label">트콤 최신 여행 가이드</p>
+      <div class="latest-video-embed">
+        <iframe
+          src="https://www.youtube-nocookie.com/embed/videoseries?list=UU0EQX5Z2TlaKeIw4O3ieZAQ"
+          title="트립콤파니 최신 영상"
+          loading="lazy"
+          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="channel-banner-section">
+  <nav class="channel-banner" aria-label="유튜브 채널 바로가기">
+    <a class="channel-card channel-card-trip" href="https://www.youtube.com/@tripcompany93" target="_blank" rel="noopener noreferrer">
+      <span class="channel-card-avatar">
+        <img class="channel-card-photo" src="images/host-trip.jpg" alt="트립콤파니">
+        <span class="channel-card-badge channel-card-badge-trip">
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </span>
+      <span class="channel-card-body">
+        <span class="channel-card-name">트립콤파니</span>
+        <span class="channel-card-desc">지구라는 행성 여행의 백과사전이 되고자 합니다</span>
+      </span>
+    </a>
+    <a class="channel-card channel-card-trekom" href="https://www.youtube.com/@Tripcompany2" target="_blank" rel="noopener noreferrer">
+      <span class="channel-card-avatar">
+        <img class="channel-card-photo" src="images/host-trekom.jpg" alt="여행하는트콤">
+        <span class="channel-card-badge channel-card-badge-trekom">
+          <svg viewBox="0 0 24 24" width="10" height="10" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+      </span>
+      <span class="channel-card-body">
+        <span class="channel-card-name">여행하는트콤</span>
+        <span class="channel-card-desc">가이드 뒤편의 진짜 여행, 브이로그로 그대로 담습니다</span>
+      </span>
+    </a>
+  </nav>
+</section>
+
+<footer class="site-footer">
+  <p>&copy; 2026 트립콤파니. 영상 데이터는 구글시트로 관리됩니다.</p>
+  <p class="site-footer-links">
+    <a href="privacy.html">개인정보처리방침</a>
+    <span class="site-footer-sep" aria-hidden="true">&middot;</span>
+    <a href="mailto:cms9304@gmail.com">문의: cms9304@gmail.com</a>
+  </p>
+</footer>
+
+<!-- 쿠키 동의 배너 (지도/외부 CDN과 무관하게 가장 먼저 동작) -->
+<script src="cookie-consent.js"></script>
+
+<!-- Leaflet (지도 엔진) -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<!-- topojson-client (세계 국경 데이터를 GeoJSON으로 변환) -->
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+
+<script src="data/sample-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

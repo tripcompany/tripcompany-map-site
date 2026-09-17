@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", sans-serif;
+      background: #0b0c0b;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 24px;
+      text-align: center;
+    }
+    h1 { font-size: 1.2rem; margin: 0 0 4px; }
+    .sub { color: #9aa3ab; font-size: 0.85rem; margin: 0 0 20px; }
+    #coords {
+      font-size: 0.82rem;
+      color: #cfd6dc;
+      background: #14171a;
+      border-radius: 8px;
+      padding: 10px 14px;
+      width: 100%;
+      max-width: 320px;
+      margin-bottom: 10px;
+    }
+    input {
+      width: 100%;
+      max-width: 320px;
+      padding: 12px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      border: 1px solid #2a2f33;
+      background: #14171a;
+      color: #ffffff;
+      font-size: 0.95rem;
+    }
+    input::placeholder { color: #6b7278; }
+    button {
+      width: 100%;
+      max-width: 320px;
+      padding: 15px;
+      border: none;
+      border-radius: 8px;
+      background: #3b6fd6;
+      color: #ffffff;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    button:disabled { background: #3a3d40; color: #8a8f93; }
+    #status { margin-top: 14px; font-size: 0.85rem; min-height: 20px; }
+  </style>
+</head>
+<body>
+  <h1>📍 트콤 지금 여기</h1>
+  <p class="sub">위치 권한을 허용하면 좌표를 자동으로 가져와요</p>
+
+  <div id="coords">위치 확인 중…</div>
+  <input id="locationName" type="text" placeholder="지명 (예: 모뉴먼트 밸리, 미국) — 생략 가능">
+  <button id="submitBtn" disabled>지금 위치로 업데이트</button>
+  <div id="status"></div>
+
+  <script>
+    let currentLat = null;
+    let currentLng = null;
+
+    function onSuccess(pos) {
+      currentLat = pos.coords.latitude;
+      currentLng = pos.coords.longitude;
+      document.getElementById("coords").textContent =
+        currentLat.toFixed(5) + ", " + currentLng.toFixed(5);
+      document.getElementById("submitBtn").disabled = false;
+    }
+
+    function onError(err) {
+      document.getElementById("coords").textContent =
+        "위치를 가져오지 못했어요 (" + err.message + "). 브라우저의 위치 권한 설정을 확인해주세요.";
+    }
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(onSuccess, onError, {
+        enableHighAccuracy: true,
+        timeout: 10000
+      });
+    } else {
+      document.getElementById("coords").textContent = "이 브라우저는 위치 확인을 지원하지 않아요.";
+    }
+
+    document.getElementById("submitBtn").addEventListener("click", function () {
+      if (currentLat === null || currentLng === null) return;
+      const btn = document.getElementById("submitBtn");
+      const statusEl = document.getElementById("status");
+      btn.disabled = true;
+      btn.textContent = "저장 중…";
+      statusEl.textContent = "";
+
+      const name = document.getElementById("locationName").value;
+
+      google.script.run
+        .withSuccessHandler(function () {
+          statusEl.textContent = "✅ 업데이트 완료! 지도에는 몇 분 안에 반영돼요.";
+          btn.textContent = "지금 위치로 업데이트";
+          btn.disabled = false;
+        })
+        .withFailureHandler(function (err) {
+          statusEl.textContent = "⚠️ 실패: " + err.message;
+          btn.textContent = "지금 위치로 업데이트";
+          btn.disabled = false;
+        })
+        .updateLocation(currentLat, currentLng, name);
+    });
+  </script>
+</body>
+</html>

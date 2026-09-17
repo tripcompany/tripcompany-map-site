@@ -1,0 +1,1338 @@
+/* ===== 기본 톤 ===== */
+:root {
+  --accent: #1f6f5c;
+  --accent-soft: #cfe3de;
+  --ink: #1f2523;
+  --ink-soft: #5b655f;
+  --bg: #f7f7f4;
+  --panel-bg: #ffffff;
+  --border: #e3e2dc;
+  --danger-accent: #e0583b;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Pretendard", "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+}
+
+/* ===== 헤더 ===== */
+.site-header {
+  padding: 20px 24px 8px;
+  text-align: center;
+}
+/* 검색엔진을 위해 태그만 div → h1으로 바꿨기 때문에(README 40번 항목),
+   브라우저가 h1에 기본으로 주는 큰 위아래 여백을 없애서 화면에 보이는
+   모양은 예전 그대로 유지합니다. */
+.brand {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+.brand-sub {
+  margin: 4px 0 0;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+}
+/* 헤더 아래 "OO개국 OO개 도시 OO개의 가이드" 요약 문구. 시트 데이터가
+   준비되기 전(:empty)에는 자리만 차지하지 않도록 숨겨둡니다. */
+.site-stats {
+  margin: 10px 0 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.01em;
+}
+.site-stats:empty {
+  display: none;
+}
+
+/* ===== 채널 바로가기 배너 =====
+   원래는 상단 헤더 안에 있었는데, 방문자가 지도를 보기도 전에
+   유튜브로 먼저 이탈하는 것 같아서 페이지 맨 아래(최신 영상 섹션과
+   푸터 사이)로 옮겼습니다. */
+.channel-banner-section {
+  max-width: 1280px;
+  margin: 28px auto 0;
+  padding: 20px 16px 0;
+  border-top: 1px solid var(--border);
+}
+.channel-banner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.channel-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: 300px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-left: 4px solid transparent;
+  border-radius: 12px;
+  padding: 8px 16px 8px 10px;
+  text-decoration: none;
+  color: inherit;
+  text-align: left;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.channel-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+.channel-card-trip { border-left-color: #e8871e; }
+.channel-card-trekom { border-left-color: #3b6fd6; }
+
+.channel-card-avatar {
+  position: relative;
+  flex-shrink: 0;
+  display: block;
+}
+.channel-card-photo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  background: #ddd;
+}
+.channel-card-badge {
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.channel-card-badge-trip { background: #e8871e; }
+.channel-card-badge-trekom { background: #3b6fd6; }
+
+.channel-card-body {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.channel-card-name {
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+.channel-card-desc {
+  margin-top: 2px;
+  font-size: 0.74rem;
+  color: var(--ink-soft);
+  line-height: 1.35;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ===== 광고 슬롯 (나중에 실제 광고 코드로 교체) ===== */
+.ad-slot {
+  margin: 12px auto;
+  background: repeating-linear-gradient(45deg, #eeece6, #eeece6 10px, #e6e4dd 10px, #e6e4dd 20px);
+  border: 1px dashed #c7c4ba;
+  color: #9a978d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+.ad-slot-leaderboard {
+  max-width: 728px;
+  height: 90px;
+  width: 92%;
+  /* .ad-slot의 margin은 아고다 배너가 활성화되면(그 클래스가 빠지면) 함께
+     사라지므로, 가운데 정렬은 여기서도 한 번 더 명시해둡니다. */
+  margin: 12px auto;
+}
+.ad-slot-inline {
+  width: 100%;
+  height: 70px;
+  margin: 0;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+/* ===== 아고다(Agoda) 숙소 예약 제휴 배너 ===== */
+.agoda-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  height: 100%;
+  padding: 0 18px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #eaf3f0, #dcece5);
+  border: 1px solid var(--accent-soft);
+  text-decoration: none;
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+.agoda-banner:hover {
+  border-color: var(--accent);
+}
+.agoda-banner-icon {
+  font-size: 1.7rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+.agoda-banner-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+.agoda-banner-text strong {
+  font-size: 0.95rem;
+  color: var(--ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.agoda-banner-sub {
+  font-size: 0.72rem;
+  color: var(--ink-soft);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.agoda-banner-cta {
+  flex-shrink: 0;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 8px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+/* 영상 목록 아래 작은 자리(70px)에서는 부제(제휴 링크 문구 포함)를 감춰서
+   좁은 공간에 글자가 겹치지 않게 합니다 — 헤더의 큰 배너에서 항상 표시되므로
+   제휴 고지 자체가 사라지는 건 아닙니다. */
+.agoda-banner-inline {
+  padding: 0 12px;
+}
+.agoda-banner-inline .agoda-banner-sub {
+  display: none;
+}
+.agoda-banner-inline .agoda-banner-icon {
+  font-size: 1.4rem;
+}
+.agoda-banner-inline .agoda-banner-cta {
+  padding: 6px 10px;
+  font-size: 0.75rem;
+}
+
+/* ===== 클룩(Klook) 어필리에이트 배너 (헤더 전용, 고정 이미지) ===== */
+.klook-banner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  line-height: 0;
+  /* 배너 이미지(728×90 비율)가 자리보다 낮은 높이로 줄어드는 화면(모바일 등)에서
+     위아래에 여백이 생길 수 있어, 그 여백이 이미지 배경색과 자연스럽게 이어지도록
+     같은 계열 색을 깔아둡니다. */
+  background: #f2602a;
+}
+.klook-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* cover로 자르면 좁은 화면에서 양옆의 차 아이콘/버튼이 잘려나가므로, 잘리지
+     않고 항상 전체가 보이도록 contain을 사용합니다. */
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+/* ===== 트립닷컴(Trip.com) 호텔 예약 제휴 배너 (영상 목록 아래 작은 자리 전용, 고정 이미지) =====
+   이 자리는 index.html에 고정 크기 요소가 미리 있는 헤더와 달리, 배너 자체가
+   #video-list 안에 곧바로 끼워 넣어지므로 여기서 폭 100%·높이 70px을 직접
+   정해줍니다(ad-slot-inline과 같은 크기). */
+.tripcom-banner {
+  display: block;
+  width: 100%;
+  height: 70px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  overflow: hidden;
+  line-height: 0;
+  /* 배너 이미지가 자리보다 좁은 비율로 보이는 화면에서 위아래에 여백이 생길 수
+     있어, 그 여백이 이미지 배경색과 자연스럽게 이어지도록 같은 계열 색을 깔아둡니다. */
+  background: #153f8c;
+}
+.tripcom-banner img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* cover로 자르면 좁은 화면에서 양옆의 아이콘/버튼이 잘려나가므로, 잘리지
+     않고 항상 전체가 보이도록 contain을 사용합니다. */
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+/* ===== 레이아웃 ===== */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 16px;
+  max-width: 1280px;
+  margin: 16px auto;
+  padding: 0 16px;
+  align-items: start;
+}
+
+.map-pane {
+  position: relative;
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+}
+#map {
+  height: 640px;
+  width: 100%;
+  background: #eef1f0;
+}
+/* 지도/데이터를 불러오는 동안 보여주는 스켈레톤(shimmer) 배경 — 로딩이 끝나면
+   부드럽게 사라지도록 opacity 트랜지션으로 처리합니다. */
+.map-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 400;
+  background: linear-gradient(100deg, #e7eae6 30%, #f4f5f2 45%, #e7eae6 60%);
+  background-size: 200% 100%;
+  animation: map-skeleton-shimmer 1.4s ease-in-out infinite;
+  transition: opacity 0.4s ease;
+}
+.map-skeleton.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes map-skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.map-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 401;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink-soft);
+  font-size: 0.9rem;
+  text-align: center;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+.map-status.is-hidden {
+  opacity: 0;
+}
+.map-status-spinner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  animation: map-status-spin 0.8s linear infinite;
+}
+.map-status-spinner.is-error {
+  animation: none;
+  border-top-color: var(--danger-accent);
+}
+@keyframes map-status-spin {
+  to { transform: rotate(360deg); }
+}
+
+.back-btn {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  min-height: 44px;
+}
+.back-btn:hover { background: var(--accent-soft); }
+.back-btn svg { flex-shrink: 0; color: var(--accent); }
+.back-btn:disabled {
+  opacity: 0.65;
+  cursor: default;
+  background: #ffffff;
+}
+
+/* 어디서든 클릭 한 번으로 다른 여행지를 무작위로 둘러볼 수 있는 버튼 —
+   back-btn과 반대편(오른쪽 위)에 두어 항상 눈에 띄게 했습니다. */
+.random-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  min-height: 44px;
+}
+.random-btn:hover { background: var(--accent-soft); }
+.random-btn svg { flex-shrink: 0; color: var(--accent); }
+
+/* 멀리 이동할 때(app.js의 jumpMapWithFade) 아주 짧게 흐려졌다가 목적지에서
+   다시 선명해집니다. 아직 안 그려진 빈 지도를 가로질러 날아가는 모습을
+   보여주지 않기 위한 전환 효과입니다. */
+#map {
+  transition: opacity 160ms ease;
+}
+#map.is-map-fading {
+  opacity: 0.15;
+}
+
+/* ===== 지도 위 도시 검색 =====
+   "내 위치" 버튼 바로 아래에 두어서 위쪽 두 버튼과 겹치지 않게 했습니다.
+   #map의 자식이 아니라 .map-pane의 자식이라, 여기서 일어난 클릭·스크롤이
+   지도를 끌고 다니지 않습니다(위쪽 두 버튼과 같은 구조). */
+.map-search {
+  position: absolute;
+  top: 68px;
+  left: 14px;
+  z-index: 500;
+  /* 가장 긴 지명("상트페테르부르크", 8자)을 입력했을 때도 글자 1~2개
+     정도는 더 들어갈 여유가 남도록 계산한 값입니다(기존 260px는 그보다
+     훨씬 넓어서 검색창이 불필요하게 길어 보였습니다). */
+  width: min(208px, calc(100% - 28px));
+}
+.map-search-box {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0 10px;
+  min-height: 40px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+.map-search-box svg { flex-shrink: 0; color: var(--ink-soft); }
+.map-search-input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.9rem;
+  color: var(--ink);
+  padding: 9px 0;
+}
+.map-search-input::placeholder { color: #9a978d; }
+.map-search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+.map-search-clear {
+  flex-shrink: 0;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 4px;
+}
+.map-search-clear:hover { color: var(--ink); }
+.map-search-clear[hidden] { display: none; }
+
+.map-search-results {
+  list-style: none;
+  margin: 6px 0 0;
+  padding: 4px;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
+  max-height: 264px;
+  overflow-y: auto;
+}
+.map-search-results[hidden] { display: none; }
+.map-search-result {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.map-search-result.is-active { background: var(--accent-soft); }
+.map-search-result-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.map-search-result-meta {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* ===== 오른쪽 패널 ===== */
+.side-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 640px;
+}
+.panel-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.panel-heading {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 700;
+  min-width: 0;
+}
+
+/* 지금 보고 있는 지역의 주소(?region=...)를 공유하는 버튼. 나라/도시를
+   고르기 전에는 숨겨져 있습니다(app.js의 updateShareButton). */
+.share-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+  padding: 6px 11px;
+  min-height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.share-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.share-btn[hidden] {
+  display: none;
+}
+
+/* 오른쪽 영상 패널 상단의 채널별 필터 탭("전체보기"/"트립콤파니"/"여행하는트콤").
+   나라/도시를 고르기 전에는 숨겨져 있습니다(app.js의 renderChannelTabs). */
+.channel-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.channel-tabs[hidden] {
+  display: none;
+}
+.channel-tab {
+  padding: 6px 12px;
+  min-height: 32px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--ink-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.channel-tab:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.channel-tab.is-active {
+  color: #ffffff;
+  border-color: transparent;
+}
+.channel-tab-all.is-active {
+  background: var(--accent);
+}
+.channel-tab-trip.is-active {
+  background: #e8871e;
+}
+.channel-tab-trekom.is-active {
+  background: #3b6fd6;
+}
+
+.video-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+.panel-empty {
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+.video-card {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  text-align: left;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px;
+  cursor: pointer;
+  width: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+.video-card:hover { border-color: var(--accent); background: #f2f7f5; }
+.video-card img {
+  width: 96px;
+  height: 54px;
+  object-fit: cover;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #ddd;
+}
+.video-card-info { min-width: 0; }
+
+/* 최근(added_date 기준 CONFIG.newBadge.withinDays 이내) 등록된 영상 카드는
+   가이드 이름 줄(.video-guide) 오른쪽 끝, 원래 비어있던 자리에 작은 "NEW"
+   배지가 붙습니다. 썸네일 위에 겹쳐 올리면 썸네일을 가려서 지저분해
+   보이므로, margin-left: auto로 같은 줄의 남는 공간 끝까지 밀어서 배치합니다. */
+.video-new-badge {
+  margin-left: auto;
+  flex-shrink: 0;
+  background: #e0263f;
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+.video-title {
+  margin: 0;
+  font-size: 0.88rem;
+  font-weight: 600;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.video-guide {
+  margin: 4px 0 0;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+/* 여러 도시를 함께 다루는 비교 영상에서, 어떤 도시들을 비교하는지 보여줍니다. */
+.video-compare {
+  margin: 3px 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.channel-tag {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+.channel-tag-trip { background: #e8871e; }
+.channel-tag-trekom { background: #3b6fd6; }
+
+/* 지역별 맞춤 제휴 광고 카드 — 영상 카드(.video-card)와 같은 생김새를
+   그대로 써서 목록 안에 자연스럽게 섞이되, 살짝 다른 배경색과 "제휴 광고"
+   배지로 광고라는 걸 분명히 알아볼 수 있게 합니다. */
+.video-card-ad {
+  background: #fbf6ec;
+  border-color: #e8dcc0;
+}
+.video-card-ad:hover {
+  background: #f5ecd8;
+  border-color: #d8bd7a;
+}
+.video-card-ad-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 54px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  background: #efe3c4;
+  font-size: 1.4rem;
+}
+.channel-tag-ad { background: #9a7a2a; }
+
+/* ===== Leaflet 커스텀 ===== */
+.country-active { cursor: pointer; }
+.country-inactive { cursor: default; }
+
+.city-tooltip {
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+/* 채널별 도시 점 (divIcon). 트립콤파니 점(주황)이 바깥쪽 큰 원이고, 여행하는트콤
+   점(파랑)은 그보다 작게 정중앙에 겹쳐서 "원 안에 원" 형태로 보이게 배치합니다.
+   #map에 설정되는 --marker-zoom-scale 값에 따라 확대할수록 점이 함께 커집니다. */
+.city-icon-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+.city-icon {
+  position: relative;
+  display: block;
+  width: 24px;
+  height: 24px;
+  transform: scale(var(--marker-zoom-scale, 1));
+  transform-origin: center;
+}
+.city-dot {
+  position: absolute;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+}
+.city-dot-trip {
+  left: 2px;
+  top: 2px;
+  width: 20px;
+  height: 20px;
+  background: #e8871e;
+  z-index: 1;
+}
+.city-dot-trekom {
+  left: 7px;
+  top: 7px;
+  width: 10px;
+  height: 10px;
+  background: #3b6fd6;
+  z-index: 2;
+}
+/* 여행하는트콤 영상만 있고 트립콤파니 영상은 없는 도시는 파란 점 혼자 표시되므로
+   너무 작지 않게 살짝 키워서 중앙에 오도록 합니다. */
+.city-icon:has(.city-dot-trekom:only-child) .city-dot-trekom {
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+}
+/* Cities 탭에는 있지만 아직 등록된 영상이 하나도 없는 도시는 흰 점(회색 테두리)으로
+   "준비중" 상태를 표시합니다. */
+.city-dot-empty {
+  left: 4px;
+  top: 4px;
+  width: 16px;
+  height: 16px;
+  background: #ffffff;
+  border-color: #9a978d;
+  z-index: 1;
+}
+.city-icon.is-selected .city-dot-trip { background: #c1272d; }
+.city-icon.is-selected .city-dot-trekom { background: #1f3f8f; }
+.city-icon.is-selected .city-dot-empty { border-color: #5b655f; }
+.city-icon.is-selected { transform: scale(calc(var(--marker-zoom-scale, 1) * 1.15)); }
+
+/* 최근 영상이 추가된 지역(최대 3곳)에 붙는 "N" 배지. 점 오른쪽 위에 살짝
+   겹쳐서 붙고, 은은하게 깜빡이는 애니메이션으로 눈에 띄게 합니다. */
+.city-new-badge {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e0263f;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 14px;
+  text-align: center;
+  box-shadow: 0 0 0 2px #fff;
+  z-index: 2;
+  animation: city-new-pulse 1.6s ease-in-out infinite;
+}
+@keyframes city-new-pulse {
+  0%, 100% { box-shadow: 0 0 0 2px #fff, 0 0 0 2px rgba(224, 38, 63, 0.6); }
+  50% { box-shadow: 0 0 0 2px #fff, 0 0 0 5px rgba(224, 38, 63, 0); }
+}
+
+/* 트콤이 지금 있는 위치를 보여주는 동그란 얼굴 사진 마커. 뒤에 은은하게
+   퍼지는 파란 파동(pulse)과 오른쪽 아래 빨간 LIVE 배지로 "지금 실시간"이라는
+   느낌을 줍니다. 다른 도시 점들과 달리 확대/축소해도 크기가 바뀌지 않아서
+   어느 줌 레벨에서든 눈에 잘 띕니다.
+
+   얼굴 사진 원을 실제 좌표에 정중앙 정렬하지 않고, 좌표 바로 위에 살짝
+   띄운 "핀" 모양으로 그립니다(원 아래 작은 꼬리가 정확한 좌표를 가리킴).
+   그래야 같은 위치에 이미 있는 도시 영상 점을 가리지 않아서, 트콤이 지금
+   있는 도시와 그 도시의 영상 점이 겹쳐도 영상 점을 계속 클릭할 수 있습니다. */
+.trekom-live-icon-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+.trekom-live-marker {
+  position: relative;
+  display: block;
+  width: 56px;
+  height: 70px;
+}
+.trekom-live-pulse {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(59, 111, 214, 0.35);
+  animation: trekom-live-pulse 1.8s ease-out infinite;
+  pointer-events: none;
+}
+@keyframes trekom-live-pulse {
+  0% { transform: scale(0.7); opacity: 0.9; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+.trekom-live-photo {
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #3b6fd6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+  background: #ddd;
+  display: block;
+}
+.trekom-live-badge {
+  position: absolute;
+  right: -2px;
+  top: 38px;
+  background: #e0303a;
+  color: #ffffff;
+  font-size: 0.5rem;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  padding: 1px 5px;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  line-height: 1.3;
+}
+/* 원 바로 아래, 실제 좌표를 가리키는 작은 꼬리(말풍선 꼬리와 같은 구조). */
+.trekom-live-tail {
+  position: absolute;
+  left: 50%;
+  top: 53px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 12px solid #3b6fd6;
+  filter: drop-shadow(0 2px 1px rgba(0, 0, 0, 0.3));
+  pointer-events: none;
+}
+.trekom-live-tooltip {
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.map-legend {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  z-index: 500;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 0.76rem;
+  color: var(--ink-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.map-legend .legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.map-legend .legend-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  flex-shrink: 0;
+}
+.map-legend .legend-dot-trip { background: #e8871e; }
+.map-legend .legend-dot-trekom { background: #3b6fd6; }
+.map-legend .legend-dot-empty {
+  background: #ffffff;
+  border-color: #9a978d;
+}
+.map-legend .legend-new-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #e0263f;
+  color: #fff;
+  font-size: 8px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.map-legend .legend-combo {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+.map-legend .legend-combo .legend-dot {
+  position: absolute;
+  box-sizing: border-box;
+}
+.map-legend .legend-combo .legend-dot-trip {
+  left: 0;
+  top: 0;
+  width: 14px;
+  height: 14px;
+}
+.map-legend .legend-combo .legend-dot-trekom {
+  left: 4px;
+  top: 4px;
+  width: 7px;
+  height: 7px;
+}
+
+/* ===== 영상 재생 모달 (지도 위에 크게 표시) ===== */
+.video-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.video-modal[hidden] { display: none; }
+.video-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 17, 15, 0.75);
+  border: none;
+}
+.video-modal-dialog {
+  position: relative;
+  z-index: 1;
+  width: min(92%, 720px);
+  background: #0b0c0b;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+.video-modal-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.55);
+  color: #ffffff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+.video-modal-close:hover { background: rgba(0, 0, 0, 0.8); }
+.video-modal-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+.video-modal-player iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.video-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  background: #14171a;
+}
+.video-modal-title {
+  margin: 0;
+  color: #ffffff;
+  font-size: 0.82rem;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+.video-modal-yt-link {
+  flex-shrink: 0;
+  color: #cfd6dc;
+  font-size: 0.76rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.video-modal-yt-link:hover { color: #ffffff; text-decoration: underline; }
+
+/* 모달 하단 "이어서 볼 영상" 추천 — 가로 스크롤 썸네일 스트립. 모달을 닫지
+   않고도 클릭 한 번으로 다음 영상으로 바로 넘어갈 수 있게 해서 체류시간을
+   늘리는 용도입니다. */
+.video-modal-related {
+  background: #0b0c0b;
+  padding: 4px 14px 14px;
+}
+.video-modal-related-label {
+  margin: 0 0 8px;
+  color: #9aa3ab;
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+.video-modal-related-list {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: thin;
+}
+.video-modal-related-item {
+  flex: 0 0 132px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.video-modal-related-item img {
+  width: 132px;
+  height: 74px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #222;
+  display: block;
+}
+.video-modal-related-item:hover img { outline: 2px solid var(--accent); }
+.video-modal-related-item-title {
+  color: #e6e9eb;
+  font-size: 0.72rem;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* ===== 채널별 최신 영상 (하단 3분할 — 여행하는트콤 / 광고 / 트립콤파니) ===== */
+.latest-videos {
+  max-width: 1280px;
+  margin: 8px auto 0;
+  padding: 0 16px;
+}
+.latest-videos-heading {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0 0 14px;
+  text-align: center;
+}
+.latest-videos-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  /* 기본 grid는 세 칸의 높이를 서로 맞춰 늘리는데, 가운데 광고 자리는 이제
+     양옆 영상과 다른(더 작은) 자기 크기를 가지므로 늘어나지 않도록 위쪽
+     기준으로만 정렬합니다. */
+  align-items: start;
+}
+.latest-video-frame {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.latest-video-label {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.latest-video-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 10px;
+  overflow: hidden;
+}
+/* 실제 영상 iframe이 들어가는 두 자리만 검정 배경을 깔아서 로딩 중 흰 화면이
+   깜빡이지 않게 합니다. 가운데 광고 자리(.latest-video-ad)는 제외합니다. */
+.latest-video-embed:not(.latest-video-ad) {
+  background: #000;
+}
+/* 영상 iframe은 자리 전체를 꽉 채우도록(16:9) 절대 위치로 늘립니다.
+   가운데 광고 자리(.latest-video-ad)는 광고가 요청한 고정 픽셀 크기
+   (예: 320×320) 그대로 보여줘야 하므로 이 규칙에서 제외합니다. */
+.latest-video-embed:not(.latest-video-ad) iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+/* 가운데 광고 자리는 양옆 영상 프레임과 같은 16:9 비율을 강제로 맞추지
+   않습니다 — 실제 디스플레이 광고(트립닷컴, 구글 애드센스 등)는 300×250,
+   320×320, 336×280처럼 정해진 고정 픽셀 크기로 나오는 경우가 많아서,
+   그 크기를 광고 코드가 요청한 그대로 보여주고 이 자리는 폭 최대
+   320px 안에서 가운데 정렬만 해줍니다(광고 쪽 iframe 자체의 width/height는
+   건드리지 않습니다 — 크기를 임의로 늘리거나 줄이면 광고가 깨지거나
+   클릭 영역이 어긋날 수 있습니다). 다른 크기의 광고로 바꾸고 싶으면
+   index.html에서 class="latest-video-ad"인 부분을 찾아 그 안의 iframe을
+   새 광고 코드로 통째로 바꾸면 됩니다. 이 칸의 max-width보다 더 큰
+   광고(예: 336px 이상)를 쓰려면 아래 max-width 값도 함께 늘려주세요. */
+.latest-video-ad {
+  aspect-ratio: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 320px;
+  min-height: 250px;
+  margin: 0 auto;
+  border-radius: 10px;
+  /* 아주 좁은 화면(320px 미만 뷰포트)에서 고정 크기 광고가 자리보다
+     커지는 경우에도 페이지 전체가 아니라 이 칸 안에서만 가로 스크롤되게
+     막아둡니다. */
+  overflow-x: auto;
+}
+
+@media (max-width: 860px) {
+  .latest-videos-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ===== 푸터 ===== */
+.site-footer {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  padding: 20px 16px 32px;
+}
+
+/* ===== 반응형 (모바일) ===== */
+@media (max-width: 860px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+  #map {
+    height: 56vh;
+    min-height: 320px;
+  }
+  .side-panel {
+    max-height: none;
+  }
+  .ad-slot-leaderboard {
+    height: 70px;
+  }
+  .ad-slot-leaderboard .agoda-banner-sub {
+    display: none;
+  }
+  .channel-banner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 16px;
+  }
+  .channel-card {
+    max-width: none;
+  }
+
+  /* 모바일에서는 지도 영역이 좁아서 모달을 지도 패널 안이 아니라
+     화면 전체를 덮는 전체화면 형태로 띄웁니다. */
+  .video-modal {
+    position: fixed;
+  }
+  .video-modal-dialog {
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    border-radius: 0;
+    display: flex;
+    flex-direction: column;
+  }
+  .video-modal-player {
+    flex: 1;
+    aspect-ratio: auto;
+  }
+  .video-modal-related {
+    flex-shrink: 0;
+  }
+}
+
+/* 아주 좁은 화면에서는 back-btn과 random-btn이 겹치지 않도록 random-btn은
+   아이콘만 남기고 글자를 숨깁니다. */
+@media (max-width: 420px) {
+  .random-btn {
+    padding: 10px;
+  }
+  .random-btn-label {
+    display: none;
+  }
+}
+
+/* ===== 쿠키 동의 배너 ===== */
+.cookie-consent-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 3000;
+  background: #ffffff;
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 16px rgba(0, 0, 0, 0.1);
+  padding: 14px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cookie-consent-text {
+  margin: 0;
+  flex: 1 1 260px;
+  min-width: 200px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+.cookie-consent-text a {
+  color: var(--accent);
+  font-weight: 600;
+}
+.cookie-consent-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.cookie-consent-btn {
+  min-height: 40px;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+.cookie-consent-reject {
+  background: #ffffff;
+  color: var(--ink);
+}
+.cookie-consent-reject:hover {
+  background: #f2f2ef;
+}
+.cookie-consent-accept {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #ffffff;
+}
+.cookie-consent-accept:hover {
+  background: #185c4c;
+}
+.site-footer-links {
+  margin-top: 6px;
+}
+.site-footer-links a {
+  color: var(--ink-soft);
+  text-decoration: underline;
+}
+.site-footer-sep {
+  margin: 0 6px;
+}
+
+@media (max-width: 480px) {
+  .cookie-consent-banner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cookie-consent-actions {
+    justify-content: stretch;
+  }
+  .cookie-consent-btn {
+    flex: 1;
+  }
+}
