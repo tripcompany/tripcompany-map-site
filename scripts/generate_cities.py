@@ -30,9 +30,8 @@ CSV_URLS = {
     'Rules': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=888055413&single=true&output=csv',
     'Route': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1206356054&single=true&output=csv',
     'VideoIndex': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1318190129&single=true&output=csv',
-    # Videos 탭은 아직 구글시트에 없습니다. city_id / video_id / "tc_desc (한 줄 소개)" 열을 넣은
-    # 새 탭을 만들고 파일 > 공유 > 웹에 게시로 그 탭만 CSV로 공개한 뒤, 그 주소를 아래에 붙여넣어 주세요.
-    'Videos': 'PASTE_VIDEOS_TAB_CSV_URL_HERE',
+    # Videos 탭: city_id / video_id / "tc_desc (한 줄 소개)" 열이 있는 구글시트 탭입니다.
+    'Videos': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1750048788&single=true&output=csv',
 }
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
@@ -586,7 +585,7 @@ def main(local_files=None):
     rules_all = fetch_csv('Rules', CSV_URLS['Rules'], local_files)
     route_all = fetch_csv('Route', CSV_URLS['Route'], local_files)
     vindex_all = fetch_csv('VideoIndex', CSV_URLS['VideoIndex'], local_files)
-    # Videos 탭 주소를 아직 안 채웠으면(위 PASTE_... 자리 그대로면) 조용히 건너뜁니다.
+    # CSV_URLS['Videos']가 실제 주소가 아니면(설정 전이면) 조용히 건너뜁니다.
     if local_files and 'Videos' in local_files:
         videos_all = fetch_csv('Videos', CSV_URLS['Videos'], local_files)
     elif CSV_URLS.get('Videos', '').startswith('http'):
