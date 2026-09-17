@@ -159,6 +159,7 @@ PAGE_CSS = '''
   .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
+  .rule .tc{ font-weight:400; }
   .cond{ margin:6px 0 0; font-size:0.83rem; color:var(--money); }
   .stayed{ font-size:0.74rem; padding:2px 8px; border-radius:999px; }
   .stayed.yes{ background:var(--accent-soft); color:var(--accent-strong); font-weight:700; }
