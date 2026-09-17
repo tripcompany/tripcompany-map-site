@@ -221,7 +221,6 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
         for s in items:
             note = s.get('tc_note (한 줄)', '')
             fact = s.get('fact_note (사전조사)', '')
-            warn = s.get('tc_warn', '')
             ts = s.get('video_ts', '')
             alt = alt_names(s.get('spot_name_en'), s.get('spot_name_local'))
             cards.append(f'''
@@ -233,7 +232,6 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
             {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
           </div>
           {'<p class="tc">' + e(note) + '</p>' if note else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>'}
-          {'<p class="tc tc-warn">⚠ ' + e(warn) + '</p>' if warn else ''}
           {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
         </li>''')
         spots_html.append(f'''
@@ -376,7 +374,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
       <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
       <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
       <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
-      <span class="grade grade-skip">굳이</span> 유명한데 우리는 추천 안 함
+      <span class="grade grade-skip">굳이</span> 그렇게 권장하지 않음
     </p>
     {''.join(spots_html) if spots_html else '<p class="empty-note">Spots 탭이 비어 있습니다.</p>'}
   </div>
