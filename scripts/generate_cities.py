@@ -2,7 +2,7 @@
 """여러 도시 페이지 자동 생성 — 구글시트(웹에 게시된 CSV)를 읽어 한 번에 만듭니다.
 
 이 스크립트는 깃허브 액션이 몇 시간마다 자동으로 실행합니다.
-구글시트의 각 탭(Cities/Timing/Spots/Stay/Rules/Route/VideoIndex)을
+구글시트의 각 탭(Cities/Timing/Spots/Stay/Rules/Route/VideoIndex/Videos)을
 "웹에 게시 → CSV" 링크로 읽어와서, city_id별로 city/<slug>/index.html을 만듭니다.
 
 원칙 (카가와 시험판 때와 동일)
@@ -13,6 +13,7 @@
 import csv
 import html
 import io
+import json
 import os
 import urllib.request
 
@@ -29,6 +30,9 @@ CSV_URLS = {
     'Rules': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=888055413&single=true&output=csv',
     'Route': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1206356054&single=true&output=csv',
     'VideoIndex': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1318190129&single=true&output=csv',
+    # Videos 탭은 아직 구글시트에 없습니다. city_id / video_id / "tc_desc (한 줄 소개)" 열을 넣은
+    # 새 탭을 만들고 파일 > 공유 > 웹에 게시로 그 탭만 CSV로 공개한 뒤, 그 주소를 아래에 붙여넣어 주세요.
+    'Videos': 'PASTE_VIDEOS_TAB_CSV_URL_HERE',
 }
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
@@ -85,6 +89,29 @@ def grade_badge(g, field, hint=''):
     if not g:
         return slot(field, hint)
     return f'<span class="grade grade-{GRADE_CLASS.get(g, "maybe")}">{e(g)}</span>'
+
+
+_TITLE_CACHE = {}
+
+
+def fetch_video_title(video_id):
+    """유튜브 oEmbed로 영상 제목을 가져옵니다. 실패해도 전체 빌드가 멈추지 않도록
+    무슨 일이 있어도 예외를 삼키고 빈 문자열을 돌려줍니다."""
+    if not video_id or is_example(video_id):
+        return ''
+    if video_id in _TITLE_CACHE:
+        return _TITLE_CACHE[video_id]
+    title = ''
+    try:
+        url = f'https://www.youtube.com/oembed?url=https://youtu.be/{video_id}&format=json'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=8) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+        title = data.get('title', '') or ''
+    except Exception:
+        title = ''
+    _TITLE_CACHE[video_id] = title
+    return title
 
 
 PAGE_CSS = '''
@@ -185,15 +212,92 @@ PAGE_CSS = '''
     .timing-list, .spot-list, .rule-list{ grid-template-columns:1fr; }
     table{ display:block; overflow-x:auto; }
   }
+
+  .videos-section{ background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .vscroll-wrap{ position:relative; }
+  .vscroll{ display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x proximity;
+    padding:4px 2px 14px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+  .vscroll::-webkit-scrollbar{ height:8px; }
+  .vscroll::-webkit-scrollbar-thumb{ background:var(--border); border-radius:8px; }
+  .vcard{ flex:0 0 240px; scroll-snap-align:start; background:var(--bg); border:1px solid var(--border);
+    border-radius:12px; overflow:hidden; cursor:pointer; text-align:left; padding:0; font:inherit; color:inherit; }
+  .vcard-thumb{ position:relative; aspect-ratio:16/9; background:#000; display:block; }
+  .vcard-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .vcard-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .vcard-play svg{ width:44px; height:44px; filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5)); }
+  .vcard-body{ padding:11px 13px 13px; display:block; }
+  .vcard-title{ font-size:0.88rem; font-weight:700; margin:0 0 6px; line-height:1.35; display:-webkit-box;
+    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .vscroll-arrow{ position:absolute; top:38%; width:34px; height:34px; border-radius:999px; border:1px solid var(--border);
+    background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:1.1rem; color:var(--ink); z-index:2; }
+  .vscroll-arrow.prev{ left:-6px; }
+  .vscroll-arrow.next{ right:-6px; }
+  @media (max-width:820px){ .vscroll-arrow{ display:none; } }
+
+  .vmodal{ position:fixed; inset:0; background:rgba(10,15,13,0.86); display:none; align-items:center;
+    justify-content:center; padding:24px; z-index:1000; }
+  .vmodal.open{ display:flex; }
+  .vmodal-box{ width:100%; max-width:860px; }
+  .vmodal-frame-wrap{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:10px; overflow:hidden; }
+  .vmodal-frame-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vmodal-close{ display:block; margin:12px auto 0; background:rgba(255,255,255,0.14); color:#fff;
+    border:1px solid rgba(255,255,255,0.3); border-radius:999px; padding:7px 18px; font-size:0.85rem; cursor:pointer; }
+
+  .home-fab{ position:fixed; left:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
+    background:var(--accent-strong); color:#fff; text-decoration:none; font-size:0.84rem; font-weight:700;
+    padding:10px 16px 10px 13px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .home-fab:hover{ background:var(--accent); }
+  @media (max-width:520px){ .home-fab .fab-text{ display:none; } .home-fab{ padding:12px; } }
+'''
+
+VIDEO_JS = '''
+(function(){
+  var scroller = document.getElementById('vscroll');
+  document.querySelectorAll('[data-vscroll]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(!scroller) return;
+      var dir = btn.getAttribute('data-vscroll') === 'next' ? 1 : -1;
+      scroller.scrollBy({ left: dir * (scroller.clientWidth * 0.8), behavior: 'smooth' });
+    });
+  });
+  var modal = document.getElementById('vmodal');
+  var frameWrap = document.getElementById('vmodalFrame');
+  var closeBtn = document.getElementById('vmodalClose');
+  function openVideo(id){
+    if(!modal || !frameWrap || !id) return;
+    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    modal.classList.add('open');
+  }
+  function closeVideo(){
+    if(!modal) return;
+    modal.classList.remove('open');
+    if(frameWrap) frameWrap.innerHTML = '';
+  }
+  document.querySelectorAll('.vcard').forEach(function(card){
+    card.addEventListener('click', function(){ openVideo(card.getAttribute('data-video-id')); });
+  });
+  if(closeBtn) closeBtn.addEventListener('click', closeVideo);
+  if(modal) modal.addEventListener('click', function(evt){ if(evt.target === modal) closeVideo(); });
+  document.addEventListener('keydown', function(evt){ if(evt.key === 'Escape') closeVideo(); });
+})();
 '''
 
 
-def build_city_page(city, timing, spots, stay, rules, route, vindex):
+def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     city_id = city['city_id']
     slug = city_id.lower()
     name = city.get('city_name_ko', city_id)
     country = COUNTRY_NAME.get(city.get('country_code', ''), '')
     alpha2 = COUNTRY_ALPHA2.get(city.get('country_code', ''), '')
+    hero_img = city.get('hero_image_url', '')
+    hero_style = ''
+    if hero_img:
+        hero_style = (
+            ' style="background-image:linear-gradient(150deg, rgba(22,78,65,0.86) 0%, '
+            "rgba(31,111,92,0.55) 55%, rgba(44,133,112,0.35) 100%), url('" + e(hero_img) + "'); "
+            'background-size:cover; background-position:center;"'
+        )
 
     areas = []
     for s in spots:
@@ -289,6 +393,26 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
         {'<span class="ex-tag">예시</span>' if ex else ''}
       </li>''')
 
+    videos_html = []
+    for v in videos:
+        vid = v.get('video_id', '')
+        desc = v.get('tc_desc (한 줄 소개)', '')
+        vtitle = v.get('_title', '')
+        ex = is_example(vid, desc)
+        thumb = f'https://img.youtube.com/vi/{vid}/hqdefault.jpg' if vid else ''
+        videos_html.append(f'''
+        <button class="vcard{' is-example' if ex else ''}" type="button" data-video-id="{e(vid)}" aria-label="영상 재생">
+          <span class="vcard-thumb">
+            {'<img src="' + e(thumb) + '" alt="" loading="lazy">' if thumb else ''}
+            <span class="vcard-play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/><path d="M9.5 7.5v9l8-4.5z" fill="#fff"/></svg></span>
+            {'<span class="ex-tag" style="position:absolute;top:6px;right:6px;">예시</span>' if ex else ''}
+          </span>
+          <span class="vcard-body">
+            {'<span class="vcard-title">' + e(vtitle) + '</span>' if vtitle else ''}
+            {'<span class="tc" style="display:block;margin-top:2px;">' + e(desc) + '</span>' if desc else '<span class="tc tc-empty" style="display:block;margin-top:2px;">' + slot('Videos.tc_desc', '이 영상 한 줄 소개') + '</span>'}
+          </span>
+        </button>''')
+
     tagline = city.get('hero_tagline', '')
     one_line = city.get('tc_one_line', '')
     checked = city.get('checked_at', '')
@@ -308,7 +432,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
 }}'''
 
     # 아직 아무 탭도 채워지지 않은 도시는 페이지를 만들지 않고 건너뜁니다.
-    has_any = timing or spots or stay or rules or route or vindex or tagline or one_line
+    has_any = timing or spots or stay or rules or route or vindex or videos or tagline or one_line
     if not has_any:
         return None, slug
 
@@ -369,6 +493,21 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
   </div>
 </section>'''
 
+    videos_section = ''
+    if videos:
+        videos_section = f'''
+<section id="videos" class="videos-section">
+  <div class="wrap">
+    <h2>트립콤파니가 다녀온 영상</h2>
+    <p class="section-sub">눌러서 바로 재생 · 옆으로 넘겨서 더 보기</p>
+    <div class="vscroll-wrap">
+      <button class="vscroll-arrow prev" type="button" aria-label="이전 영상" data-vscroll="prev">&#8249;</button>
+      <div class="vscroll" id="vscroll">{''.join(videos_html)}</div>
+      <button class="vscroll-arrow next" type="button" aria-label="다음 영상" data-vscroll="next">&#8250;</button>
+    </div>
+  </div>
+</section>'''
+
     page = f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -393,7 +532,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
   <b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.
 </div>
 
-<div class="hero">
+<div class="hero"{hero_style}>
   <div class="wrap">
     <p class="eyebrow">{e(country)} · {e(name)}</p>
     <h1>{e(title_h1)}</h1>
@@ -403,8 +542,11 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
       {''.join(f'<a href="#{area_anchor.get(a, a)}">{e(a)}</a>' for a in areas)}
     </div>
     <span class="checked">정보 기준: {e(checked) if checked else '— (Cities.checked_at 비어 있음)'}</span>
+    {'' if hero_img else '<div style="margin-top:10px;">' + slot('Cities.hero_image_url', '도시 사진 없음 (헤더 배경)') + '</div>'}
   </div>
 </div>
+
+{videos_section}
 
 {'<section class="timing" id="timing"><div class="wrap"><h2>놓치면 여행이 망가지는 것</h2><p class="section-sub">예약·간조·영업시간처럼 <strong>가서 알면 늦는 것</strong>만 모았습니다.</p><ul class="timing-list">' + ''.join(timing_html) + '</ul></div></section>' if timing else ''}
 
@@ -422,6 +564,14 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
   </div>
 </footer>
 
+<a class="home-fab" href="/" aria-label="지도로 돌아가기">
+  <span aria-hidden="true">🗺️</span><span class="fab-text">지도로 돌아가기</span>
+</a>
+
+{'<div class="vmodal" id="vmodal"><div class="vmodal-box"><div class="vmodal-frame-wrap" id="vmodalFrame"></div><button class="vmodal-close" type="button" id="vmodalClose">닫기 ✕</button></div></div>' if videos else ''}
+
+{'<script>' + VIDEO_JS + '</script>' if videos else ''}
+
 </body>
 </html>
 '''
@@ -436,6 +586,13 @@ def main(local_files=None):
     rules_all = fetch_csv('Rules', CSV_URLS['Rules'], local_files)
     route_all = fetch_csv('Route', CSV_URLS['Route'], local_files)
     vindex_all = fetch_csv('VideoIndex', CSV_URLS['VideoIndex'], local_files)
+    # Videos 탭 주소를 아직 안 채웠으면(위 PASTE_... 자리 그대로면) 조용히 건너뜁니다.
+    if local_files and 'Videos' in local_files:
+        videos_all = fetch_csv('Videos', CSV_URLS['Videos'], local_files)
+    elif CSV_URLS.get('Videos', '').startswith('http'):
+        videos_all = fetch_csv('Videos', CSV_URLS['Videos'], local_files)
+    else:
+        videos_all = []
 
     made = []
     skipped = []
@@ -449,8 +606,11 @@ def main(local_files=None):
         rules = [r for r in rules_all if r.get('city_id') == cid and r.get('condition (조건)')]
         route = [r for r in route_all if r.get('city_id') == cid and r.get('from')]
         vindex = [r for r in vindex_all if r.get('city_id') == cid and (r.get('ts') or r.get('label (이 지점에 뭐가 있나)'))]
+        videos = [r for r in videos_all if r.get('city_id') == cid and r.get('video_id')]
+        for v in videos:
+            v['_title'] = fetch_video_title(v.get('video_id', ''))
 
-        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex)
+        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos)
         if page is None:
             skipped.append(cid)
             continue
