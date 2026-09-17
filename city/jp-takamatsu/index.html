@@ -89,6 +89,9 @@
   .grade-reco{ background:#d8e8f6; color:#1c567f; }
   .grade-skip{ background:#f0e4e0; color:#8d4b33; }
   .ts{ font-size:0.76rem; font-weight:700; background:#eceae2; border-radius:5px; padding:2px 7px; text-decoration:none; }
+  .map-link{ display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
+    border-radius:999px; background:#eceae2; color:var(--ink-soft); flex-shrink:0; }
+  .map-link:hover{ background:var(--accent-soft); color:var(--accent-strong); }
 
   .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -170,7 +173,7 @@
     <p class="tagline">우동과 현대미술의 지역. 일본에서도 유니크한 포지션</p>
     <p class="tagline" style="font-size:0.95rem; opacity:0.92;">다카마츠를 베이스로 카가와 현의 여기저기를 돌아다니는 형태</p>
     <div class="chips">
-      <a href="#area-1">다카마쓰</a><a href="#area-2">나오시마</a><a href="#area-3">데시마</a><a href="#area-4">쇼도시마</a><a href="#area-5">서부</a>
+      <a href="#area-1">다카마츠</a><a href="#area-2">나오시마</a><a href="#area-3">데시마</a><a href="#area-4">쇼도시마</a><a href="#area-5">동부</a><a href="#area-6">서부</a>
     </div>
     <span class="checked">정보 기준: 2026-09</span>
     
@@ -348,13 +351,14 @@
     </p>
     
       <div class="area" id="area-1">
-        <h3 class="area-name">다카마쓰 <span class="area-count">5곳</span></h3>
+        <h3 class="area-name">다카마츠 <span class="area-count">5곳</span></h3>
         <ul class="spot-list">
         <li class="spot">
           <div class="spot-head">
             <span class="grade grade-reco">권장</span>
             <span class="spot-name">리쓰린공원</span>
             <span class="spot-alt">Ritsurin Garden · 栗林公園</span>
+            
             
           </div>
           
@@ -366,19 +370,10 @@
             <span class="spot-name">다카마쓰성(다마모공원)</span>
             <span class="spot-alt">Tamamo Park (Takamatsu Castle Ruins) · 高松城跡 玉藻公園</span>
             
-          </div>
-          
-          <p class="fact">바닷물을 끌어들인 해자성.</p>
-        </li>
-        <li class="spot">
-          <div class="spot-head">
-            <span class="grade grade-skip">굳이</span>
-            <span class="spot-name">야시마</span>
-            <span class="spot-alt">Yashima · 屋島</span>
             
           </div>
           
-          
+          <p class="fact">바닷물을 끌어들인 해자성.</p>
         </li>
         <li class="spot">
           <div class="spot-head">
@@ -386,8 +381,20 @@
             <span class="spot-name">마루가메마치 상점가</span>
             <span class="spot-alt">Marugamemachi Shopping Street · 丸亀町商店街</span>
             
+            
           </div>
           
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-must">필수</span>
+            <span class="spot-name">우동</span>
+            <span class="spot-alt">Udon · うどん</span>
+            
+            
+          </div>
+          <p class="tc">지역의 상징 그 자체. 매일 한 번씩 드세요</p>
           
         </li>
         <li class="spot">
@@ -395,6 +402,7 @@
             <span class="grade grade-maybe">시간 되면</span>
             <span class="spot-name">선포트 다카마쓰</span>
             <span class="spot-alt">Sunport Takamatsu · サンポート高松</span>
+            
             
           </div>
           
@@ -410,15 +418,17 @@
             <span class="spot-name">지추미술관</span>
             <span class="spot-alt">Chichu Art Museum · 地中美術館</span>
             
+            
           </div>
           
-          <p class="fact">예약 필수 — Timing 탭 참조.</p>
+          <p class="fact">예약 필수.</p>
         </li>
         <li class="spot">
           <div class="spot-head">
             <span class="grade grade-must">필수</span>
             <span class="spot-name">이우환미술관</span>
             <span class="spot-alt">Lee Ufan Museum · 李禹煥美術館</span>
+            
             
           </div>
           
@@ -430,6 +440,7 @@
             <span class="spot-name">베네세하우스 뮤지엄</span>
             <span class="spot-alt">Benesse House Museum · ベネッセハウス ミュージアム</span>
             
+            
           </div>
           
           <p class="fact">예약 필수.</p>
@@ -439,6 +450,7 @@
             <span class="grade grade-maybe">시간 되면</span>
             <span class="spot-name">이에프로젝트 킨자</span>
             <span class="spot-alt">Art House Project – Kinza · 家プロジェクト きんざ</span>
+            
             
           </div>
           
@@ -450,6 +462,7 @@
             <span class="spot-name">이에프로젝트 미나미데라</span>
             <span class="spot-alt">Art House Project – Minamidera · 家プロジェクト 南寺</span>
             
+            
           </div>
           
           <p class="fact">예약 필수.</p>
@@ -459,6 +472,7 @@
             <span class="grade grade-must">필수</span>
             <span class="spot-name">노란 호박</span>
             <span class="spot-alt">Yellow Pumpkin · 黄かぼちゃ</span>
+            
             
           </div>
           
@@ -470,6 +484,7 @@
             <span class="spot-name">빨간 호박</span>
             <span class="spot-alt">Red Pumpkin · 赤かぼちゃ</span>
             
+            
           </div>
           
           <p class="fact">미야노우라항 앞.</p>
@@ -480,6 +495,7 @@
             <span class="spot-name">나오시마 신미술관</span>
             <span class="spot-alt">直島新美術館</span>
             
+            
           </div>
           
           <p class="fact">2025년 개관.</p>
@@ -489,6 +505,7 @@
             <span class="grade grade-must">필수</span>
             <span class="spot-name">혼무라 지구</span>
             <span class="spot-alt">Honmura District · 本村地区</span>
+            
             
           </div>
           
@@ -504,6 +521,7 @@
             <span class="spot-name">데시마미술관</span>
             <span class="spot-alt">Teshima Art Museum · 豊島美術館</span>
             
+            
           </div>
           <p class="tc">다카마쓰 여행의 하이라이트</p>
           <p class="fact">예약 필수.</p>
@@ -518,6 +536,7 @@
             <span class="spot-name">엔젤로드</span>
             <span class="spot-alt">Angel Road · エンジェルロード</span>
             
+            
           </div>
           
           <p class="fact">간조 시간 제약.</p>
@@ -527,6 +546,7 @@
             <span class="grade grade-reco">권장</span>
             <span class="spot-name">올리브공원</span>
             <span class="spot-alt">Shodoshima Olive Park · 小豆島オリーブ公園</span>
+            
             
           </div>
           <p class="tc">쇼도시마 가면 꼭 들러야 함</p>
@@ -538,6 +558,7 @@
             <span class="spot-name">간카케이 로프웨이</span>
             <span class="spot-alt">Kankakei Ropeway · 寒霞渓ロープウェイ</span>
             
+            
           </div>
           
           <p class="fact">단풍철 혼잡.</p>
@@ -548,12 +569,61 @@
             <span class="spot-name">24의 눈동자 영화마을</span>
             <span class="spot-alt">Twenty-Four Eyes Movie Village · 二十四の瞳映画村</span>
             
+            
           </div>
           
           
         </li></ul>
       </div>
       <div class="area" id="area-5">
+        <h3 class="area-name">동부 <span class="area-count">4곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">야쿠리지(팔률사)</span>
+            
+            
+            
+          </div>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">야시마 전망대</span>
+            
+            
+            
+          </div>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-skip">굳이</span>
+            <span class="spot-name">야시마지</span>
+            
+            
+            
+          </div>
+          
+          
+        </li>
+        <li class="spot">
+          <div class="spot-head">
+            <span class="grade grade-maybe">시간 되면</span>
+            <span class="spot-name">시코쿠무라</span>
+            
+            
+            
+          </div>
+          
+          
+        </li></ul>
+      </div>
+      <div class="area" id="area-6">
         <h3 class="area-name">서부 <span class="area-count">5곳</span></h3>
         <ul class="spot-list">
         <li class="spot">
@@ -561,6 +631,7 @@
             <span class="grade grade-maybe">시간 되면</span>
             <span class="spot-name">고토히라궁(곤피라산)</span>
             <span class="spot-alt">Kotohira-gu Shrine (Konpira-san) · 金刀比羅宮</span>
+            
             
           </div>
           
@@ -572,6 +643,7 @@
             <span class="spot-name">젠쓰지</span>
             <span class="spot-alt">Zentsuji Temple · 善通寺</span>
             
+            
           </div>
           
           <p class="fact">시코쿠 88개소 75번 사찰.</p>
@@ -581,6 +653,7 @@
             <span class="grade grade-maybe">시간 되면</span>
             <span class="spot-name">마루가메성</span>
             <span class="spot-alt">Marugame Castle · 丸亀城</span>
+            
             
           </div>
           
@@ -592,6 +665,7 @@
             <span class="spot-name">치치부가하마</span>
             <span class="spot-alt">Chichibugahama Beach · 父母ヶ浜</span>
             
+            
           </div>
           
           <p class="fact">간조+일몰 조건.</p>
@@ -601,6 +675,7 @@
             <span class="grade grade-reco">권장</span>
             <span class="spot-name">타카야 신사</span>
             <span class="spot-alt">Takaya Shrine (Sky Torii Gate) · 高屋神社</span>
+            
             
           </div>
           
@@ -625,35 +700,35 @@
           <span class="grade grade-must">추천</span>
           <span class="spot-name">JR 다카마츠역 주변</span>
         </div>
-        
+        <p class="tc">공항버스, 철도, 페리 모든 것이 가까운 최적의 위치. 4일 정도까지는 교통이 가장 중요하다.</p>
       </li>
       <li class="stay-item">
         <div class="spot-head">
           <span class="grade grade-maybe">조건부</span>
           <span class="spot-name">가와라마치·마루가메마치</span>
         </div>
-        
+        <p class="tc">저녁에 놀고 마시기 좋다. 하지만 철도역까지는 미묘하게 거리가 있어 자주 걸어서 왕복하기에는 은근 불편. 가격도 역전보다는 조금 저렴한 편.</p>
       </li>
       <li class="stay-item">
         <div class="spot-head">
           <span class="grade grade-maybe">조건부</span>
           <span class="spot-name">나오시마 섬내</span>
         </div>
-        
+        <p class="tc">베네세 하우스라는 유니크한 호텔이 목적이라면 OK. 하지만 일반 여행 일정 혹은 섬 내 다른 평범한 숙소라면 권장하지 않음.</p>
       </li>
       <li class="stay-item">
         <div class="spot-head">
           <span class="grade grade-skip">비추천</span>
           <span class="spot-name">쇼도시마 섬내</span>
         </div>
-        
+        <p class="tc">굳이...여기서...?</p>
       </li>
       <li class="stay-item">
         <div class="spot-head">
-          <span class="grade grade-skip">비추천</span>
+          <span class="grade grade-maybe">조건부</span>
           <span class="spot-name">공항 근처</span>
         </div>
-        
+        <p class="tc">렌터카를 가지고 있을 경우, 그리고 다음날 아주 일찍 비행기를 타야 하는 경우. 물론 둘 모두 겹치는 케이스는 거의 없지만.</p>
       </li></ul>
   </div>
 </section>
@@ -698,9 +773,14 @@
   var modal = document.getElementById('vmodal');
   var frameWrap = document.getElementById('vmodalFrame');
   var closeBtn = document.getElementById('vmodalClose');
+  // autoplay=1로 강제 재생시키지 않습니다 — 유튜브 정책상 광고가 붙으려면
+  // 스크립트가 강제로 트는 게 아니라 방문자가 플레이어 안에서 직접 눌러야
+  // 하는 click-to-play여야 합니다(메인 지도 페이지 app.js의 openVideoModal과
+  // 동일한 이유). 모달이 열리면 유튜브 썸네일과 재생 버튼만 뜨고, 방문자가
+  // 그 안에서 한 번 더 눌러야 재생이 시작됩니다.
   function openVideo(id){
     if(!modal || !frameWrap || !id) return;
-    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     modal.classList.add('open');
   }
   function closeVideo(){
