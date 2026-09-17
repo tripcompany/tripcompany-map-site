@@ -8,7 +8,8 @@
 원칙 (카가와 시험판 때와 동일)
  - 시트에 있는 값만 그린다. 없는 값은 지어내지 않고 "빈 자리"로 표시한다.
  - 사전조사(fact_*)와 트콤 판정(tc_*)은 시각적으로 반드시 구분한다.
- - 아직 검색엔진에 공개하지 않는다 (robots: noindex, nofollow). 공개는 사람이 결정한다.
+ - 아직 검색엔진에 공개하지 않는다 (robots: noindex, nofollow). Cities 탭에 published 열을 추가해
+   Y로 표시하면 그 도시만 공개(index, follow)되고, 빈 자리 표시도 함께 사라진다.
 """
 import csv
 import html
@@ -36,6 +37,10 @@ CSV_URLS = {
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
 COUNTRY_ALPHA2 = {'392': 'JP', '840': 'US', '156': 'CN'}
+
+# 지금 만들고 있는 도시가 공개(published) 상태인지. build_city_page가 그 도시 값으로 바꿔주고,
+# slot()이 이 값을 보고 '빈 자리' 표시를 보여줄지 말지 정합니다.
+_PUBLISHED = False
 
 GRADE_CLASS = {
     '필수': 'must', '권장': 'reco', '시간 되면': 'maybe', '굳이': 'skip',
@@ -80,6 +85,8 @@ def alt_names(en, local):
 
 
 def slot(field, hint=''):
+    if _PUBLISHED:
+        return ''
     return (f'<span class="slot"><span class="slot-field">{e(field)}</span>'
             + (f'<span class="slot-hint">{e(hint)}</span>' if hint else '') + '</span>')
 
@@ -298,6 +305,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             'background-size:cover; background-position:center;"'
         )
 
+    global _PUBLISHED
+    is_published = city.get('published', '').strip().upper() in ('Y', 'YES', '공개', 'TRUE', '1')
+    _PUBLISHED = is_published
+
     areas = []
     for s in spots:
         if s['area'] not in areas:
@@ -314,7 +325,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
           <span class="timing-target">{e(t.get('target'))}</span>
         </div>
         <p class="fact">{e(t.get('fact_detail (사전조사)'))}</p>
-        {'<p class="tc">' + e(t.get('tc_warn (직접)')) + '</p>' if t.get('tc_warn (직접)') else '<p class="tc tc-empty">' + slot('Timing.tc_warn', '트콤이 직접 겪은 주의점 한 줄') + '</p>'}
+        {'<p class="tc">' + e(t.get('tc_warn (직접)')) + '</p>' if t.get('tc_warn (직접)') else ('' if is_published else '<p class="tc tc-empty">' + slot('Timing.tc_warn', '트콤이 직접 겪은 주의점 한 줄') + '</p>')}
       </li>''')
 
     spots_html = []
@@ -334,7 +345,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             {'<span class="spot-alt">' + e(alt) + '</span>' if alt else ''}
             {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
           </div>
-          {'<p class="tc">' + e(note) + '</p>' if note else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>'}
+          {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
           {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
         </li>''')
         spots_html.append(f'''
@@ -349,7 +360,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
         rules_html.append(f'''
       <li class="rule">
         <p class="rule-q">{e(r.get('condition (조건)'))}</p>
-        {'<p class="tc">' + e(rec) + '</p>' if rec else '<p class="tc tc-empty">' + slot('Rules.recommendation', '이 조건이면 어떻게 하라고 할 것인가') + '</p>'}
+        {'<p class="tc">' + e(rec) + '</p>' if rec else ('' if is_published else '<p class="tc tc-empty">' + slot('Rules.recommendation', '이 조건이면 어떻게 하라고 할 것인가') + '</p>')}
       </li>''')
 
     stay_html = []
@@ -361,7 +372,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
           {grade_badge(s.get('tc_grade'), 'Stay.tc_grade', '추천 / 조건부 / 비추천 중 하나')}
           <span class="spot-name">{e(s.get('area_name'))}</span>
         </div>
-        {'<p class="tc">' + e(note) + '</p>' if note else '<p class="tc tc-empty">' + slot('Stay.tc_note', '이 구역을 고르는 이유 한 줄') + '</p>'}
+        {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Stay.tc_note', '이 구역을 고르는 이유 한 줄') + '</p>')}
       </li>''')
 
     route_html = []
@@ -408,7 +419,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
           </span>
           <span class="vcard-body">
             {'<span class="vcard-title">' + e(vtitle) + '</span>' if vtitle else ''}
-            {'<span class="tc" style="display:block;margin-top:2px;">' + e(desc) + '</span>' if desc else '<span class="tc tc-empty" style="display:block;margin-top:2px;">' + slot('Videos.tc_desc', '이 영상 한 줄 소개') + '</span>'}
+            {'<span class="tc" style="display:block;margin-top:2px;">' + e(desc) + '</span>' if desc else ('' if is_published else '<span class="tc tc-empty" style="display:block;margin-top:2px;">' + slot('Videos.tc_desc', '이 영상 한 줄 소개') + '</span>')}
           </span>
         </button>''')
 
@@ -454,7 +465,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
         spots_section = f'''
 <section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
   <div class="wrap">
-    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">({grades_filled}/{len(spots)}곳 판정 완료)</span></h2>
+    <h2>가볼 곳 판정{'' if is_published else f' <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">({grades_filled}/{len(spots)}곳 판정 완료)</span>'}</h2>
     <p class="section-sub">
       <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
       <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
@@ -512,8 +523,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!-- 아직 준비 단계라 검색엔진에는 노출하지 않습니다. 공개할 때 사람이 index, follow로 바꿉니다. -->
-<meta name="robots" content="noindex, nofollow">
+<!-- {'검색엔진에 공개된 페이지입니다 (Cities.published = Y).' if is_published else '아직 준비 단계라 검색엔진에는 노출하지 않습니다. Cities.published 열을 Y로 바꾸면 공개됩니다.'} -->
+<meta name="robots" content="{'index, follow' if is_published else 'noindex, nofollow'}">
 <title>{e(title_tag)}</title>
 <meta name="description" content="{e(meta_desc)}">
 <link rel="canonical" href="{SITE}/city/{slug}/">
@@ -527,9 +538,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
 </head>
 <body>
 
-<div class="preview-bar">
-  <b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.
-</div>
+{'' if is_published else '<div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>'}
 
 <div class="hero"{hero_style}>
   <div class="wrap">
@@ -540,8 +549,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     <div class="chips">
       {''.join(f'<a href="#{area_anchor.get(a, a)}">{e(a)}</a>' for a in areas)}
     </div>
-    <span class="checked">정보 기준: {e(checked) if checked else '— (Cities.checked_at 비어 있음)'}</span>
-    {'' if hero_img else '<div style="margin-top:10px;">' + slot('Cities.hero_image_url', '도시 사진 없음 (헤더 배경)') + '</div>'}
+    <span class="checked">정보 기준: {e(checked) if checked else ('' if is_published else '— (Cities.checked_at 비어 있음)')}</span>
+    {'' if (hero_img or is_published) else '<div style="margin-top:10px;">' + slot('Cities.hero_image_url', '도시 사진 없음 (헤더 배경)') + '</div>'}
   </div>
 </div>
 
