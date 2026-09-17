@@ -12,6 +12,7 @@
    Y로 표시하면 그 도시만 공개(index, follow)되고, 빈 자리 표시도 함께 사라진다.
 """
 import csv
+import datetime
 import html
 import io
 import json
@@ -78,6 +79,11 @@ def e(s):
 
 def is_example(*vals):
     return any('(예시)' in (v or '') for v in vals)
+
+
+def is_city_published(city):
+    """Cities.published 칸이 Y/공개 등으로 표시돼 있으면 그 도시는 공개 상태입니다."""
+    return (city.get('published', '') or '').strip().upper() in ('Y', 'YES', '공개', 'TRUE', '1')
 
 
 def alt_names(en, local):
@@ -361,7 +367,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
         )
 
     global _PUBLISHED
-    is_published = city.get('published', '').strip().upper() in ('Y', 'YES', '공개', 'TRUE', '1')
+    is_published = is_city_published(city)
     _PUBLISHED = is_published
 
     areas = []
@@ -642,6 +648,33 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     return page, slug
 
 
+def build_sitemap(published):
+    """공개(published) 상태인 도시들의 주소를 sitemap.xml에 자동으로 반영합니다.
+    사람이 매번 손으로 도시 한 줄씩 추가/삭제할 필요 없이, Cities.published 값만
+    바꾸면 이 파일이 그 다음 자동 빌드 때 알아서 최신 상태로 다시 만들어집니다.
+    (그래서 이 파일은 항상 이 스크립트가 통째로 새로 씁니다 — 수동으로 고쳐도 다음 실행 때 덮어써집니다.)"""
+    today = datetime.date.today().isoformat()
+    entries = [
+        ('/', today, 'weekly', '1.0'),
+        ('/privacy.html', today, 'monthly', '0.3'),
+    ]
+    for slug, checked in published:
+        lastmod = checked.strip() if checked and checked.strip() else today
+        entries.append((f'/city/{slug}/', lastmod, 'weekly', '0.7'))
+
+    urls = []
+    for path_part, lastmod, changefreq, priority in entries:
+        urls.append(
+            f'  <url>\n    <loc>{SITE}{path_part}</loc>\n'
+            f'    <lastmod>{e(lastmod)}</lastmod>\n'
+            f'    <changefreq>{changefreq}</changefreq>\n'
+            f'    <priority>{priority}</priority>\n  </url>'
+        )
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+            + '\n'.join(urls) + '\n</urlset>\n')
+
+
 def main(local_files=None):
     cities = fetch_csv('Cities', CSV_URLS['Cities'], local_files)
     timing_all = fetch_csv('Timing', CSV_URLS['Timing'], local_files)
@@ -660,6 +693,7 @@ def main(local_files=None):
 
     made = []
     skipped = []
+    published = []
     for city in cities:
         cid = city['city_id']
         if not cid:
@@ -689,12 +723,19 @@ def main(local_files=None):
         with open(os.path.join(out_dir, 'index.html'), 'w', encoding='utf-8') as f:
             f.write(page)
         made.append((cid, slug, len(spots)))
+        if is_city_published(city):
+            published.append((slug, city.get('checked_at', '')))
+
+    sitemap_path = os.path.join(REPO_ROOT, 'sitemap.xml')
+    with open(sitemap_path, 'w', encoding='utf-8') as f:
+        f.write(build_sitemap(published))
 
     print('생성 완료:', len(made), '개 도시')
     for cid, slug, n in made:
         print(f'  - {cid} -> city/{slug}/index.html (스팟 {n}개)')
     if skipped:
         print('건너뜀(아직 아무 탭도 안 채워짐):', ', '.join(skipped))
+    print('sitemap.xml 갱신 완료 (공개 도시', len(published), '개 포함)')
 
 
 if __name__ == '__main__':
