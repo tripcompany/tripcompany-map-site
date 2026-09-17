@@ -2168,7 +2168,7 @@ function updateShareButton() {
 }
 
 /* 특정 도시를 골랐고, 그 도시의 안내 페이지(city/도시코드/)가 실제로
- * 공개된 경우에만 패널 제목 옆에 "가이드 보기" 버튼을 보여줍니다.
+ * 공개된 경우에만 패널 제목 옆에 "자세하게 살펴보기" 버튼을 보여줍니다.
  * (나라만 고른 상태나, 아직 안내 페이지가 없는/비공개인 도시에서는
  * 숨겨둡니다.) */
 function updateCityGuideButton() {
@@ -2556,7 +2556,7 @@ async function main() {
   applyVisitorView();
 
   // 공개된 도시 목록도 나라/도시 데이터와 별개로 받아옵니다. 늦게 도착해도
-  // 도착하는 대로 "가이드 보기" 버튼 표시 여부만 다시 계산합니다.
+  // 도착하는 대로 "자세하게 살펴보기" 버튼 표시 여부만 다시 계산합니다.
   loadPublishedCityIds().then((ids) => {
     PUBLISHED_CITY_IDS = ids;
     updateCityGuideButton();
