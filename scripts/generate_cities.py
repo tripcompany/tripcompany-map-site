@@ -248,6 +248,9 @@ PAGE_CSS = '''
   .grade-reco{ background:#d8e8f6; color:#1c567f; }
   .grade-skip{ background:#f0e4e0; color:#8d4b33; }
   .ts{ font-size:0.76rem; font-weight:700; background:#eceae2; border-radius:5px; padding:2px 7px; text-decoration:none; }
+  .map-link{ display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
+    border-radius:999px; background:#eceae2; color:var(--ink-soft); flex-shrink:0; }
+  .map-link:hover{ background:var(--accent-soft); color:var(--accent-strong); }
 
   .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
@@ -397,6 +400,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             note = s.get('tc_note (한 줄)', '')
             fact = s.get('fact_note (사전조사)', '')
             ts = s.get('video_ts', '')
+            map_url = s.get('map_url', '').strip()
             alt = alt_names(s.get('spot_name_en'), s.get('spot_name_local'))
             cards.append(f'''
         <li class="spot">
@@ -405,6 +409,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             <span class="spot-name">{e(s.get('spot_name_ko'))}</span>
             {'<span class="spot-alt">' + e(alt) + '</span>' if alt else ''}
             {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
+            {'<a class="map-link" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
           </div>
           {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
           {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
