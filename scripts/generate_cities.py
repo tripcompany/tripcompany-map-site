@@ -372,7 +372,12 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     name = city.get('city_name_ko', city_id)
     country = COUNTRY_NAME.get(city.get('country_code', ''), '')
     alpha2 = COUNTRY_ALPHA2.get(city.get('country_code', ''), '')
-    hero_img = city.get('hero_image_url', '')
+    hero_img = city.get('hero_image_url', '').strip()
+    # 스팟 사진(photo_url)과 똑같은 방식 — Imgur 같은 외부 서비스 대신 저장소 안
+    # 이미지 경로(예: images/cities/jp-kagawa/hero.jpg)를 써도 되도록, http(s) 주소가
+    # 아니면 사이트 맨 위 기준 절대경로가 되게 앞에 "/"를 자동으로 붙여줍니다.
+    if hero_img and not hero_img.startswith('http') and not hero_img.startswith('/'):
+        hero_img = '/' + hero_img
     hero_style = ''
     if hero_img:
         hero_style = (
