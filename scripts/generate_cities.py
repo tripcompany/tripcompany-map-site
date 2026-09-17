@@ -334,9 +334,14 @@ VIDEO_JS = '''
   var modal = document.getElementById('vmodal');
   var frameWrap = document.getElementById('vmodalFrame');
   var closeBtn = document.getElementById('vmodalClose');
+  // autoplay=1로 강제 재생시키지 않습니다 — 유튜브 정책상 광고가 붙으려면
+  // 스크립트가 강제로 트는 게 아니라 방문자가 플레이어 안에서 직접 눌러야
+  // 하는 click-to-play여야 합니다(메인 지도 페이지 app.js의 openVideoModal과
+  // 동일한 이유). 모달이 열리면 유튜브 썸네일과 재생 버튼만 뜨고, 방문자가
+  // 그 안에서 한 번 더 눌러야 재생이 시작됩니다.
   function openVideo(id){
     if(!modal || !frameWrap || !id) return;
-    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
     modal.classList.add('open');
   }
   function closeVideo(){
