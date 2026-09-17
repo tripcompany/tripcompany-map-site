@@ -166,6 +166,26 @@ let activeChannelFilter = "all";
 
 let DATA = { countries: [], cities: [], videos: [], localAds: [] };
 
+/* 안내 페이지(city/도시코드/index.html)가 실제로 공개된 도시의 city_id
+ * 집합입니다. generate_cities.py가 빌드할 때마다 city/published.json으로
+ * 내보내는 값을 읽어 채웁니다 — 지도 쪽 Cities 탭과 도시 안내 페이지 쪽
+ * Cities 탭이 같은 city_id(예: JP-TOKYO)를 쓴다는 전제입니다. */
+let PUBLISHED_CITY_IDS = new Set();
+
+/* city/published.json은 같은 사이트 안의 정적 파일이라 실패할 일이
+ * 거의 없지만, 혹시 아직 파일이 없거나 네트워크 문제가 있어도 지도
+ * 자체는 그대로 동작해야 하므로 실패하면 조용히 빈 집합을 돌려줍니다. */
+async function loadPublishedCityIds() {
+  try {
+    const res = await fetch("/city/published.json", { cache: "no-store" });
+    if (!res.ok) return new Set();
+    const ids = await res.json();
+    return new Set((ids || []).map((id) => String(id)));
+  } catch (err) {
+    return new Set();
+  }
+}
+
 /* ---------- 데이터 로딩 ---------- */
 
 async function fetchSheet(tabName) {
@@ -1702,6 +1722,7 @@ function renderVideoPanel() {
   const heading = document.getElementById("panel-heading");
   const listEl = document.getElementById("video-list");
   updateShareButton();
+  updateCityGuideButton();
   renderChannelTabs();
 
   if (!selectedCountryCode) {
@@ -2146,6 +2167,39 @@ function updateShareButton() {
   btn.hidden = !selectedCountryCode;
 }
 
+/* 특정 도시를 골랐고, 그 도시의 안내 페이지(city/도시코드/)가 실제로
+ * 공개된 경우에만 패널 제목 옆에 "가이드 보기" 버튼을 보여줍니다.
+ * (나라만 고른 상태나, 아직 안내 페이지가 없는/비공개인 도시에서는
+ * 숨겨둡니다.) */
+function updateCityGuideButton() {
+  const btn = document.getElementById("city-guide-btn");
+  if (!btn) return;
+  const city = selectedCityId ? DATA.cities.find((c) => c.city_id === selectedCityId) : null;
+  if (city && PUBLISHED_CITY_IDS.has(String(city.city_id))) {
+    btn.href = `/city/${String(city.city_id).toLowerCase()}/`;
+    btn.hidden = false;
+  } else {
+    btn.hidden = true;
+    btn.removeAttribute("href");
+  }
+}
+
+function handleCityGuideClick() {
+  trackEvent("city_guide_click", {
+    region_type: "city",
+    region_name: selectedCityId
+      ? (DATA.cities.find((c) => c.city_id === selectedCityId) || {}).city_name_ko || ""
+      : "",
+    region_slug: currentRegionSlug()
+  });
+}
+
+function bindCityGuideButton() {
+  const btn = document.getElementById("city-guide-btn");
+  if (!btn) return;
+  btn.addEventListener("click", handleCityGuideClick);
+}
+
 let shareFeedbackTimer = null;
 
 function showShareFeedback(message) {
@@ -2494,11 +2548,19 @@ async function main() {
   bindVideoModalEvents();
   bindAffiliateClickTracking();
   bindShareButton();
+  bindCityGuideButton();
   bindCitySearch();
   bindChannelTabEvents();
 
   // 데이터 로딩과 별개로 진행 — 실패해도 지도/데이터 표시에는 영향 없음
   applyVisitorView();
+
+  // 공개된 도시 목록도 나라/도시 데이터와 별개로 받아옵니다. 늦게 도착해도
+  // 도착하는 대로 "가이드 보기" 버튼 표시 여부만 다시 계산합니다.
+  loadPublishedCityIds().then((ids) => {
+    PUBLISHED_CITY_IDS = ids;
+    updateCityGuideButton();
+  });
 
   let renderedFromCache = false;
 

@@ -174,17 +174,30 @@
   <aside class="side-panel">
     <div class="panel-heading-row">
       <h2 id="panel-heading" class="panel-heading">지도에서 국가를 선택해보세요</h2>
-      <!-- 나라/도시를 고른 상태에서만 보이는 공유 버튼. 휴대폰에서는 카카오톡 등으로
-           바로 보낼 수 있는 기본 공유창이 뜨고, PC에서는 주소가 복사됩니다. -->
-      <button id="share-btn" class="share-btn" type="button" title="지금 보고 있는 지역의 링크 공유하기" hidden>
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="18" cy="5" r="3"></circle>
-          <circle cx="6" cy="12" r="3"></circle>
-          <circle cx="18" cy="19" r="3"></circle>
-          <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path>
-        </svg>
-        <span class="share-btn-label">공유</span>
-      </button>
+      <div class="panel-heading-actions">
+        <!-- 해당 도시의 안내 페이지(city/도시코드/index.html)가 실제로 공개된
+             경우에만 보이는 버튼입니다(app.js의 updateCityGuideButton, 도시
+             선택 시 city/published.json과 대조해서 판단). -->
+        <a id="city-guide-btn" class="city-guide-btn" href="#" hidden>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 3h7l5 5v13H7z"></path>
+            <path d="M14 3v5h5"></path>
+            <path d="M9.5 12.5h5M9.5 16h5"></path>
+          </svg>
+          <span>가이드 보기</span>
+        </a>
+        <!-- 나라/도시를 고른 상태에서만 보이는 공유 버튼. 휴대폰에서는 카카오톡 등으로
+             바로 보낼 수 있는 기본 공유창이 뜨고, PC에서는 주소가 복사됩니다. -->
+        <button id="share-btn" class="share-btn" type="button" title="지금 보고 있는 지역의 링크 공유하기" hidden>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"></circle>
+            <circle cx="6" cy="12" r="3"></circle>
+            <circle cx="18" cy="19" r="3"></circle>
+            <path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path>
+          </svg>
+          <span class="share-btn-label">공유</span>
+        </button>
+      </div>
     </div>
 
     <!-- 나라/도시를 고른 상태에서만 보이는 채널별 필터 탭입니다(app.js의
