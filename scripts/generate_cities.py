@@ -326,6 +326,37 @@ PAGE_CSS = '''
     padding:10px 16px 10px 13px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .home-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .home-fab .fab-text{ display:none; } .home-fab{ padding:12px; } }
+  .share-fab{ position:fixed; right:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
+    background:var(--accent-strong); color:#fff; border:none; cursor:pointer; font-family:inherit; font-size:0.84rem; font-weight:700;
+    padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .share-fab:hover{ background:var(--accent); }
+  @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+'''
+
+SHARE_JS = '''
+(function(){
+  var btn = document.getElementById('shareFab');
+  var label = document.getElementById('shareFabLabel');
+  if(!btn) return;
+  var timer = null;
+  function showFeedback(msg){
+    if(!label) return;
+    label.textContent = msg;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ label.textContent = '공유'; }, 1600);
+  }
+  btn.addEventListener('click', function(){
+    var url = window.location.href;
+    var title = document.title;
+    if(navigator.share){
+      navigator.share({ title: title, url: url }).catch(function(){ /* 방문자가 공유창을 그냥 닫음 */ });
+      return;
+    }
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
 '''
 
 VIDEO_JS = '''
@@ -366,7 +397,7 @@ VIDEO_JS = '''
 '''
 
 
-def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
+def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities=None):
     city_id = city['city_id']
     slug = city_id.lower()
     name = city.get('city_name_ko', city_id)
@@ -385,6 +416,22 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             "rgba(15,15,15,0.5) 55%, rgba(20,20,20,0.28) 100%), url('" + e(hero_img) + "'); "
             'background-size:cover; background-position:center;"'
         )
+
+    # 공유(카카오톡 등) 미리보기 이미지 — 도시마다 다른 hero_image_url이 있으면 그 사진을,
+    # 없으면 기존 공용 이미지를 씁니다. hero_img는 이미 위에서 "/"로 시작하는 절대경로나
+    # http(s) 주소로 정리돼 있어서, 절대 URL(https://...)로만 한 번 더 바꿔줍니다.
+    if hero_img:
+        og_image = hero_img if hero_img.startswith('http') else SITE + hero_img
+    else:
+        og_image = SITE + '/images/og-image.jpg'
+
+    # 같은 나라의 다른 "공개된" 도시 페이지로 가는 링크(도시 페이지 하단). 아직 준비
+    # 중(비공개)인 페이지는 링크하지 않습니다 — main()에서 country_code 기준으로 미리
+    # 골라서 넘겨줍니다.
+    related_cities = related_cities or []
+    related_links = ' · '.join(
+        f'<a href="/city/{e(r["slug"])}/">{e(r["name"])}</a>' for r in related_cities
+    )
 
     global _PUBLISHED
     is_published = is_city_published(city)
@@ -425,8 +472,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             if photo and not photo.startswith('http') and not photo.startswith('/'):
                 photo = '/' + photo
             alt = alt_names(s.get('spot_name_en'), s.get('spot_name_local'))
+            spot_name_ko = (s.get('spot_name_ko') or '').strip()
+            photo_alt = (spot_name_ko + ' 사진') if spot_name_ko else ''
             photo_html = (
-                '<span class="spot-photo"><img src="' + e(photo) + '" alt="" loading="lazy"></span>'
+                '<span class="spot-photo"><img src="' + e(photo) + '" alt="' + e(photo_alt) + '" loading="lazy"></span>'
                 if photo else ''
             )
             cards.append(f'''
@@ -507,10 +556,11 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
         vdate_disp = vdate.replace('-', '.') if vdate else ''
         ex = is_example(vid)
         thumb = f'https://img.youtube.com/vi/{vid}/hqdefault.jpg' if vid else ''
+        vthumb_alt = vtitle if vtitle else f'{name} 여행 영상'
         videos_html.append(f'''
         <button class="vcard{' is-example' if ex else ''}" type="button" data-video-id="{e(vid)}" aria-label="영상 재생">
           <span class="vcard-thumb">
-            {'<img src="' + e(thumb) + '" alt="" loading="lazy">' if thumb else ''}
+            {'<img src="' + e(thumb) + '" alt="' + e(vthumb_alt) + '" loading="lazy">' if thumb else ''}
             <span class="vcard-play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/><path d="M9.5 7.5v9l8-4.5z" fill="#fff"/></svg></span>
             {'<span class="ex-tag" style="position:absolute;top:6px;right:6px;">예시</span>' if ex else ''}
           </span>
@@ -534,6 +584,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
   "@type": "TravelGuide",
   "name": "{e(name)} 여행 가이드 · 트립콤파니 여행지도",
   "url": "{SITE}/city/{slug}/",
+  "image": "{e(og_image)}",
   "about": {{ "@type": "Place", "name": "{e(name)}", "address": {{ "@type": "PostalAddress", "addressCountry": "{alpha2}" }} }},
   "publisher": {{ "@type": "Organization", "name": "트립콤파니" }}
 }}'''
@@ -629,7 +680,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
 <meta property="og:site_name" content="트립콤파니 여행지도">
 <meta property="og:title" content="{e(title_h1)}">
 <meta property="og:url" content="{SITE}/city/{slug}/">
-<meta property="og:image" content="{SITE}/images/og-image.jpg">
+<meta property="og:image" content="{e(og_image)}">
 <script type="application/ld+json">{jsonld}</script>
 <style>{PAGE_CSS}</style>
 </head>
@@ -665,6 +716,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
 <footer>
   <div class="wrap">
     <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+    {'<p style="margin:0 0 8px; opacity:0.85;">' + e(country) + '의 다른 도시 가이드 → ' + related_links + '</p>' if related_links else ''}
     <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
   </div>
 </footer>
@@ -673,9 +725,15 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
   <span aria-hidden="true">🗺️</span><span class="fab-text">지도로 돌아가기</span>
 </a>
 
+<button class="share-fab" id="shareFab" type="button" aria-label="이 페이지 링크 공유하기">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+  <span class="fab-text" id="shareFabLabel">공유</span>
+</button>
+
 {'<div class="vmodal" id="vmodal"><div class="vmodal-box"><div class="vmodal-frame-wrap" id="vmodalFrame"></div><button class="vmodal-close" type="button" id="vmodalClose">닫기 ✕</button></div></div>' if videos else ''}
 
 {'<script>' + VIDEO_JS + '</script>' if videos else ''}
+<script>{SHARE_JS}</script>
 
 </body>
 </html>
@@ -712,6 +770,24 @@ def build_sitemap(published):
 
 def main(local_files=None):
     cities = fetch_csv('Cities', CSV_URLS['Cities'], local_files)
+
+    # 나라(country_code)별로 "공개된" 도시 목록을 미리 만들어둡니다 — 도시 페이지
+    # 하단에 같은 나라의 다른 도시로 가는 링크를 넣기 위해서입니다. country_code가
+    # 비어있는 도시는 묶을 기준이 없으니 건너뜁니다.
+    published_by_country = {}
+    for c in cities:
+        if not is_city_published(c):
+            continue
+        cc = (c.get('country_code') or '').strip()
+        if not cc:
+            continue
+        published_by_country.setdefault(cc, []).append({
+            'city_id': c['city_id'],
+            'slug': c['city_id'].lower(),
+            'name': c.get('city_name_ko', c['city_id']),
+        })
+    for _cc, _lst in published_by_country.items():
+        _lst.sort(key=lambda r: r['name'])
     timing_all = fetch_csv('Timing', CSV_URLS['Timing'], local_files)
     spots_all = fetch_csv('Spots', CSV_URLS['Spots'], local_files)
     stay_all = fetch_csv('Stay', CSV_URLS['Stay'], local_files)
@@ -749,7 +825,11 @@ def main(local_files=None):
         # 바뀌면 다음 자동 빌드 때 제목을 가져오는 데 성공해서 저절로 나타납니다.
         videos = [v for v in videos if is_example(v.get('video_id', '')) or v.get('_title')]
 
-        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos)
+        cc = (city.get('country_code') or '').strip()
+        related_cities = [
+            r for r in published_by_country.get(cc, []) if r['city_id'] != cid
+        ]
+        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities)
         if page is None:
             skipped.append(cid)
             continue
