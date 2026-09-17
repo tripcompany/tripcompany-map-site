@@ -160,10 +160,6 @@ PAGE_CSS = '''
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
   .rule .tc{ font-weight:400; }
-  .cond{ margin:6px 0 0; font-size:0.83rem; color:var(--money); }
-  .stayed{ font-size:0.74rem; padding:2px 8px; border-radius:999px; }
-  .stayed.yes{ background:var(--accent-soft); color:var(--accent-strong); font-weight:700; }
-  .stayed.no{ background:#eeece4; color:var(--ink-soft); }
 
   table{ width:100%; border-collapse:collapse; font-size:0.9rem; background:var(--panel);
     border:1px solid var(--border); border-radius:12px; overflow:hidden; }
@@ -257,17 +253,13 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
 
     stay_html = []
     for s in stay:
-        stayed = str(s.get('tc_stayed', '')).upper() in ('TRUE', 'O', 'Y', 'YES')
         note = s.get('tc_note', '')
-        cond = s.get('tc_condition', '')
         stay_html.append(f'''
       <li class="stay-item">
         <div class="spot-head">
           {grade_badge(s.get('tc_grade'), 'Stay.tc_grade', '추천 / 조건부 / 비추천 중 하나')}
           <span class="spot-name">{e(s.get('area_name'))}</span>
-          <span class="stayed {'yes' if stayed else 'no'}">{'직접 묵어봄' + (' · ' + e(s.get('stayed_hotel')) if s.get('stayed_hotel') else '') if stayed else '직접 투숙하지 않음 · 구역 기준 추천'}</span>
         </div>
-        {'<p class="cond">조건: ' + e(cond) + '</p>' if cond else ''}
         {'<p class="tc">' + e(note) + '</p>' if note else '<p class="tc tc-empty">' + slot('Stay.tc_note', '이 구역을 고르는 이유 한 줄') + '</p>'}
       </li>''')
 
