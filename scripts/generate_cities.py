@@ -122,6 +122,7 @@ def grade_badge(g, field, hint=''):
 
 
 _TITLE_CACHE = {}
+_DATE_CACHE = {}
 
 
 def fetch_video_title(video_id):
@@ -142,6 +143,35 @@ def fetch_video_title(video_id):
         title = ''
     _TITLE_CACHE[video_id] = title
     return title
+
+
+def fetch_video_published_date(video_id):
+    """영상 시청 페이지에 있는 공개일 메타데이터를 읽어옵니다(oEmbed엔 발행일이 없어서
+    별도로 가져옴). 역시 실패하면 빈 문자열만 돌려주고 빌드는 멈추지 않습니다."""
+    if not video_id or is_example(video_id):
+        return ''
+    if video_id in _DATE_CACHE:
+        return _DATE_CACHE[video_id]
+    date_str = ''
+    try:
+        url = f'https://www.youtube.com/watch?v={video_id}'
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            page = resp.read().decode('utf-8', errors='ignore')
+        for pattern in (
+            r'itemprop="datePublished" content="(\d{4}-\d{2}-\d{2})"',
+            r'itemprop="uploadDate" content="(\d{4}-\d{2}-\d{2})"',
+            r'"publishDate":"(\d{4}-\d{2}-\d{2})',
+            r'"uploadDate":"(\d{4}-\d{2}-\d{2})',
+        ):
+            m = re.search(pattern, page)
+            if m:
+                date_str = m.group(1)
+                break
+    except Exception:
+        date_str = ''
+    _DATE_CACHE[video_id] = date_str
+    return date_str
 
 
 PAGE_CSS = '''
@@ -258,6 +288,7 @@ PAGE_CSS = '''
   .vcard-body{ padding:11px 13px 13px; display:block; }
   .vcard-title{ font-size:0.88rem; font-weight:700; margin:0 0 6px; line-height:1.35; display:-webkit-box;
     -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .vcard-date{ display:block; font-size:0.74rem; color:var(--ink-soft); }
   .vscroll-arrow{ position:absolute; top:38%; width:34px; height:34px; border-radius:999px; border:1px solid var(--border);
     background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center;
     cursor:pointer; font-size:1.1rem; color:var(--ink); z-index:2; }
@@ -430,9 +461,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     videos_html = []
     for v in videos:
         vid = v.get('video_id', '')
-        desc = v.get('tc_desc (한 줄 소개)', '')
         vtitle = v.get('_title', '')
-        ex = is_example(vid, desc)
+        vdate = v.get('_date', '')
+        vdate_disp = vdate.replace('-', '.') if vdate else ''
+        ex = is_example(vid)
         thumb = f'https://img.youtube.com/vi/{vid}/hqdefault.jpg' if vid else ''
         videos_html.append(f'''
         <button class="vcard{' is-example' if ex else ''}" type="button" data-video-id="{e(vid)}" aria-label="영상 재생">
@@ -443,7 +475,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
           </span>
           <span class="vcard-body">
             {'<span class="vcard-title">' + e(vtitle) + '</span>' if vtitle else ''}
-            {'<span class="tc" style="display:block;margin-top:2px;">' + e(desc) + '</span>' if desc else ('' if is_published else '<span class="tc tc-empty" style="display:block;margin-top:2px;">' + slot('Videos.tc_desc', '이 영상 한 줄 소개') + '</span>')}
+            {'<span class="vcard-date">' + e(vdate_disp) + ' 공개</span>' if vdate_disp else ''}
           </span>
         </button>''')
 
@@ -642,6 +674,7 @@ def main(local_files=None):
         for v in videos:
             v['video_id'] = extract_video_id(v.get('video_id', ''))
             v['_title'] = fetch_video_title(v.get('video_id', ''))
+            v['_date'] = fetch_video_published_date(v.get('video_id', ''))
 
         page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos)
         if page is None:
