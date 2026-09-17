@@ -355,8 +355,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
     hero_style = ''
     if hero_img:
         hero_style = (
-            ' style="background-image:linear-gradient(150deg, rgba(22,78,65,0.86) 0%, '
-            "rgba(31,111,92,0.55) 55%, rgba(44,133,112,0.35) 100%), url('" + e(hero_img) + "'); "
+            ' style="background-image:linear-gradient(150deg, rgba(8,8,8,0.82) 0%, '
+            "rgba(15,15,15,0.5) 55%, rgba(20,20,20,0.28) 100%), url('" + e(hero_img) + "'); "
             'background-size:cover; background-position:center;"'
         )
 
