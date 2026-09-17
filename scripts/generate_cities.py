@@ -675,6 +675,10 @@ def main(local_files=None):
             v['video_id'] = extract_video_id(v.get('video_id', ''))
             v['_title'] = fetch_video_title(v.get('video_id', ''))
             v['_date'] = fetch_video_published_date(v.get('video_id', ''))
+        # 아직 비공개(비공개/일부공개 등)라 유튜브에서 제목을 못 가져온 영상은
+        # 화면에 깨진 카드로 보이지 않도록 아예 숨깁니다. 나중에 그 영상이 공개로
+        # 바뀌면 다음 자동 빌드 때 제목을 가져오는 데 성공해서 저절로 나타납니다.
+        videos = [v for v in videos if is_example(v.get('video_id', '')) or v.get('_title')]
 
         page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos)
         if page is None:
