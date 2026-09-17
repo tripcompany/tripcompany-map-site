@@ -18,6 +18,7 @@
   "@type": "TravelGuide",
   "name": "도쿄 여행 가이드 · 트립콤파니 여행지도",
   "url": "https://tripcompany.world/city/jp-tokyo/",
+  "image": "https://tripcompany.world/images/og-image.jpg",
   "about": { "@type": "Place", "name": "도쿄", "address": { "@type": "PostalAddress", "addressCountry": "JP" } },
   "publisher": { "@type": "Organization", "name": "트립콤파니" }
 }</script>
@@ -79,7 +80,14 @@
   .area-name{ font-size:1.05rem; margin:0 0 12px; display:flex; align-items:baseline; gap:8px; }
   .area-count{ font-size:0.8rem; color:var(--ink-soft); font-weight:500; }
   .spot-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:15px 17px; }
+  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; }
+  .stay-item, .rule{ padding:15px 17px; }
+  .spot{ padding:0; overflow:hidden; }
+  .spot-body{ padding:15px 17px; min-width:0; }
+  .spot.has-photo{ display:flex; align-items:stretch; }
+  .spot-photo{ flex:0 0 108px; }
+  .spot-photo img{ width:100%; height:100%; min-height:104px; object-fit:cover; display:block; }
+  .spot.has-photo .spot-body{ flex:1; }
   .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .spot-name{ font-weight:700; }
   .spot-alt{ font-size:0.78rem; color:var(--ink-soft); }
@@ -160,6 +168,11 @@
     padding:10px 16px 10px 13px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .home-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .home-fab .fab-text{ display:none; } .home-fab{ padding:12px; } }
+  .share-fab{ position:fixed; right:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
+    background:var(--accent-strong); color:#fff; border:none; cursor:pointer; font-family:inherit; font-size:0.84rem; font-weight:700;
+    padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .share-fab:hover{ background:var(--accent); }
+  @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
 </style>
 </head>
 <body>
@@ -334,6 +347,7 @@
 <footer>
   <div class="wrap">
     <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+    <p style="margin:0 0 8px; opacity:0.85;">일본의 다른 도시 가이드 → <a href="/city/jp-takamatsu/">다카마츠</a></p>
     <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
   </div>
 </footer>
@@ -342,9 +356,39 @@
   <span aria-hidden="true">🗺️</span><span class="fab-text">지도로 돌아가기</span>
 </a>
 
+<button class="share-fab" id="shareFab" type="button" aria-label="이 페이지 링크 공유하기">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+  <span class="fab-text" id="shareFabLabel">공유</span>
+</button>
 
 
 
+
+<script>
+(function(){
+  var btn = document.getElementById('shareFab');
+  var label = document.getElementById('shareFabLabel');
+  if(!btn) return;
+  var timer = null;
+  function showFeedback(msg){
+    if(!label) return;
+    label.textContent = msg;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ label.textContent = '공유'; }, 1600);
+  }
+  btn.addEventListener('click', function(){
+    var url = window.location.href;
+    var title = document.title;
+    if(navigator.share){
+      navigator.share({ title: title, url: url }).catch(function(){ /* 방문자가 공유창을 그냥 닫음 */ });
+      return;
+    }
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
