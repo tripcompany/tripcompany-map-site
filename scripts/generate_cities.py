@@ -238,7 +238,14 @@ PAGE_CSS = '''
   .area-name{ font-size:1.05rem; margin:0 0 12px; display:flex; align-items:baseline; gap:8px; }
   .area-count{ font-size:0.8rem; color:var(--ink-soft); font-weight:500; }
   .spot-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; padding:15px 17px; }
+  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; }
+  .stay-item, .rule{ padding:15px 17px; }
+  .spot{ padding:0; overflow:hidden; }
+  .spot-body{ padding:15px 17px; min-width:0; }
+  .spot.has-photo{ display:flex; align-items:stretch; }
+  .spot-photo{ flex:0 0 108px; }
+  .spot-photo img{ width:100%; height:100%; min-height:104px; object-fit:cover; display:block; }
+  .spot.has-photo .spot-body{ flex:1; }
   .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .spot-name{ font-weight:700; }
   .spot-alt{ font-size:0.78rem; color:var(--ink-soft); }
@@ -406,18 +413,31 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos):
             fact = s.get('fact_note (사전조사)', '')
             ts = s.get('video_ts', '')
             map_url = s.get('map_url', '').strip()
+            # 시트에 "images/spots/..."처럼 맨 앞 슬래시 없이 적어도, 도시 페이지는
+            # city/도시코드/ 하위 경로에 있어서 사이트 맨 위 기준 절대경로로 안 잡아주면
+            # 엉뚱한 위치에서 이미지를 찾게 됩니다. http(s) 주소가 아니면 앞에 "/"를 붙여줍니다.
+            photo = s.get('photo_url', '').strip()
+            if photo and not photo.startswith('http') and not photo.startswith('/'):
+                photo = '/' + photo
             alt = alt_names(s.get('spot_name_en'), s.get('spot_name_local'))
+            photo_html = (
+                '<span class="spot-photo"><img src="' + e(photo) + '" alt="" loading="lazy"></span>'
+                if photo else ''
+            )
             cards.append(f'''
-        <li class="spot">
-          <div class="spot-head">
-            {grade_badge(s.get('tc_grade'), 'Spots.tc_grade')}
-            <span class="spot-name">{e(s.get('spot_name_ko'))}</span>
-            {'<span class="spot-alt">' + e(alt) + '</span>' if alt else ''}
-            {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
-            {'<a class="map-link" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
+        <li class="spot{' has-photo' if photo else ''}">
+          {photo_html}
+          <div class="spot-body">
+            <div class="spot-head">
+              {grade_badge(s.get('tc_grade'), 'Spots.tc_grade')}
+              <span class="spot-name">{e(s.get('spot_name_ko'))}</span>
+              {'<span class="spot-alt">' + e(alt) + '</span>' if alt else ''}
+              {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
+              {'<a class="map-link" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
+            </div>
+            {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
+            {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
           </div>
-          {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
-          {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
         </li>''')
         spots_html.append(f'''
       <div class="area" id="{area_anchor.get(area, area)}">
