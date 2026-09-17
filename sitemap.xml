@@ -2,24 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://tripcompany.world/</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://tripcompany.world/privacy.html</loc>
-    <lastmod>2026-09-10</lastmod>
+    <lastmod>2026-09-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
-  <!-- 도시 페이지(city.html?id=도시ID)는 아직 공개 전(noindex)이라 일부러
-       빼뒀습니다. 실제로 공개하는 시점에 도시마다 아래 형식으로 한 블록씩
-       추가하세요. README "도시 페이지 검색 노출" 항목 참고.
   <url>
-    <loc>https://tripcompany.world/city.html?id=CN-SHANGHAI</loc>
-    <lastmod>2026-09-12</lastmod>
+    <loc>https://tripcompany.world/city/jp-takamatsu/</loc>
+    <lastmod>2026-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-  -->
 </urlset>
