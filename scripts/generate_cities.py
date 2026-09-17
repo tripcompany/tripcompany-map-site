@@ -326,6 +326,49 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
   </div>
 </section>'''
 
+    spots_section = ''
+    if spots:
+        spots_section = f'''
+<section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">({grades_filled}/{len(spots)}곳 판정 완료)</span></h2>
+    <p class="section-sub">
+      <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
+      <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
+      <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
+      <span class="grade grade-skip">굳이</span> 그렇게 권장하지 않음
+    </p>
+    {''.join(spots_html)}
+  </div>
+</section>'''
+
+    stay_section = ''
+    if stay:
+        stay_section = f'''
+<section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>어느 구역에 묵을까</h2>
+    <p class="section-sub">호텔 하나를 찍어주지 않고 <strong>구역</strong>으로 답합니다.</p>
+    <p class="section-sub" style="margin-top:-14px;">
+      <span class="grade grade-must">추천</span> 고민되면 여기, 도시당 1곳만 ·
+      <span class="grade grade-maybe">조건부</span> 특정 조건일 때만 ·
+      <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
+    </p>
+    <ul class="stay-list">{''.join(stay_html)}</ul>
+  </div>
+</section>'''
+
+    vindex_section = ''
+    if vindex:
+        vindex_section = f'''
+<section id="video-index" style="background:var(--panel); border-top:1px solid var(--border);">
+  <div class="wrap">
+    <h2>영상에서 바로 찾아보기</h2>
+    <p class="section-sub">글로 옮기지 않고 해당 장면으로 보냅니다.</p>
+    <ul class="vi-list">{''.join(vindex_html)}</ul>
+  </div>
+</section>'''
+
     page = f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -363,43 +406,14 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex):
   </div>
 </div>
 
-{'<section class="timing" id="timing"><div class="wrap"><h2>놓치면 여행이 망가지는 것</h2><p class="section-sub">예약·간조·영업시간처럼 <strong>가서 알면 늦는 것</strong>만 모았습니다. 회색 글은 사전조사한 사실, 굵은 글은 트립콤파니가 직접 덧붙인 경고입니다.</p><ul class="timing-list">' + ''.join(timing_html) + '</ul></div></section>' if timing else ''}
+{'<section class="timing" id="timing"><div class="wrap"><h2>놓치면 여행이 망가지는 것</h2><p class="section-sub">예약·간조·영업시간처럼 <strong>가서 알면 늦는 것</strong>만 모았습니다.</p><ul class="timing-list">' + ''.join(timing_html) + '</ul></div></section>' if timing else ''}
 
 {'<section id="rules"><div class="wrap"><h2>당신의 조건이면 이렇게 하세요</h2><p class="section-sub">같은 도시라도 렌터카 유무와 일정 길이에 따라 답이 달라집니다.</p><ul class="rule-list">' + ''.join(rules_html) + '</ul></div></section>' if rules else ''}
 
-<section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="wrap">
-    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">({grades_filled}/{len(spots)}곳 판정 완료)</span></h2>
-    <p class="section-sub">
-      <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
-      <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
-      <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
-      <span class="grade grade-skip">굳이</span> 그렇게 권장하지 않음
-    </p>
-    {''.join(spots_html) if spots_html else '<p class="empty-note">Spots 탭이 비어 있습니다.</p>'}
-  </div>
-</section>
-
-<section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
-  <div class="wrap">
-    <h2>어느 구역에 묵을까</h2>
-    <p class="section-sub">호텔 하나를 찍어주지 않고 <strong>구역</strong>으로 답합니다. 직접 묵은 곳과 그렇지 않은 곳을 구분해서 표시합니다.</p>
-    <p class="section-sub" style="margin-top:-14px;">
-      <span class="grade grade-must">추천</span> 고민되면 여기, 도시당 1곳만 ·
-      <span class="grade grade-maybe">조건부</span> 특정 조건일 때만 ·
-      <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
-    </p>
-    {'<ul class="stay-list">' + ''.join(stay_html) + '</ul>' if stay_html else '<p class="empty-note">Stay 탭이 비어 있습니다.</p>'}
-  </div>
-</section>
+{spots_section}
+{stay_section}
 {route_section}
-<section id="video-index" style="background:var(--panel); border-top:1px solid var(--border);">
-  <div class="wrap">
-    <h2>영상에서 바로 찾아보기</h2>
-    <p class="section-sub">글로 옮기지 않고 해당 장면으로 보냅니다.</p>
-    {'<ul class="vi-list">' + ''.join(vindex_html) + '</ul>' if vindex_html else '<p class="empty-note">VideoIndex 탭이 비어 있습니다.</p>'}
-  </div>
-</section>
+{vindex_section}
 
 <footer>
   <div class="wrap">
