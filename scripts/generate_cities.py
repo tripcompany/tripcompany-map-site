@@ -16,6 +16,7 @@ import html
 import io
 import json
 import os
+import re
 import urllib.request
 
 SITE = 'https://tripcompany.world'
@@ -82,6 +83,29 @@ def is_example(*vals):
 def alt_names(en, local):
     parts = [p.strip() for p in (en, local) if p and p.strip()]
     return ' · '.join(parts)
+
+
+_VIDEO_ID_PATTERNS = [
+    r'(?:[?&]v=)([A-Za-z0-9_-]{11})',
+    r'youtu\.be/([A-Za-z0-9_-]{11})',
+    r'shorts/([A-Za-z0-9_-]{11})',
+    r'embed/([A-Za-z0-9_-]{11})',
+]
+
+
+def extract_video_id(raw):
+    """시트에 순수 영상ID 대신 유튜브 주소 전체를 붙여넣어도 알아서 ID만 뽑아냅니다.
+    (실수로 전체 주소를 넣으면 임베드가 깨지고 제목도 못 가져오는 문제가 있었음)"""
+    raw = (raw or '').strip()
+    if not raw:
+        return ''
+    if re.fullmatch(r'[A-Za-z0-9_-]{11}', raw):
+        return raw
+    for pattern in _VIDEO_ID_PATTERNS:
+        m = re.search(pattern, raw)
+        if m:
+            return m.group(1)
+    return raw
 
 
 def slot(field, hint=''):
@@ -616,6 +640,7 @@ def main(local_files=None):
         vindex = [r for r in vindex_all if r.get('city_id') == cid and (r.get('ts') or r.get('label (이 지점에 뭐가 있나)'))]
         videos = [r for r in videos_all if r.get('city_id') == cid and r.get('video_id')]
         for v in videos:
+            v['video_id'] = extract_video_id(v.get('video_id', ''))
             v['_title'] = fetch_video_title(v.get('video_id', ''))
 
         page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos)
