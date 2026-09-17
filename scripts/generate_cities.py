@@ -658,7 +658,7 @@ def build_sitemap(published):
         ('/', today, 'weekly', '1.0'),
         ('/privacy.html', today, 'monthly', '0.3'),
     ]
-    for slug, checked in published:
+    for _cid, slug, checked in published:
         lastmod = checked.strip() if checked and checked.strip() else today
         entries.append((f'/city/{slug}/', lastmod, 'weekly', '0.7'))
 
@@ -724,11 +724,19 @@ def main(local_files=None):
             f.write(page)
         made.append((cid, slug, len(spots)))
         if is_city_published(city):
-            published.append((slug, city.get('checked_at', '')))
+            published.append((cid, slug, city.get('checked_at', '')))
 
     sitemap_path = os.path.join(REPO_ROOT, 'sitemap.xml')
     with open(sitemap_path, 'w', encoding='utf-8') as f:
         f.write(build_sitemap(published))
+
+    # 지도 화면(index.html/app.js)이 "이 도시는 안내 페이지가 있다"는 걸
+    # 알 수 있도록, 공개된 도시의 city_id 목록만 따로 내보냅니다. 지도 쪽
+    # Cities 탭과 이 시트(핵심_도시페이지) 둘 다 같은 city_id(예: JP-TOKYO)를
+    # 쓴다는 전제로 만들었습니다 — 다르면 이 파일만으로는 매칭이 안 됩니다.
+    published_ids_path = os.path.join(OUT_ROOT, 'published.json')
+    with open(published_ids_path, 'w', encoding='utf-8') as f:
+        json.dump(sorted({cid for cid, _slug, _checked in published}), f, ensure_ascii=False)
 
     print('생성 완료:', len(made), '개 도시')
     for cid, slug, n in made:
