@@ -1,2 +1,4 @@
 .DS_Store
 Claude outputs/
+__pycache__/
+*.pyc
