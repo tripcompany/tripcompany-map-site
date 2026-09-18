@@ -263,6 +263,7 @@ PAGE_CSS = '''
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
   .rule .tc{ font-weight:400; }
+  .stay-item .tc{ font-weight:500; }
 
   table{ width:100%; border-collapse:collapse; font-size:0.9rem; background:var(--panel);
     border:1px solid var(--border); border-radius:12px; overflow:hidden; }
