@@ -259,6 +259,17 @@ PAGE_CSS = '''
     border-radius:999px; background:#eceae2; color:var(--ink-soft); flex-shrink:0; }
   .map-link:hover{ background:var(--accent-soft); color:var(--accent-strong); }
 
+  /* 제휴 예약 버튼(클룩·마이리얼트립 — 스팟별, 트립닷컴 — 숙소 섹션 전체 1개) */
+  .book-actions{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .book-btn{ display:inline-flex; align-items:center; font-size:0.78rem; font-weight:700;
+    color:var(--money); background:var(--money-soft); border:1px solid var(--money-line);
+    border-radius:999px; padding:5px 12px; text-decoration:none; }
+  .book-btn:hover{ background:var(--money-line); }
+  .stay-cta{ margin-top:16px; display:flex; }
+  .stay-cta a{ display:inline-flex; align-items:center; gap:8px; font-size:0.92rem; font-weight:700;
+    color:#fff; background:var(--money); border-radius:10px; padding:12px 18px; text-decoration:none; }
+  .stay-cta a:hover{ background:#7c5522; }
+
   .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
   .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
   .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
@@ -425,6 +436,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     else:
         og_image = SITE + '/images/og-image.jpg'
 
+    # 숙소 예약(트립닷컴) — 도시 하나당 링크 1개만. "어느 구역에 묵을까" 섹션 맨
+    # 아래에 버튼으로 붙습니다. 시트 칸이 비어있으면 버튼 자체가 안 뜹니다.
+    trip_com_url = (city.get('trip_com_url') or '').strip()
+
     # 같은 나라의 다른 "공개된" 도시 페이지로 가는 링크(도시 페이지 하단). 아직 준비
     # 중(비공개)인 페이지는 링크하지 않습니다 — main()에서 country_code 기준으로 미리
     # 골라서 넘겨줍니다.
@@ -465,6 +480,11 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
             fact = s.get('fact_note (사전조사)', '')
             ts = s.get('video_ts', '')
             map_url = s.get('map_url', '').strip()
+            # 실제 예약 가능한 티켓/투어 상품이 있는 스팟에만 채우는 칸입니다. 둘 다
+            # 비어있으면 버튼 자체가 안 뜨고(map_url과 같은 방식), 어느 한쪽만 채워도
+            # 그쪽 버튼만 뜹니다.
+            klook_url = s.get('klook_url', '').strip()
+            myrealtrip_url = s.get('myrealtrip_url', '').strip()
             # 시트에 "images/spots/..."처럼 맨 앞 슬래시 없이 적어도, 도시 페이지는
             # city/도시코드/ 하위 경로에 있어서 사이트 맨 위 기준 절대경로로 안 잡아주면
             # 엉뚱한 위치에서 이미지를 찾게 됩니다. http(s) 주소가 아니면 앞에 "/"를 붙여줍니다.
@@ -491,6 +511,12 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
             </div>
             {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
             {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
+            {(
+                '<div class="book-actions">'
+                + ('<a class="book-btn" href="' + e(klook_url) + '" target="_blank" rel="noopener noreferrer">클룩에서 티켓 예약</a>' if klook_url else '')
+                + ('<a class="book-btn" href="' + e(myrealtrip_url) + '" target="_blank" rel="noopener noreferrer">마이리얼트립에서 투어 보기</a>' if myrealtrip_url else '')
+                + '</div>'
+            ) if (klook_url or myrealtrip_url) else ''}
           </div>
         </li>''')
         spots_html.append(f'''
@@ -637,6 +663,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
       <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
     </p>
     <ul class="stay-list">{''.join(stay_html)}</ul>
+    {(
+        '<div class="stay-cta"><a href="' + e(trip_com_url) + '" target="_blank" rel="noopener noreferrer">'
+        + e(name) + ' 숙소 보러 가기 (트립닷컴)</a></div>'
+    ) if trip_com_url else ''}
   </div>
 </section>'''
 
