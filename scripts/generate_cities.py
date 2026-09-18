@@ -205,9 +205,11 @@ PAGE_CSS = '''
   .hero .eyebrow{ font-size:0.8rem; font-weight:700; opacity:0.9; letter-spacing:0.02em; }
   .hero h1{ font-size:2.4rem; font-weight:800; margin:10px 0 14px; letter-spacing:-0.02em; }
   .hero .tagline{ font-size:1.08rem; max-width:52ch; margin:0; }
-  .hero .chips{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
-  .hero .chips a{ color:#fff; background:rgba(255,255,255,0.16); border:1px solid rgba(255,255,255,0.28);
-    border-radius:999px; padding:5px 13px; font-size:0.82rem; font-weight:600; text-decoration:none; }
+  .toc-bar{ position:sticky; top:0; z-index:950; background:var(--panel); border-bottom:1px solid var(--border); }
+  .toc-bar .wrap{ display:flex; gap:8px; padding:10px 24px; overflow-x:auto; }
+  .toc-bar a{ flex:0 0 auto; color:var(--ink); background:var(--bg); border:1px solid var(--border);
+    border-radius:999px; padding:6px 14px; font-size:0.82rem; font-weight:700; text-decoration:none; white-space:nowrap; }
+  .toc-bar a:hover{ background:var(--accent-soft); color:var(--accent-strong); border-color:var(--accent-soft); }
   .checked{ display:inline-block; margin-top:18px; font-size:0.78rem; background:rgba(0,0,0,0.18);
     border-radius:6px; padding:4px 10px; }
 
@@ -600,6 +602,17 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     checked = city.get('checked_at', '')
     grades_filled = len([s for s in spots if s.get('tc_grade')])
 
+    toc_items = []
+    if timing:
+        toc_items.append(('timing', '타이밍'))
+    if rules:
+        toc_items.append(('rules', '조건별 팁'))
+    if spots:
+        toc_items.append(('spots', '가볼 곳'))
+    if stay:
+        toc_items.append(('stay', '숙소'))
+    toc_html = ''.join(f'<a href="#{sec_id}">{label}</a>' for sec_id, label in toc_items)
+
     title_h1 = f'{name}, 뭘 보고 뭘 버릴까'
     title_tag = f'{name} 여행, 뭘 보고 뭘 버릴까 · 트립콤파니 여행지도'
     meta_desc = one_line or tagline or f'{name} 여행에서 예약이 필요한 곳, 시간 제약이 있는 곳, 그리고 트립콤파니가 직접 가보고 내린 판정.'
@@ -715,6 +728,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
 </head>
 <body>
 
+{'<nav class="toc-bar"><div class="wrap">' + toc_html + '</div></nav>' if toc_items else ''}
+
 {'' if is_published else '<div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>'}
 
 <div class="hero"{hero_style}>
@@ -723,9 +738,6 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     <h1>{e(title_h1)}</h1>
     <p class="tagline">{e(tagline) if tagline else slot('Cities.hero_tagline', '요약이 아니라 판정 한 문장')}</p>
     {'<p class="tagline" style="font-size:0.95rem; opacity:0.92;">' + e(one_line) + '</p>' if one_line else ''}
-    <div class="chips">
-      {''.join(f'<a href="#{area_anchor.get(a, a)}">{e(a)}</a>' for a in areas)}
-    </div>
     <span class="checked">정보 기준: {e(checked) if checked else ('' if is_published else '— (Cities.checked_at 비어 있음)')}</span>
     {'' if (hero_img or is_published) else '<div style="margin-top:10px;">' + slot('Cities.hero_image_url', '도시 사진 없음 (헤더 배경)') + '</div>'}
   </div>
