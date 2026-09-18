@@ -248,7 +248,7 @@ PAGE_CSS = '''
   .spot.has-photo .spot-body{ flex:1; }
   .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .spot-name{ font-weight:700; }
-  .spot-alt{ font-size:0.78rem; color:var(--ink-soft); }
+  .spot-alt{ font-size:0.78rem; color:var(--ink-soft); margin:3px 0 0; }
   .grade{ font-size:0.74rem; font-weight:800; padding:3px 10px; border-radius:999px; }
   .grade-must{ background:var(--accent-soft); color:var(--accent-strong); }
   .grade-maybe{ background:#eeece4; color:#6b6555; }
@@ -505,10 +505,10 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
             <div class="spot-head">
               {grade_badge(s.get('tc_grade'), 'Spots.tc_grade')}
               <span class="spot-name">{e(s.get('spot_name_ko'))}</span>
-              {'<span class="spot-alt">' + e(alt) + '</span>' if alt else ''}
               {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
               {'<a class="map-link" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
             </div>
+            {'<p class="spot-alt">' + e(alt) + '</p>' if alt else ''}
             {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
             {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
             {(
