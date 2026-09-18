@@ -343,6 +343,25 @@ PAGE_CSS = '''
     padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .share-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+
+  /* ===== 쿠키 동의 배너 (메인 사이트 style.css와 동일) ===== */
+  .cookie-consent-banner{ position:fixed; left:0; right:0; bottom:0; z-index:3000; background:#ffffff;
+    border-top:1px solid var(--border); box-shadow:0 -4px 16px rgba(0,0,0,0.1); padding:14px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+  .cookie-consent-text{ margin:0; flex:1 1 260px; min-width:200px; font-size:0.82rem; line-height:1.5; color:var(--ink); }
+  .cookie-consent-text a{ color:var(--accent); font-weight:600; }
+  .cookie-consent-actions{ display:flex; gap:8px; flex-shrink:0; }
+  .cookie-consent-btn{ min-height:40px; padding:9px 18px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .cookie-consent-reject{ background:#ffffff; color:var(--ink); }
+  .cookie-consent-reject:hover{ background:#f2f2ef; }
+  .cookie-consent-accept{ background:var(--accent); border-color:var(--accent); color:#ffffff; }
+  .cookie-consent-accept:hover{ background:#185c4c; }
+  @media (max-width:480px){
+    .cookie-consent-banner{ flex-direction:column; align-items:stretch; }
+    .cookie-consent-actions{ justify-content:stretch; }
+    .cookie-consent-btn{ flex:1; }
+  }
 '''
 
 SHARE_JS = '''
@@ -405,6 +424,57 @@ VIDEO_JS = '''
   if(closeBtn) closeBtn.addEventListener('click', closeVideo);
   if(modal) modal.addEventListener('click', function(evt){ if(evt.target === modal) closeVideo(); });
   document.addEventListener('keydown', function(evt){ if(evt.key === 'Escape') closeVideo(); });
+})();
+'''
+
+
+CITY_TRACKING_JS = '''
+(function(){
+  var CITY_SLUG = document.body.getAttribute('data-city-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* 이 페이지에서 보내는 맞춤 이벤트 네 가지:
+   *   - spot_click       : 스팟 카드의 지도 아이콘을 눌렀을 때 (어느 명소에 관심 있는지)
+   *   - spot_video_click : 스팟 카드의 "영상에서 보기" 링크를 눌렀을 때
+   *   - toc_click        : 상단 목차(핵심조언/조건별팁/가볼곳/숙소)를 눌렀을 때
+   *   - affiliate_click  : 클룩·마이리얼트립 예약 버튼을 눌렀을 때 (메인페이지와 동일한 이벤트명이라
+   *                        GA4에서 광고 클릭 통계를 한 곳에서 같이 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var adEl = event.target.closest('[data-ad-network]');
+    if (adEl) {
+      trackEvent('affiliate_click', {
+        ad_network: adEl.dataset.adNetwork || '',
+        ad_placement: adEl.dataset.adPlacement || '',
+        ad_label: adEl.dataset.adLabel || '',
+        city_slug: CITY_SLUG,
+        link_url: adEl.href || ''
+      });
+      return;
+    }
+    var spotEl = event.target.closest('[data-spot-click]');
+    if (spotEl) {
+      trackEvent('spot_click', { spot_name: spotEl.dataset.spotClick || '', city_slug: CITY_SLUG });
+      return;
+    }
+    var tsEl = event.target.closest('[data-spot-video-click]');
+    if (tsEl) {
+      trackEvent('spot_video_click', {
+        spot_name: tsEl.dataset.spotVideoClick || '',
+        ts_label: tsEl.textContent || '',
+        city_slug: CITY_SLUG
+      });
+      return;
+    }
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        city_slug: CITY_SLUG
+      });
+    }
+  });
 })();
 '''
 
@@ -506,16 +576,16 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
             <div class="spot-head">
               {grade_badge(s.get('tc_grade'), 'Spots.tc_grade')}
               <span class="spot-name">{e(s.get('spot_name_ko'))}</span>
-              {'<a class="ts" href="#video-index">' + e(ts) + '</a>' if ts else ''}
-              {'<a class="map-link" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
+              {'<a class="ts" href="#video-index" data-spot-video-click="' + e(spot_name_ko) + '">' + e(ts) + '</a>' if ts else ''}
+              {'<a class="map-link" data-spot-click="' + e(spot_name_ko) + '" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
             </div>
             {'<p class="spot-alt">' + e(alt) + '</p>' if alt else ''}
             {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
             {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
             {(
                 '<div class="book-actions">'
-                + ('<a class="book-btn" href="' + e(klook_url) + '" target="_blank" rel="noopener noreferrer">클룩에서 티켓 예약</a>' if klook_url else '')
-                + ('<a class="book-btn" href="' + e(myrealtrip_url) + '" target="_blank" rel="noopener noreferrer">마이리얼트립에서 투어 보기</a>' if myrealtrip_url else '')
+                + ('<a class="book-btn" data-ad-network="klook" data-ad-placement="city_spot_card" data-ad-label="' + e(spot_name_ko) + '" href="' + e(klook_url) + '" target="_blank" rel="noopener noreferrer">클룩에서 티켓 예약</a>' if klook_url else '')
+                + ('<a class="book-btn" data-ad-network="myrealtrip" data-ad-placement="city_spot_card" data-ad-label="' + e(spot_name_ko) + '" href="' + e(myrealtrip_url) + '" target="_blank" rel="noopener noreferrer">마이리얼트립에서 투어 보기</a>' if myrealtrip_url else '')
                 + '</div>'
             ) if (klook_url or myrealtrip_url) else ''}
           </div>
@@ -611,7 +681,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
         toc_items.append(('spots', '가볼 곳'))
     if stay:
         toc_items.append(('stay', '숙소'))
-    toc_html = ''.join(f'<a href="#{sec_id}">{label}</a>' for sec_id, label in toc_items)
+    toc_html = ''.join(f'<a href="#{sec_id}" data-toc-click="{label}">{label}</a>' for sec_id, label in toc_items)
 
     title_h1 = f'{name}, 뭘 보고 뭘 버릴까'
     title_tag = f'{name} 여행, 뭘 보고 뭘 버릴까 · 트립콤파니 여행지도'
@@ -724,9 +794,11 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
 <meta property="og:url" content="{SITE}/city/{slug}/">
 <meta property="og:image" content="{e(og_image)}">
 <script type="application/ld+json">{jsonld}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
 <style>{PAGE_CSS}</style>
 </head>
-<body>
+<body data-city-slug="{slug}">
 
 {'' if is_published else '<div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>'}
 
@@ -775,6 +847,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
 
 {'<script>' + VIDEO_JS + '</script>' if videos else ''}
 <script>{SHARE_JS}</script>
+<script src="/cookie-consent.js"></script>
+<script>{CITY_TRACKING_JS}</script>
 
 </body>
 </html>

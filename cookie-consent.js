@@ -61,7 +61,7 @@
     text.className = "cookie-consent-text";
     text.innerHTML =
       "이 사이트는 서비스 개선과 광고 제공을 위해 쿠키를 사용할 수 있어요. 자세한 내용은 " +
-      '<a href="privacy.html" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>에서 확인해주세요.';
+      '<a href="/privacy.html" target="_blank" rel="noopener noreferrer">개인정보처리방침</a>에서 확인해주세요.';
 
     var actions = document.createElement("div");
     actions.className = "cookie-consent-actions";
