@@ -576,7 +576,7 @@ function getCountryCenter(code) {
   if (!countryLayer) return null;
   const layer = countryLayer.getLayers().find((l) => String(l.feature.id) === String(code));
   if (!layer) return null;
-  return getMainBounds(layer).getCenter();
+  return getMainlandCenter(layer);
 }
 
 /* ---------- 최근 업데이트 지역 "NEW" 배지 ----------
@@ -996,6 +996,37 @@ function approxRingArea(latlngs) {
     area += p1.lng * p2.lat - p2.lng * p1.lat;
   }
   return Math.abs(area) / 2;
+}
+
+/* 나라 중심에 동그라미 점 마커 하나를 찍을 때(개별 도시 영상이 없고
+ * 나라 단위 영상만 있는 경우, 예: 스페인) 쓰는 "본토 중심" 계산입니다.
+ * getMainBounds처럼 가까운 조각들을 묶어서 범위를 넓히지 않고, 면적이
+ * 가장 넓은 조각(본토) 하나의 중심만 그대로 씁니다 — 스페인의 카나리아
+ * 제도처럼 본토에서 멀리 떨어진 작은 섬 때문에 점 위치가 남서쪽으로
+ * 밀리는 문제를 막기 위해서입니다. (나라를 클릭했을 때 지도를 맞추는
+ * 확대 범위는 getMainBounds를 그대로 쓰므로 이 함수와는 무관합니다.) */
+function getMainlandCenter(layer) {
+  const geometry = layer.feature && layer.feature.geometry;
+  if (!geometry || geometry.type !== "MultiPolygon") {
+    return layer.getBounds().getCenter();
+  }
+
+  const parts = layer.getLatLngs();
+  const pieces = [];
+
+  parts.forEach((rings) => {
+    const outerRing = rings[0];
+    if (!outerRing || outerRing.length === 0) return;
+    pieces.push({
+      bounds: L.latLngBounds(outerRing),
+      area: approxRingArea(outerRing)
+    });
+  });
+
+  if (pieces.length === 0) return layer.getBounds().getCenter();
+
+  pieces.sort((a, b) => b.area - a.area);
+  return pieces[0].bounds.getCenter();
 }
 
 function getMainBounds(layer) {
