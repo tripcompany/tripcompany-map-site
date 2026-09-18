@@ -22,6 +22,8 @@
   "about": { "@type": "Place", "name": "상하이", "address": { "@type": "PostalAddress", "addressCountry": "CN" } },
   "publisher": { "@type": "Organization", "name": "트립콤파니" }
 }</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
 <style>
   :root{
     --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
@@ -185,9 +187,28 @@
     padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .share-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+
+  /* ===== 쿠키 동의 배너 (메인 사이트 style.css와 동일) ===== */
+  .cookie-consent-banner{ position:fixed; left:0; right:0; bottom:0; z-index:3000; background:#ffffff;
+    border-top:1px solid var(--border); box-shadow:0 -4px 16px rgba(0,0,0,0.1); padding:14px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+  .cookie-consent-text{ margin:0; flex:1 1 260px; min-width:200px; font-size:0.82rem; line-height:1.5; color:var(--ink); }
+  .cookie-consent-text a{ color:var(--accent); font-weight:600; }
+  .cookie-consent-actions{ display:flex; gap:8px; flex-shrink:0; }
+  .cookie-consent-btn{ min-height:40px; padding:9px 18px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .cookie-consent-reject{ background:#ffffff; color:var(--ink); }
+  .cookie-consent-reject:hover{ background:#f2f2ef; }
+  .cookie-consent-accept{ background:var(--accent); border-color:var(--accent); color:#ffffff; }
+  .cookie-consent-accept:hover{ background:#185c4c; }
+  @media (max-width:480px){
+    .cookie-consent-banner{ flex-direction:column; align-items:stretch; }
+    .cookie-consent-actions{ justify-content:stretch; }
+    .cookie-consent-btn{ flex:1; }
+  }
 </style>
 </head>
-<body>
+<body data-city-slug="cn-shanghai">
 
 <div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>
 
@@ -202,7 +223,7 @@
   </div>
 </div>
 
-<nav class="toc-bar"><div class="wrap"><a href="#timing">핵심 조언</a><a href="#rules">조건별 팁</a><a href="#spots">가볼 곳</a><a href="#stay">숙소</a></div></nav>
+<nav class="toc-bar"><div class="wrap"><a href="#timing" data-toc-click="핵심 조언">핵심 조언</a><a href="#rules" data-toc-click="조건별 팁">조건별 팁</a><a href="#spots" data-toc-click="가볼 곳">가볼 곳</a><a href="#stay" data-toc-click="숙소">숙소</a></div></nav>
 
 
 
@@ -295,7 +316,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이타워</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海中心大厦&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이타워" href="https://uri.amap.com/search?keyword=上海中心大厦&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Tower · 上海中心大厦</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -310,7 +331,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">동방명주</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=东方明珠广播电视塔&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="동방명주" href="https://uri.amap.com/search?keyword=东方明珠广播电视塔&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Oriental Pearl Tower · 东方明珠广播电视塔</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -325,7 +346,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">리츠칼튼 루프탑</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海浦东丽思卡尔顿酒店FLAIR&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="리츠칼튼 루프탑" href="https://uri.amap.com/search?keyword=上海浦东丽思卡尔顿酒店FLAIR&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">FLAIR Rooftop Restaurant &amp; Bar · 上海浦东丽思卡尔顿酒店 FLAIR</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -340,7 +361,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 디즈니랜드</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海迪士尼乐园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 디즈니랜드" href="https://uri.amap.com/search?keyword=上海迪士尼乐园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Disneyland · 上海迪士尼乐园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -355,7 +376,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">신창 수향마을</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=新场古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="신창 수향마을" href="https://uri.amap.com/search?keyword=新场古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Xinchang Ancient Town · 新场古镇</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -370,7 +391,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 세계금융센터</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海环球金融中心&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 세계금융센터" href="https://uri.amap.com/search?keyword=上海环球金融中心&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai World Financial Center · 上海环球金融中心</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -385,7 +406,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">진마오타워</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=金茂大厦&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="진마오타워" href="https://uri.amap.com/search?keyword=金茂大厦&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Jin Mao Tower · 金茂大厦</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -400,7 +421,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 해양수족관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海海洋水族馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 해양수족관" href="https://uri.amap.com/search?keyword=上海海洋水族馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Ocean Aquarium · 上海海洋水族馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -415,7 +436,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 천문관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海天文馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 천문관" href="https://uri.amap.com/search?keyword=上海天文馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Astronomy Museum · 上海天文馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -430,7 +451,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">세기공원</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=世纪公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="세기공원" href="https://uri.amap.com/search?keyword=世纪公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Century Park · 世纪公园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -449,7 +470,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">와이탄</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=外滩&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="와이탄" href="https://uri.amap.com/search?keyword=外滩&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">The Bund · 外滩</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -464,7 +485,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">황푸강 크루즈</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=黄浦江游览&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="황푸강 크루즈" href="https://uri.amap.com/search?keyword=黄浦江游览&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Huangpu River Cruise · 黄浦江游览</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -479,7 +500,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">예원</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=豫园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="예원" href="https://uri.amap.com/search?keyword=豫园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Yu Garden · 豫园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -494,7 +515,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 성황묘</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海城隍庙&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 성황묘" href="https://uri.amap.com/search?keyword=上海城隍庙&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai City God Temple · 上海城隍庙</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -509,7 +530,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">난징둥루 보행자거리</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=南京路步行街&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="난징둥루 보행자거리" href="https://uri.amap.com/search?keyword=南京路步行街&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Nanjing Road Pedestrian Street · 南京路步行街</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -524,7 +545,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 박물관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海博物馆人民广场馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 박물관" href="https://uri.amap.com/search?keyword=上海博物馆人民广场馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Museum · 上海博物馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -539,7 +560,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">인민광장</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=人民广场&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="인민광장" href="https://uri.amap.com/search?keyword=人民广场&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">People’s Square · 人民广场</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -554,7 +575,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">신톈디</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=新天地&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="신톈디" href="https://uri.amap.com/search?keyword=新天地&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Xintiandi · 新天地</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -569,7 +590,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">톈즈팡</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=田子坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="톈즈팡" href="https://uri.amap.com/search?keyword=田子坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tianzifang · 田子坊</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -584,7 +605,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">쓰난공관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=思南公馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="쓰난공관" href="https://uri.amap.com/search?keyword=思南公馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Sinan Mansions · 思南公馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -599,7 +620,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">푸싱공원</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=复兴公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="푸싱공원" href="https://uri.amap.com/search?keyword=复兴公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Fuxing Park · 复兴公园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -614,7 +635,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 도시계획전시관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海城市规划展示馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 도시계획전시관" href="https://uri.amap.com/search?keyword=上海城市规划展示馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Urban Planning Exhibition Center · 上海城市规划展示馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -633,7 +654,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">징안사</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=静安寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="징안사" href="https://uri.amap.com/search?keyword=静安寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Jing’an Temple · 静安寺</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -648,7 +669,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">난징시루 번화가</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=南京西路&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="난징시루 번화가" href="https://uri.amap.com/search?keyword=南京西路&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">West Nanjing Road · 南京西路</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -663,7 +684,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">스타벅스 리저브 로스터리</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=星巴克臻选上海烘焙工坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="스타벅스 리저브 로스터리" href="https://uri.amap.com/search?keyword=星巴克臻选上海烘焙工坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Starbucks Reserve Roastery Shanghai · 星巴克臻选上海烘焙工坊</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -678,7 +699,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">옥불사</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=玉佛禅寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="옥불사" href="https://uri.amap.com/search?keyword=玉佛禅寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Jade Buddha Temple · 玉佛禅寺</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -693,7 +714,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">M50 창의원</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=M50创意园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="M50 창의원" href="https://uri.amap.com/search?keyword=M50创意园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">M50 Creative Park · M50创意园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -708,7 +729,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">쑤저우허 산책로</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=苏州河滨水步道&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="쑤저우허 산책로" href="https://uri.amap.com/search?keyword=苏州河滨水步道&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Suzhou Creek Waterfront · 苏州河滨水步道</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -723,7 +744,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 자연사박물관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海自然博物馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 자연사박물관" href="https://uri.amap.com/search?keyword=上海自然博物馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Natural History Museum · 上海自然博物馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -738,7 +759,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">톈안 천수</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=天安千树&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="톈안 천수" href="https://uri.amap.com/search?keyword=天安千树&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">1000 Trees · 天安千树</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -757,7 +778,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">훙커우 공원</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=鲁迅公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="훙커우 공원" href="https://uri.amap.com/search?keyword=鲁迅公园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Lu Xun Park · 鲁迅公园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -772,7 +793,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">라오창팡</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=1933老场坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="라오창팡" href="https://uri.amap.com/search?keyword=1933老场坊&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">1933 Old Millfun · 1933老场坊</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -787,7 +808,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">북와이탄</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=北外滩&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="북와이탄" href="https://uri.amap.com/search?keyword=北外滩&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">North Bund · 北外滩</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -802,7 +823,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 유대난민기념관</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海犹太难民纪念馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 유대난민기념관" href="https://uri.amap.com/search?keyword=上海犹太难民纪念馆&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Jewish Refugees Museum · 上海犹太难民纪念馆</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -817,7 +838,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">주자자오 수향마을</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=朱家角古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="주자자오 수향마을" href="https://uri.amap.com/search?keyword=朱家角古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Zhujiajiao Ancient Town · 朱家角古镇</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -832,7 +853,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">치바오 수향마을</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=七宝古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="치바오 수향마을" href="https://uri.amap.com/search?keyword=七宝古镇&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Qibao Ancient Town · 七宝古镇</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -847,7 +868,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">룽화사</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=龙华寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="룽화사" href="https://uri.amap.com/search?keyword=龙华寺&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Longhua Temple · 龙华寺</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -862,7 +883,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">상하이 미술영화촬영소</span>
               
-              <a class="map-link" href="https://uri.amap.com/search?keyword=上海影视乐园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="상하이 미술영화촬영소" href="https://uri.amap.com/search?keyword=上海影视乐园&amp;city=310000&amp;view=map&amp;src=tripcompany" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shanghai Film Park · 上海影视乐园</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -973,6 +994,56 @@
     }
     if(navigator.clipboard){
       navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
+</script>
+<script src="/cookie-consent.js"></script>
+<script>
+(function(){
+  var CITY_SLUG = document.body.getAttribute('data-city-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* 이 페이지에서 보내는 맞춤 이벤트 네 가지:
+   *   - spot_click       : 스팟 카드의 지도 아이콘을 눌렀을 때 (어느 명소에 관심 있는지)
+   *   - spot_video_click : 스팟 카드의 "영상에서 보기" 링크를 눌렀을 때
+   *   - toc_click        : 상단 목차(핵심조언/조건별팁/가볼곳/숙소)를 눌렀을 때
+   *   - affiliate_click  : 클룩·마이리얼트립 예약 버튼을 눌렀을 때 (메인페이지와 동일한 이벤트명이라
+   *                        GA4에서 광고 클릭 통계를 한 곳에서 같이 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var adEl = event.target.closest('[data-ad-network]');
+    if (adEl) {
+      trackEvent('affiliate_click', {
+        ad_network: adEl.dataset.adNetwork || '',
+        ad_placement: adEl.dataset.adPlacement || '',
+        ad_label: adEl.dataset.adLabel || '',
+        city_slug: CITY_SLUG,
+        link_url: adEl.href || ''
+      });
+      return;
+    }
+    var spotEl = event.target.closest('[data-spot-click]');
+    if (spotEl) {
+      trackEvent('spot_click', { spot_name: spotEl.dataset.spotClick || '', city_slug: CITY_SLUG });
+      return;
+    }
+    var tsEl = event.target.closest('[data-spot-video-click]');
+    if (tsEl) {
+      trackEvent('spot_video_click', {
+        spot_name: tsEl.dataset.spotVideoClick || '',
+        ts_label: tsEl.textContent || '',
+        city_slug: CITY_SLUG
+      });
+      return;
+    }
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        city_slug: CITY_SLUG
+      });
     }
   });
 })();
