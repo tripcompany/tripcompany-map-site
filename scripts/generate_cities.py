@@ -321,11 +321,10 @@ PAGE_CSS = '''
   .vmodal-close{ display:block; margin:12px auto 0; background:rgba(255,255,255,0.14); color:#fff;
     border:1px solid rgba(255,255,255,0.3); border-radius:999px; padding:7px 18px; font-size:0.85rem; cursor:pointer; }
 
-  .home-fab{ position:fixed; left:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
-    background:var(--accent-strong); color:#fff; text-decoration:none; font-size:0.84rem; font-weight:700;
-    padding:10px 16px 10px 13px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .home-fab{ position:fixed; left:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; justify-content:center;
+    width:44px; height:44px; background:var(--accent-strong); color:#fff; text-decoration:none;
+    border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .home-fab:hover{ background:var(--accent); }
-  @media (max-width:520px){ .home-fab .fab-text{ display:none; } .home-fab{ padding:12px; } }
   .share-fab{ position:fixed; right:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
     background:var(--accent-strong); color:#fff; border:none; cursor:pointer; font-family:inherit; font-size:0.84rem; font-weight:700;
     padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
@@ -721,8 +720,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
   </div>
 </footer>
 
-<a class="home-fab" href="/" aria-label="지도로 돌아가기">
-  <span aria-hidden="true">🗺️</span><span class="fab-text">지도로 돌아가기</span>
+<a class="home-fab" href="/" aria-label="지도로 돌아가기" title="지도로 돌아가기">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"></path></svg>
 </a>
 
 <button class="share-fab" id="shareFab" type="button" aria-label="이 페이지 링크 공유하기">
