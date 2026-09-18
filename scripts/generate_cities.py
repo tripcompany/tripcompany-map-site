@@ -728,8 +728,6 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
 </head>
 <body>
 
-{'<nav class="toc-bar"><div class="wrap">' + toc_html + '</div></nav>' if toc_items else ''}
-
 {'' if is_published else '<div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>'}
 
 <div class="hero"{hero_style}>
@@ -742,6 +740,8 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     {'' if (hero_img or is_published) else '<div style="margin-top:10px;">' + slot('Cities.hero_image_url', '도시 사진 없음 (헤더 배경)') + '</div>'}
   </div>
 </div>
+
+{'<nav class="toc-bar"><div class="wrap">' + toc_html + '</div></nav>' if toc_items else ''}
 
 {videos_section}
 
