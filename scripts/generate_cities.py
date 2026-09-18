@@ -242,10 +242,9 @@ PAGE_CSS = '''
   .stay-item, .rule{ padding:15px 17px; }
   .spot{ padding:0; overflow:hidden; }
   .spot-body{ padding:15px 17px; min-width:0; }
-  .spot.has-photo{ display:flex; align-items:stretch; }
-  .spot-photo{ flex:0 0 108px; }
-  .spot-photo img{ width:100%; height:100%; min-height:104px; object-fit:cover; display:block; }
-  .spot.has-photo .spot-body{ flex:1; }
+  .spot.has-photo{ display:flex; flex-direction:column; }
+  .spot-photo{ width:100%; aspect-ratio:16/9; }
+  .spot-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
   .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .spot-name{ font-weight:700; }
   .spot-alt{ font-size:0.78rem; color:var(--ink-soft); margin:3px 0 0; }
