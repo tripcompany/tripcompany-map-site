@@ -604,7 +604,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
 
     toc_items = []
     if timing:
-        toc_items.append(('timing', '타이밍'))
+        toc_items.append(('timing', '핵심 조언'))
     if rules:
         toc_items.append(('rules', '조건별 팁'))
     if spots:
