@@ -972,7 +972,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     return page, slug
 
 
-def build_country_page(country, regions, rules, cities_by_region, season, basics, video_count=0):
+def build_country_page(country, regions, rules, cities_by_region, season, basics, video_count=0, region_views=None):
     """국가 가이드 페이지 하나를 만듭니다. build_city_page와 원칙은 같습니다 —
     시트에 있는 값만 그리고, 없는 값은 slot()으로 빈 자리 표시를 합니다.
     이 나라에 대한 데이터가 어느 탭에도 하나도 없으면 페이지를 만들지 않고 건너뜁니다."""
@@ -980,9 +980,10 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
     alpha2 = COUNTRY_ALPHA2.get(cc, '')
     slug = alpha2.lower()
     name = country.get('country_name_ko') or COUNTRY_NAME.get(cc, '') or cc
+    region_views = region_views or []
 
     has_any = bool(
-        regions or rules or cities_by_region or season or basics
+        regions or rules or cities_by_region or season or basics or region_views
         or country.get('hero_title') or country.get('tc_verdict')
     )
     if not slug or not has_any:
@@ -1080,6 +1081,43 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
 
     verdict_html = e(verdict) if verdict else ('' if is_published else slot('Countries.tc_verdict', '이 나라는 어떻게 고르라고 할 것인가, 한 문장'))
 
+    # "시청자들은 어디를 보고 있나" — RegionViews 탭(매주 손으로 채워 넣는 조회수)에서
+    # 이 나라의 가장 최근 주(week_label)만 골라 권역별 막대그래프로 보여줍니다.
+    # week_label이 "2026-09-08~09-14"처럼 날짜로 시작하는 형식이라는 전제로,
+    # 그냥 문자열로 가장 큰 값(=가장 최근 주)을 고릅니다 — RegionViews 탭에 쓰실 때
+    # 이 형식을 지켜주셔야 정확한 주가 뽑힙니다.
+    viewstat_html = ''
+    if region_views:
+        latest_week = max((rv.get('week_label', '').strip() for rv in region_views if rv.get('week_label', '').strip()), default='')
+        week_rows = [rv for rv in region_views if rv.get('week_label', '').strip() == latest_week]
+
+        def _views_num(rv):
+            try:
+                return int(str(rv.get('views', '0')).strip() or '0')
+            except ValueError:
+                return 0
+
+        week_rows = [rv for rv in week_rows if _views_num(rv) > 0]
+        week_rows.sort(key=_views_num, reverse=True)
+
+        if week_rows:
+            region_name_by_id = {r.get('region_id', ''): r.get('region_name_ko', '') for r in regions}
+            max_v = _views_num(week_rows[0])
+            total_v = sum(_views_num(rv) for rv in week_rows)
+            bar_rows = ''.join(f'''
+      <div class="vbar-row">
+        <div class="vbar-name">{e(region_name_by_id.get(rv.get('region_id', ''), rv.get('region_id', '')))}</div>
+        <div class="vbar-track"><div class="vbar-fill" style="width:{max(4, round(_views_num(rv) / max_v * 100))}%"></div></div>
+        <div class="vbar-val">{_views_num(rv)}</div>
+      </div>''' for rv in week_rows)
+            viewstat_html = f'''
+<section class="viewstat"><div class="shead"><h2>시청자들은 어디를 보고 있나</h2></div>
+<p class="lead">다른 데서는 못 보는 숫자입니다. 트립콤파니 지도에서 실제로 눌린 횟수를 권역별로 모은 것입니다.</p>
+<div class="vmeta">{e(latest_week)} · {name} 도시 선택 {total_v}회</div>
+<div class="vbar-list">{bar_rows}</div>
+<p class="vfoot">이 숫자는 저희가 다루는 도시 안에서의 분포입니다. 영상이 없는 도시는 0이 아니라 <b>측정되지 않은 것</b>입니다.</p>
+</section>'''
+
     page = f'''<!doctype html>
 <html lang="ko">
 <head>
@@ -1137,6 +1175,10 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
 {'<div class="hr"></div>' if season and basics else ''}
 
 {'<section><div class="shead"><h2>공통으로 챙길 것</h2></div><p class="lead">도시와 상관없이 나라 전체에 해당하는 것만 모았습니다.</p><div class="basics">' + basics_html + '</div>' + ('<p class="asof">정보 기준: ' + e(checked) + '</p>' if checked else '') + '</section>' if basics else ''}
+
+{'<div class="hr"></div>' if (basics or season or groups_html or rules or regions) and viewstat_html else ''}
+
+{viewstat_html}
 
 </div>
 
@@ -1230,6 +1272,7 @@ def main(local_files=None):
     regions_all = _optional_csv('Regions')
     season_all = _optional_csv('Season')
     basics_all = _optional_csv('Basics')
+    region_views_all = _optional_csv('RegionViews')
 
     cities_by_country = {}
     for c in cities:
@@ -1252,6 +1295,7 @@ def main(local_files=None):
         c_rules = [r for r in rules_all if (r.get('city_id') or '').strip().upper() == c_alpha2]
         c_season = [s for s in season_all if (s.get('country_code') or '').strip() == ccc]
         c_basics = [b for b in basics_all if (b.get('country_code') or '').strip() == ccc]
+        c_region_views = [v for v in region_views_all if (v.get('country_code') or '').strip() == ccc]
 
         cities_by_region = {}
         for c in cities_by_country.get(ccc, []):
@@ -1270,7 +1314,7 @@ def main(local_files=None):
         video_count = sum(1 for v in videos_all if v.get('city_id') in country_city_ids)
 
         c_page, c_slug = build_country_page(
-            country, c_regions, c_rules, cities_by_region, c_season, c_basics, video_count
+            country, c_regions, c_rules, cities_by_region, c_season, c_basics, video_count, c_region_views
         )
         if c_page is None:
             continue
