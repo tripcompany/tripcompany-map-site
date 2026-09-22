@@ -44,6 +44,8 @@ CSV_URLS = {
     'Regions': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=644300893&single=true&output=csv',
     'Season': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1898476893&single=true&output=csv',
     'Basics': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=2010151279&single=true&output=csv',
+    # "시청자들은 어디를 보고 있나" 그래프용 — 매주 손으로 숫자를 채워 넣는 RegionViews 탭.
+    'RegionViews': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1275272239&single=true&output=csv',
 }
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
@@ -468,6 +470,20 @@ td.vd b{color:var(--a);font-weight:600}
 .slot{ display:inline-flex; align-items:center; gap:6px; background:#f1eefa; color:#8a7ab8;
   border:1px dashed #8a7ab8; border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
 .slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+
+.viewstat{background:var(--deep);color:#fff;padding:34px 30px 30px;border:1px solid var(--rule)}
+.viewstat h2{color:#fff}
+.viewstat .lead{color:#a9c4bd}
+.viewstat .vmeta{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:#7fd7c4;margin-bottom:20px}
+.vbar-list{display:flex;flex-direction:column;gap:10px}
+.vbar-row{display:grid;grid-template-columns:92px 1fr 46px;align-items:center;gap:12px}
+.vbar-name{font-size:13.5px;color:#dce9e5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbar-track{background:rgba(255,255,255,.13);height:19px;border-radius:3px;overflow:hidden}
+.vbar-fill{background:#7fd7c4;height:100%;border-radius:3px}
+.vbar-val{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#fff;text-align:right}
+.viewstat .vfoot{margin-top:22px;padding-top:17px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:#a9c4bd}
+.viewstat .vfoot b{color:#fff}
+@media(max-width:640px){.vbar-row{grid-template-columns:74px 1fr 40px;gap:8px}}
 .slot-hint{ font-weight:500; opacity:0.85; }
 
 .asof{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);margin-top:10px}
