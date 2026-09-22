@@ -40,6 +40,7 @@ jobs:
           git config user.name "tripcompany-bot"
           git config user.email "actions@users.noreply.github.com"
           git add city/ sitemap.xml
+          if [ -d country/ ]; then git add country/; fi
           if git diff --cached --quiet; then
             echo "바뀐 내용 없음 — 그대로 둠"
           else
