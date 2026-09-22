@@ -22,6 +22,8 @@
   "about": { "@type": "Place", "name": "도쿄", "address": { "@type": "PostalAddress", "addressCountry": "JP" } },
   "publisher": { "@type": "Organization", "name": "트립콤파니" }
 }</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
 <style>
   :root{
     --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
@@ -185,9 +187,28 @@
     padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .share-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+
+  /* ===== 쿠키 동의 배너 (메인 사이트 style.css와 동일) ===== */
+  .cookie-consent-banner{ position:fixed; left:0; right:0; bottom:0; z-index:3000; background:#ffffff;
+    border-top:1px solid var(--border); box-shadow:0 -4px 16px rgba(0,0,0,0.1); padding:14px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+  .cookie-consent-text{ margin:0; flex:1 1 260px; min-width:200px; font-size:0.82rem; line-height:1.5; color:var(--ink); }
+  .cookie-consent-text a{ color:var(--accent); font-weight:600; }
+  .cookie-consent-actions{ display:flex; gap:8px; flex-shrink:0; }
+  .cookie-consent-btn{ min-height:40px; padding:9px 18px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .cookie-consent-reject{ background:#ffffff; color:var(--ink); }
+  .cookie-consent-reject:hover{ background:#f2f2ef; }
+  .cookie-consent-accept{ background:var(--accent); border-color:var(--accent); color:#ffffff; }
+  .cookie-consent-accept:hover{ background:#185c4c; }
+  @media (max-width:480px){
+    .cookie-consent-banner{ flex-direction:column; align-items:stretch; }
+    .cookie-consent-actions{ justify-content:stretch; }
+    .cookie-consent-btn{ flex:1; }
+  }
 </style>
 </head>
-<body>
+<body data-city-slug="jp-tokyo">
 
 <div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>
 
@@ -202,7 +223,7 @@
   </div>
 </div>
 
-<nav class="toc-bar"><div class="wrap"><a href="#timing">핵심 조언</a><a href="#spots">가볼 곳</a><a href="#stay">숙소</a></div></nav>
+<nav class="toc-bar"><div class="wrap"><a href="#timing" data-toc-click="핵심 조언">핵심 조언</a><a href="#spots" data-toc-click="가볼 곳">가볼 곳</a><a href="#stay" data-toc-click="숙소">숙소</a></div></nav>
 
 
 
@@ -303,7 +324,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">센소지</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=浅草寺%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="센소지" href="https://www.google.com/maps/search/?api=1&amp;query=浅草寺%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Sensoji Temple · 浅草寺</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -318,7 +339,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">나카미세도리</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=仲見世通り%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="나카미세도리" href="https://www.google.com/maps/search/?api=1&amp;query=仲見世通り%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Nakamise Shopping Street · 仲見世通り</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -333,7 +354,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">갓파바시 도구거리</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=かっぱ橋道具街%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="갓파바시 도구거리" href="https://www.google.com/maps/search/?api=1&amp;query=かっぱ橋道具街%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Kappabashi Kitchenware Street · かっぱ橋道具街</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -348,7 +369,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">스미다강 크루즈</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=隅田川クルーズ%20浅草" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="스미다강 크루즈" href="https://www.google.com/maps/search/?api=1&amp;query=隅田川クルーズ%20浅草" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Sumida River Cruise · 隅田川クルーズ</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -367,7 +388,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">우에노 공원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=上野恩賜公園%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="우에노 공원" href="https://www.google.com/maps/search/?api=1&amp;query=上野恩賜公園%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ueno Park · 上野恩賜公園</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -382,7 +403,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄국립박물관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京国立博物館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄국립박물관" href="https://www.google.com/maps/search/?api=1&amp;query=東京国立博物館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo National Museum · 東京国立博物館</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -397,7 +418,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">우에노 동물원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=上野動物園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="우에노 동물원" href="https://www.google.com/maps/search/?api=1&amp;query=上野動物園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ueno Zoological Gardens · 上野動物園</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -412,7 +433,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">아메요코 시장</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=アメ横商店街%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="아메요코 시장" href="https://www.google.com/maps/search/?api=1&amp;query=アメ横商店街%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ameyoko Shopping Street · アメ横商店街</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -431,7 +452,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄 스카이트리</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京スカイツリー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄 스카이트리" href="https://www.google.com/maps/search/?api=1&amp;query=東京スカイツリー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Skytree · 東京スカイツリー</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -446,7 +467,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄 소라마치</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京ソラマチ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄 소라마치" href="https://www.google.com/maps/search/?api=1&amp;query=東京ソラマチ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Solamachi · 東京ソラマチ</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -461,7 +482,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">료고쿠 국기관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=両国国技館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="료고쿠 국기관" href="https://www.google.com/maps/search/?api=1&amp;query=両国国技館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ryogoku Kokugikan · 両国国技館</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -480,7 +501,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄역 마루노우치</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京駅丸の内" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄역 마루노우치" href="https://www.google.com/maps/search/?api=1&amp;query=東京駅丸の内" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Station Marunouchi · 東京駅丸の内</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -495,7 +516,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">황궁 동쪽정원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=皇居東御苑" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="황궁 동쪽정원" href="https://www.google.com/maps/search/?api=1&amp;query=皇居東御苑" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Imperial Palace East Gardens · 皇居東御苑</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -510,7 +531,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">긴자</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=銀座%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="긴자" href="https://www.google.com/maps/search/?api=1&amp;query=銀座%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ginza · 銀座</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -525,7 +546,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">쓰키지 장외시장</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=築地場外市場" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="쓰키지 장외시장" href="https://www.google.com/maps/search/?api=1&amp;query=築地場外市場" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tsukiji Outer Market · 築地場外市場</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -544,7 +565,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">시부야 스카이</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷スカイ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="시부야 스카이" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷スカイ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shibuya Sky · 渋谷スカイ</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -559,7 +580,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">시부야 스크램블 교차로</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷スクランブル交差点" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="시부야 스크램블 교차로" href="https://www.google.com/maps/search/?api=1&amp;query=渋谷スクランブル交差点" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shibuya Scramble Crossing · 渋谷スクランブル交差点</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -574,7 +595,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">메이지 신궁</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=明治神宮" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="메이지 신궁" href="https://www.google.com/maps/search/?api=1&amp;query=明治神宮" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Meiji Jingu · 明治神宮</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -589,7 +610,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">다케시타도리</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=竹下通り%20原宿" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="다케시타도리" href="https://www.google.com/maps/search/?api=1&amp;query=竹下通り%20原宿" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Takeshita Street · 竹下通り</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -604,7 +625,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">오모테산도</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=表参道%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="오모테산도" href="https://www.google.com/maps/search/?api=1&amp;query=表参道%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Omotesando · 表参道</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -623,7 +644,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">신주쿠 교엔</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=新宿御苑" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="신주쿠 교엔" href="https://www.google.com/maps/search/?api=1&amp;query=新宿御苑" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shinjuku Gyoen National Garden · 新宿御苑</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -638,7 +659,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄도청 전망대</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京都庁展望室" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄도청 전망대" href="https://www.google.com/maps/search/?api=1&amp;query=東京都庁展望室" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Metropolitan Government Building Observatories · 東京都庁展望室</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -653,7 +674,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">가부키초</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=歌舞伎町%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="가부키초" href="https://www.google.com/maps/search/?api=1&amp;query=歌舞伎町%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Kabukicho · 歌舞伎町</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -668,7 +689,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">오모이데요코초</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=思い出横丁%20新宿" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="오모이데요코초" href="https://www.google.com/maps/search/?api=1&amp;query=思い出横丁%20新宿" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Omoide Yokocho · 思い出横丁</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -687,7 +708,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄타워</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京タワー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄타워" href="https://www.google.com/maps/search/?api=1&amp;query=東京タワー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Tower · 東京タワー</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -702,7 +723,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">팀랩 보더리스</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=チームラボボーダレス%20麻布台" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="팀랩 보더리스" href="https://www.google.com/maps/search/?api=1&amp;query=チームラボボーダレス%20麻布台" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">teamLab Borderless · チームラボボーダレス</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -717,7 +738,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">롯폰기 힐스 전망대</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京シティビュー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="롯폰기 힐스 전망대" href="https://www.google.com/maps/search/?api=1&amp;query=東京シティビュー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo City View · 東京シティビュー</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -732,7 +753,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">모리미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=森美術館%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="모리미술관" href="https://www.google.com/maps/search/?api=1&amp;query=森美術館%20東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Mori Art Museum · 森美術館</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -751,7 +772,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">팀랩 플래닛</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=チームラボプラネッツ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="팀랩 플래닛" href="https://www.google.com/maps/search/?api=1&amp;query=チームラボプラネッツ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">teamLab Planets Tokyo · チームラボプラネッツ</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -766,7 +787,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도요스 시장</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=豊洲市場" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도요스 시장" href="https://www.google.com/maps/search/?api=1&amp;query=豊洲市場" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Toyosu Market · 豊洲市場</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -781,7 +802,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">일본과학미래관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=日本科学未来館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="일본과학미래관" href="https://www.google.com/maps/search/?api=1&amp;query=日本科学未来館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Miraikan · 日本科学未来館</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -796,7 +817,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">오다이바 해변공원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=お台場海浜公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="오다이바 해변공원" href="https://www.google.com/maps/search/?api=1&amp;query=お台場海浜公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Odaiba Marine Park · お台場海浜公園</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -815,7 +836,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">미타카의 숲 지브리 미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=三鷹の森ジブリ美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="미타카의 숲 지브리 미술관" href="https://www.google.com/maps/search/?api=1&amp;query=三鷹の森ジブリ美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ghibli Museum, Mitaka · 三鷹の森ジブリ美術館</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -830,7 +851,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">이노카시라 공원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=井の頭恩賜公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="이노카시라 공원" href="https://www.google.com/maps/search/?api=1&amp;query=井の頭恩賜公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Inokashira Park · 井の頭恩賜公園</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -849,7 +870,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">해리포터 스튜디오 도쿄</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=ワーナーブラザーススタジオツアー東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="해리포터 스튜디오 도쿄" href="https://www.google.com/maps/search/?api=1&amp;query=ワーナーブラザーススタジオツアー東京" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Warner Bros. Studio Tour Tokyo · ワーナー ブラザース スタジオツアー東京</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -868,7 +889,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄 디즈니랜드</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京ディズニーランド" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄 디즈니랜드" href="https://www.google.com/maps/search/?api=1&amp;query=東京ディズニーランド" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo Disneyland · 東京ディズニーランド</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -883,7 +904,7 @@
               <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
               <span class="spot-name">도쿄 디즈니씨</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=東京ディズニーシー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="도쿄 디즈니씨" href="https://www.google.com/maps/search/?api=1&amp;query=東京ディズニーシー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tokyo DisneySea · 東京ディズニーシー</p>
             <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
@@ -1008,6 +1029,56 @@
     }
     if(navigator.clipboard){
       navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
+</script>
+<script src="/cookie-consent.js"></script>
+<script>
+(function(){
+  var CITY_SLUG = document.body.getAttribute('data-city-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* 이 페이지에서 보내는 맞춤 이벤트 네 가지:
+   *   - spot_click       : 스팟 카드의 지도 아이콘을 눌렀을 때 (어느 명소에 관심 있는지)
+   *   - spot_video_click : 스팟 카드의 "영상에서 보기" 링크를 눌렀을 때
+   *   - toc_click        : 상단 목차(핵심조언/조건별팁/가볼곳/숙소)를 눌렀을 때
+   *   - affiliate_click  : 클룩·마이리얼트립 예약 버튼을 눌렀을 때 (메인페이지와 동일한 이벤트명이라
+   *                        GA4에서 광고 클릭 통계를 한 곳에서 같이 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var adEl = event.target.closest('[data-ad-network]');
+    if (adEl) {
+      trackEvent('affiliate_click', {
+        ad_network: adEl.dataset.adNetwork || '',
+        ad_placement: adEl.dataset.adPlacement || '',
+        ad_label: adEl.dataset.adLabel || '',
+        city_slug: CITY_SLUG,
+        link_url: adEl.href || ''
+      });
+      return;
+    }
+    var spotEl = event.target.closest('[data-spot-click]');
+    if (spotEl) {
+      trackEvent('spot_click', { spot_name: spotEl.dataset.spotClick || '', city_slug: CITY_SLUG });
+      return;
+    }
+    var tsEl = event.target.closest('[data-spot-video-click]');
+    if (tsEl) {
+      trackEvent('spot_video_click', {
+        spot_name: tsEl.dataset.spotVideoClick || '',
+        ts_label: tsEl.textContent || '',
+        city_slug: CITY_SLUG
+      });
+      return;
+    }
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        city_slug: CITY_SLUG
+      });
     }
   });
 })();

@@ -22,6 +22,8 @@
   "about": { "@type": "Place", "name": "다카마츠", "address": { "@type": "PostalAddress", "addressCountry": "JP" } },
   "publisher": { "@type": "Organization", "name": "트립콤파니" }
 }</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
 <style>
   :root{
     --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
@@ -185,9 +187,28 @@
     padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
   .share-fab:hover{ background:var(--accent); }
   @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+
+  /* ===== 쿠키 동의 배너 (메인 사이트 style.css와 동일) ===== */
+  .cookie-consent-banner{ position:fixed; left:0; right:0; bottom:0; z-index:3000; background:#ffffff;
+    border-top:1px solid var(--border); box-shadow:0 -4px 16px rgba(0,0,0,0.1); padding:14px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+  .cookie-consent-text{ margin:0; flex:1 1 260px; min-width:200px; font-size:0.82rem; line-height:1.5; color:var(--ink); }
+  .cookie-consent-text a{ color:var(--accent); font-weight:600; }
+  .cookie-consent-actions{ display:flex; gap:8px; flex-shrink:0; }
+  .cookie-consent-btn{ min-height:40px; padding:9px 18px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .cookie-consent-reject{ background:#ffffff; color:var(--ink); }
+  .cookie-consent-reject:hover{ background:#f2f2ef; }
+  .cookie-consent-accept{ background:var(--accent); border-color:var(--accent); color:#ffffff; }
+  .cookie-consent-accept:hover{ background:#185c4c; }
+  @media (max-width:480px){
+    .cookie-consent-banner{ flex-direction:column; align-items:stretch; }
+    .cookie-consent-actions{ justify-content:stretch; }
+    .cookie-consent-btn{ flex:1; }
+  }
 </style>
 </head>
-<body>
+<body data-city-slug="jp-takamatsu">
 
 
 
@@ -202,7 +223,7 @@
   </div>
 </div>
 
-<nav class="toc-bar"><div class="wrap"><a href="#timing">핵심 조언</a><a href="#rules">조건별 팁</a><a href="#spots">가볼 곳</a><a href="#stay">숙소</a></div></nav>
+<nav class="toc-bar"><div class="wrap"><a href="#timing" data-toc-click="핵심 조언">핵심 조언</a><a href="#rules" data-toc-click="조건별 팁">조건별 팁</a><a href="#spots" data-toc-click="가볼 곳">가볼 곳</a><a href="#stay" data-toc-click="숙소">숙소</a></div></nav>
 
 
 <section id="videos" class="videos-section">
@@ -384,7 +405,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">리츠린 공원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=栗林公園%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="리츠린 공원" href="https://www.google.com/maps/search/?api=1&amp;query=栗林公園%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Ritsurin Garden · 栗林公園</p>
             <p class="tc">아름다운 회유식 일본 정원.</p>
@@ -399,7 +420,7 @@
               <span class="grade grade-skip">굳이</span>
               <span class="spot-name">다카마츠 성터</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=高松城跡%20玉藻公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="다카마츠 성터" href="https://www.google.com/maps/search/?api=1&amp;query=高松城跡%20玉藻公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Tamamo Park (Takamatsu Castle Ruins) · 高松城跡 玉藻公園</p>
             <p class="tc">바닷물을 끌어들인 해자성.</p>
@@ -414,7 +435,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">마루가메마치 상점가</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=高松丸亀町商店街" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="마루가메마치 상점가" href="https://www.google.com/maps/search/?api=1&amp;query=高松丸亀町商店街" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Marugamemachi Shopping Street · 丸亀町商店街</p>
             <p class="tc">다카마츠 시내 최대 번화가.</p>
@@ -429,7 +450,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">심볼타워 전망대</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%AB%98%E6%9D%BE%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AB%E3%82%BF%E3%83%AF%E3%83%BC" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="심볼타워 전망대" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%AB%98%E6%9D%BE%E3%82%B7%E3%83%B3%E3%83%9C%E3%83%AB%E3%82%BF%E3%83%AF%E3%83%BC" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Takamatsu Symbol Tower Observation Deck · 高松シンボルタワー</p>
             <p class="tc">카가와 최고층 빌딩의 무료 전망대.</p>
@@ -444,7 +465,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">우동</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=高松%20讃岐うどん" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="우동" href="https://www.google.com/maps/search/?api=1&amp;query=高松%20讃岐うどん" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Udon · うどん</p>
             <p class="tc">지역의 상징 그 자체. 매일 한 번씩 드세요.</p>
@@ -459,7 +480,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">선포츠 다카마츠</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=サンポート高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="선포츠 다카마츠" href="https://www.google.com/maps/search/?api=1&amp;query=サンポート高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Sunport Takamatsu · サンポート高松</p>
             
@@ -478,7 +499,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">지추미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=地中美術館%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="지추미술관" href="https://www.google.com/maps/search/?api=1&amp;query=地中美術館%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Chichu Art Museum · 地中美術館</p>
             <p class="tc">땅 속을 파고 지은 나오시마 최고의 미술관</p>
@@ -493,7 +514,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">이우환미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=李禹煥美術館%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="이우환미술관" href="https://www.google.com/maps/search/?api=1&amp;query=李禹煥美術館%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Lee Ufan Museum · 李禹煥美術館</p>
             
@@ -508,7 +529,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">베네세하우스 뮤지엄</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=ベネッセハウス%20ミュージアム%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="베네세하우스 뮤지엄" href="https://www.google.com/maps/search/?api=1&amp;query=ベネッセハウス%20ミュージアム%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Benesse House Museum · ベネッセハウス ミュージアム</p>
             
@@ -523,7 +544,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">이에프로젝트 킨자</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=家プロジェクト%20きんざ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="이에프로젝트 킨자" href="https://www.google.com/maps/search/?api=1&amp;query=家プロジェクト%20きんざ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Art House Project – Kinza · 家プロジェクト きんざ</p>
             
@@ -538,7 +559,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">이에프로젝트 미나미데라</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=家プロジェクト%20南寺%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="이에프로젝트 미나미데라" href="https://www.google.com/maps/search/?api=1&amp;query=家プロジェクト%20南寺%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Art House Project – Minamidera · 家プロジェクト 南寺</p>
             
@@ -553,7 +574,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">노란 호박</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=黄かぼちゃ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="노란 호박" href="https://www.google.com/maps/search/?api=1&amp;query=黄かぼちゃ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Yellow Pumpkin · 黄かぼちゃ</p>
             <p class="tc">나오시마 남쪽 바닷가의 랜드마크.</p>
@@ -568,7 +589,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">빨간 호박</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=赤かぼちゃ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="빨간 호박" href="https://www.google.com/maps/search/?api=1&amp;query=赤かぼちゃ%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Red Pumpkin · 赤かぼちゃ</p>
             <p class="tc">쿠사마 야요이의 설치 예술작품, 인증샷을 찍어보자.</p>
@@ -583,7 +604,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">나오시마 신미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=直島新美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="나오시마 신미술관" href="https://www.google.com/maps/search/?api=1&amp;query=直島新美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Naoshima New Museum of Art · 直島新美術館</p>
             <p class="tc">시간이 없다면 이에프로젝트와 여기 중 골라야 한다.</p>
@@ -598,7 +619,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">혼무라 지구</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=本村地区%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="혼무라 지구" href="https://www.google.com/maps/search/?api=1&amp;query=本村地区%20直島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Honmura District · 本村地区</p>
             <p class="tc">베네세 사이트와 함께 나오시마 여행의 양대 축.</p>
@@ -617,7 +638,7 @@
               <span class="grade grade-must">필수</span>
               <span class="spot-name">데시마미술관</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=豊島美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="데시마미술관" href="https://www.google.com/maps/search/?api=1&amp;query=豊島美術館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Teshima Art Museum · 豊島美術館</p>
             <p class="tc">간단한 숲길을 돌아보고 본당에 진입하는 형태. 내부는 촬영 금지. 스포일러는 하지 않겠지만 정말 신비한 경험이다.</p>
@@ -636,7 +657,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">엔젤로드</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=エンジェルロード%20小豆島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="엔젤로드" href="https://www.google.com/maps/search/?api=1&amp;query=エンジェルロード%20小豆島" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Angel Road · エンジェルロード</p>
             <p class="tc">밀물과 썰물에 따라 사라지고 나타나는 섬 사이의 모래길.</p>
@@ -651,7 +672,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">올리브공원</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=小豆島オリーブ公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="올리브공원" href="https://www.google.com/maps/search/?api=1&amp;query=小豆島オリーブ公園" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shodoshima Olive Park · 小豆島オリーブ公園</p>
             <p class="tc">쇼도시마 가면 꼭 들러야 함.</p>
@@ -666,7 +687,7 @@
               <span class="grade grade-skip">굳이</span>
               <span class="spot-name">간카케이 로프웨이</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=寒霞渓ロープウェイ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="간카케이 로프웨이" href="https://www.google.com/maps/search/?api=1&amp;query=寒霞渓ロープウェイ" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Kankakei Ropeway · 寒霞渓ロープウェイ</p>
             
@@ -681,7 +702,7 @@
               <span class="grade grade-skip">굳이</span>
               <span class="spot-name">24의 눈동자 영화마을</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=二十四の瞳映画村" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="24의 눈동자 영화마을" href="https://www.google.com/maps/search/?api=1&amp;query=二十四の瞳映画村" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Twenty-Four Eyes Movie Village · 二十四の瞳映画村</p>
             
@@ -700,7 +721,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">야쿠리지(팔률사)</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=八栗寺%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="야쿠리지(팔률사)" href="https://www.google.com/maps/search/?api=1&amp;query=八栗寺%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Yakuriji Temple · 八栗寺</p>
             <p class="tc">시코쿠 순례길의 88개절 중 85번째 장소.</p>
@@ -715,7 +736,7 @@
               <span class="grade grade-skip">굳이</span>
               <span class="spot-name">야시마 전망대</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=屋島展望台%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="야시마 전망대" href="https://www.google.com/maps/search/?api=1&amp;query=屋島展望台%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Yashima Observatory · 屋島展望台</p>
             <p class="tc">야시마지 옆에 있는 전망대. 다카마츠 시내가 내려다 보인다.</p>
@@ -730,7 +751,7 @@
               <span class="grade grade-skip">굳이</span>
               <span class="spot-name">야시마지</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=屋島寺%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="야시마지" href="https://www.google.com/maps/search/?api=1&amp;query=屋島寺%20高松" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Yashimaji Temple · 屋島寺</p>
             <p class="tc">시코쿠 순례길의 88개절 중 84번째 장소.</p>
@@ -745,7 +766,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">시코쿠무라</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=四国村ミウゼアム" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="시코쿠무라" href="https://www.google.com/maps/search/?api=1&amp;query=四国村ミウゼアム" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Shikoku Mura Museum · 四国村ミウゼアム</p>
             <p class="tc">시코쿠 민속촌. 1,600엔으로 가격이 싸진 않다.</p>
@@ -764,7 +785,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">고토히라궁(사누키 곤피라상)</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=金刀比羅宮%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="고토히라궁(사누키 곤피라상)" href="https://www.google.com/maps/search/?api=1&amp;query=金刀比羅宮%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Kotohira-gu Shrine (Konpira-san) · 金刀比羅宮</p>
             <p class="tc">바다의 신을 모신 시코쿠에서 가장 유명한 신사.</p>
@@ -779,7 +800,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">젠츠지</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=総本山善通寺%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="젠츠지" href="https://www.google.com/maps/search/?api=1&amp;query=総本山善通寺%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Zentsuji Temple · 善通寺</p>
             
@@ -794,7 +815,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">마루가메성</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=丸亀城%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="마루가메성" href="https://www.google.com/maps/search/?api=1&amp;query=丸亀城%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Marugame Castle · 丸亀城</p>
             <p class="tc">작은 천수각이 보존된 일본식 성. 전국 현존 천수 12성 중 하나.</p>
@@ -809,12 +830,12 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">치치부가하마</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=父母ヶ浜%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="치치부가하마" href="https://www.google.com/maps/search/?api=1&amp;query=父母ヶ浜%20香川県" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Chichibugahama Beach · 父母ヶ浜</p>
             <p class="tc">일본의 우유니라 불리는 작은 해변.</p>
             <p class="fact">간조 시 생기는 물웅덩이에 비친 일몰이 이 곳의 하이라이트. 조건이 많이 까다롭다.</p>
-            <div class="book-actions"><a class="book-btn" href="https://affiliate.klook.com/redirect?aid=134688&amp;aff_adid=1437323&amp;k_site=https%3A%2F%2Fwww.klook.com%2Fko%2Factivity%2F168270-kagawa-mitoyo-kotohira-chichibugahama-sunset-shuttle-bus%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D2cef87a7ec" target="_blank" rel="noopener noreferrer">클룩에서 티켓 예약</a></div>
+            <div class="book-actions"><a class="book-btn" data-ad-network="klook" data-ad-placement="city_spot_card" data-ad-label="치치부가하마" href="https://affiliate.klook.com/redirect?aid=134688&amp;aff_adid=1437323&amp;k_site=https%3A%2F%2Fwww.klook.com%2Fko%2Factivity%2F168270-kagawa-mitoyo-kotohira-chichibugahama-sunset-shuttle-bus%2F%3Fspm%3DSearchResult.SearchResult_LIST%26clickId%3D2cef87a7ec" target="_blank" rel="noopener noreferrer">클룩에서 티켓 예약</a></div>
           </div>
         </li>
         <li class="spot has-photo">
@@ -824,7 +845,7 @@
               <span class="grade grade-reco">권장</span>
               <span class="spot-name">타카야 신사</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=高屋神社%20天空の鳥居" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="타카야 신사" href="https://www.google.com/maps/search/?api=1&amp;query=高屋神社%20天空の鳥居" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Takaya Shrine (Sky Torii Gate) · 高屋神社</p>
             <p class="tc">산 꼭대기 본당 앞의 천공의 토리이가 유명하다.</p>
@@ -839,7 +860,7 @@
               <span class="grade grade-maybe">시간 되면</span>
               <span class="spot-name">제니가타 스나에</span>
               
-              <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8A%AD%E5%BD%A2%E7%A0%82%E7%B5%B5%0A" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+              <a class="map-link" data-spot-click="제니가타 스나에" href="https://www.google.com/maps/search/?api=1&amp;query=%E9%8A%AD%E5%BD%A2%E7%A0%82%E7%B5%B5%0A" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
             </div>
             <p class="spot-alt">Zenigata Sunae · 銭形砂絵</p>
             <p class="tc">모래로 그린 거대한 엽전. 근처 높은 전망대에서 전체 모습을 확인 가능.</p>
@@ -978,6 +999,56 @@
     }
     if(navigator.clipboard){
       navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
+</script>
+<script src="/cookie-consent.js"></script>
+<script>
+(function(){
+  var CITY_SLUG = document.body.getAttribute('data-city-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* 이 페이지에서 보내는 맞춤 이벤트 네 가지:
+   *   - spot_click       : 스팟 카드의 지도 아이콘을 눌렀을 때 (어느 명소에 관심 있는지)
+   *   - spot_video_click : 스팟 카드의 "영상에서 보기" 링크를 눌렀을 때
+   *   - toc_click        : 상단 목차(핵심조언/조건별팁/가볼곳/숙소)를 눌렀을 때
+   *   - affiliate_click  : 클룩·마이리얼트립 예약 버튼을 눌렀을 때 (메인페이지와 동일한 이벤트명이라
+   *                        GA4에서 광고 클릭 통계를 한 곳에서 같이 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var adEl = event.target.closest('[data-ad-network]');
+    if (adEl) {
+      trackEvent('affiliate_click', {
+        ad_network: adEl.dataset.adNetwork || '',
+        ad_placement: adEl.dataset.adPlacement || '',
+        ad_label: adEl.dataset.adLabel || '',
+        city_slug: CITY_SLUG,
+        link_url: adEl.href || ''
+      });
+      return;
+    }
+    var spotEl = event.target.closest('[data-spot-click]');
+    if (spotEl) {
+      trackEvent('spot_click', { spot_name: spotEl.dataset.spotClick || '', city_slug: CITY_SLUG });
+      return;
+    }
+    var tsEl = event.target.closest('[data-spot-video-click]');
+    if (tsEl) {
+      trackEvent('spot_video_click', {
+        spot_name: tsEl.dataset.spotVideoClick || '',
+        ts_label: tsEl.textContent || '',
+        city_slug: CITY_SLUG
+      });
+      return;
+    }
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        city_slug: CITY_SLUG
+      });
     }
   });
 })();
