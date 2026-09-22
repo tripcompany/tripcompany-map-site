@@ -450,7 +450,7 @@ strong{font-weight:600;color:var(--ink)}
 .city.soon{opacity:.55}
 .city .n{font-weight:600;font-size:14.5px;margin-bottom:3px;color:var(--ink)}
 .city .t{font-size:12px;color:var(--muted);line-height:1.5}
-.city .soon-badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:5px;background:var(--a2-soft);color:var(--a2)}
+.soon-badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:5px;background:var(--a2-soft);color:var(--a2)}
 
 .tw{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:13.8px;min-width:520px}
@@ -1019,7 +1019,7 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
     <div class="rc">
       <div class="rtop"><h3>{e(r.get('region_name_ko'))}</h3></div>
       {'<div class="cities">' + e(city_names) + '</div>' if city_names else ''}
-      <p class="who">{('<b>' + e(who) + '</b>') if who else ('' if is_published else slot('Regions.tc_who', '이 권역은 이런 사람이 갑니다'))}</p>
+      <p class="who">{('<b>' + e(who) + '</b>') if who else ('<span class="soon-badge">다루는 도시 준비 중</span>' if not member_cities else ('' if is_published else slot('Regions.tc_who', '이 권역은 이런 사람이 갑니다')))}</p>
       {'<div class="meta">' + ''.join(meta_bits) + '</div>' if meta_bits else ''}
     </div>''')
 
