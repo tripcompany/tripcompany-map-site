@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 아직 준비 단계라 검색엔진에는 노출하지 않습니다. Countries 탭의 published 열을 Y로 바꾸면 공개됩니다. -->
+<meta name="robots" content="noindex, nofollow">
+<title>미국 여행, 어디로 갈까 · 트립콤파니 여행지도</title>
+<meta name="description" content="미국 여행, 어디로 갈지 도시별로 정리했습니다.">
+<link rel="canonical" href="https://tripcompany.world/country/us/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:title" content="미국 여행, 어디로 갈까">
+<meta property="og:url" content="https://tripcompany.world/country/us/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
+<style>
+:root{
+  --paper:#f4f7f6; --surface:#ffffff; --sunk:#eaf0ee; --deep:#123d36;
+  --ink:#14201e; --ink2:#33423f; --muted:#5d6b68; --faint:#8a9794;
+  --rule:#dde4e2; --rule2:#c7d1ce;
+  --a:#00897a; --a2:#c85207; --a3:#2b5fb8;
+  --a-soft:#d6ece7; --a2-soft:#f7e2d3; --a3-soft:#dbe5f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+ font-size:15.5px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:"Gothic A1","Apple SD Gothic Neo",system-ui,sans-serif;font-weight:800;text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0 0 .9em}
+a{color:inherit}
+
+.preview-bar{background:#2b2f2d;color:#fff;font-size:0.84rem;padding:10px 24px;text-align:center}
+.preview-bar b{color:#ffd9a0}
+
+nav{background:var(--surface);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20}
+nav .wrap{display:flex;align-items:center;gap:14px;height:52px}
+.brand{font-family:"Gothic A1",sans-serif;font-weight:800;font-size:15px;letter-spacing:-.01em}
+.crumb{font-size:13px;color:var(--muted)}
+.crumb b{color:var(--ink);font-weight:500}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+
+.hero{background:var(--deep);color:#fff;padding-block:46px 40px}
+.hero .wrap{max-width:940px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7fd7c4;font-weight:600;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,5.6vw,44px);line-height:1.16;margin-bottom:18px;color:#fff}
+.verdict{font-size:17.5px;color:#cfe5df;max-width:600px;margin-bottom:28px}
+.hstats{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 14px;font-size:13px;color:#eaf5f2}
+.chip b{font-family:"IBM Plex Mono",monospace;font-weight:600;color:#fff}
+
+section{padding-block:52px 0}
+.shead{margin-bottom:8px}
+h2{font-size:clamp(20px,3.6vw,27px);line-height:1.3}
+.lead{font-size:16.5px;color:var(--ink2);margin-bottom:24px;max-width:640px}
+strong{font-weight:600;color:var(--ink)}
+.hr{height:1px;background:var(--rule);margin-top:54px}
+
+.regions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:700px){.regions{grid-template-columns:1fr}}
+.rc{background:var(--surface);border:1px solid var(--rule);padding:20px 20px 18px;display:flex;flex-direction:column}
+.rc .rtop{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.rc h3{font-size:19px}
+.rc .cities{font-size:12.5px;color:var(--faint);margin-bottom:12px}
+.rc .who{font-size:14.5px;color:var(--ink2);margin-bottom:12px;flex:1}
+.rc .who b{color:var(--ink)}
+.rc .meta{display:flex;gap:14px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);padding-top:11px;flex-wrap:wrap}
+.rc .meta span{display:flex;gap:5px}
+.rc .meta b{color:var(--ink2);font-weight:500}
+
+.rules{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.rule{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:18px;padding:15px 20px}
+@media(max-width:640px){.rule{grid-template-columns:1fr;gap:5px}}
+.rule .q{font-size:14px;color:var(--muted);font-weight:500}
+.rule .a{font-size:15px;color:var(--ink)}
+
+.group{margin-top:26px}
+.gname{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.gname h3{font-size:15px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px}
+.city{background:var(--surface);border:1px solid var(--rule);padding:11px 13px;text-decoration:none;display:block;transition:border-color .12s}
+.city:hover{border-color:var(--a)}
+.city.soon{opacity:.55}
+.city .n{font-weight:600;font-size:14.5px;margin-bottom:3px;color:var(--ink)}
+.city .t{font-size:12px;color:var(--muted);line-height:1.5}
+.soon-badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:5px;background:var(--a2-soft);color:var(--a2)}
+
+.tw{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.8px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:0}
+td.nm{font-weight:600;white-space:nowrap}
+td.vd b{color:var(--a);font-weight:600}
+
+.basics{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.bi{background:var(--surface);padding:15px 17px}
+.bi .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:5px}
+.bi .v{font-size:14px;color:var(--ink2);line-height:1.6}
+
+.slot{ display:inline-flex; align-items:center; gap:6px; background:#f1eefa; color:#8a7ab8;
+  border:1px dashed #8a7ab8; border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
+.slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+.slot-hint{ font-weight:500; opacity:0.85; }
+
+.asof{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);margin-top:10px}
+
+footer{padding-block:40px 70px}
+footer p{font-size:13px;color:var(--faint)}
+footer a{color:var(--a);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+</style>
+</head>
+<body data-country-slug="us">
+
+<div class="preview-bar"><b>자동 생성 미리보기</b> — 아직 비공개 상태입니다. Countries 탭의 published 열을 Y로 바꾸기 전까지는 검색엔진에 노출되지 않고, 지도·도시 페이지에서도 연결되지 않습니다.</div>
+
+<nav><div class="wrap">
+  <span class="brand">트립콤파니 여행지도</span>
+  <span class="crumb"><a href="/">지도</a> › <b>미국</b></span>
+</div></nav>
+
+<div class="hero"><div class="wrap">
+  <div class="kicker">국가 가이드 · 미국</div>
+  <h1>미국 여행, 어디로 갈까</h1>
+  <p class="verdict"><span class="slot"><span class="slot-field">Countries.tc_verdict</span><span class="slot-hint">이 나라는 어떻게 고르라고 할 것인가, 한 문장</span></span></p>
+  <div class="hstats"><span class="chip">다루는 도시 <b>0곳</b></span></div>
+</div></div>
+
+<div class="wrap">
+
+
+
+
+
+
+
+
+
+<section><div class="shead"><h2>도시 0곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>
+    <div class="group">
+      <div class="gname"><h3>권역 미배정</h3></div>
+      <div class="cgrid">
+      <div class="city soon">
+        <span class="soon-badge">준비 중</span>
+        <div class="n">로스앤젤레스</div>
+      </div></div>
+    </div></section>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<footer><div class="wrap">
+  <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+  <p style="margin:0; opacity:0.8;">지도에서 다른 나라 보기 → <a href="/">tripcompany.world</a></p>
+</div></footer>
+
+</body>
+</html>
