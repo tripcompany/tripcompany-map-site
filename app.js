@@ -2002,6 +2002,9 @@ function trackRegionSelect(type, source) {
       ? `${country ? country.country_name_ko : ""} · ${city.city_name_ko}`
       : (country ? country.country_name_ko : ""),
     region_slug: currentRegionSlug(),
+    // 국가 단위가 아니라 "간토/간사이" 같은 더 작은 권역(Cities 탭의 region_id 칸)로도 집계할 수 있도록,
+    // 도시를 골랐을 때만 그 도시의 region_id를 함께 보냅니다(region_id가 비어있으면 빈 문자열).
+    region_id: city ? String(city.region_id || "") : "",
     select_source: source || "map"
   });
 }
