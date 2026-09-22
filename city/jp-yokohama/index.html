@@ -1,0 +1,759 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- 아직 준비 단계라 검색엔진에는 노출하지 않습니다. Cities.published 열을 Y로 바꾸면 공개됩니다. -->
+<meta name="robots" content="noindex, nofollow">
+<title>요코하마 여행, 뭘 보고 뭘 버릴까 · 트립콤파니 여행지도</title>
+<meta name="description" content="야경, 중화요리, 이에케라멘 등 매니아들이 좋아할 것들이 여럿">
+<link rel="canonical" href="https://tripcompany.world/city/jp-yokohama/">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:title" content="요코하마, 뭘 보고 뭘 버릴까">
+<meta property="og:url" content="https://tripcompany.world/city/jp-yokohama/">
+<meta property="og:image" content="https://tripcompany.world/images/og-image.jpg">
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "TravelGuide",
+  "name": "요코하마 여행 가이드 · 트립콤파니 여행지도",
+  "url": "https://tripcompany.world/city/jp-yokohama/",
+  "image": "https://tripcompany.world/images/og-image.jpg",
+  "about": { "@type": "Place", "name": "요코하마", "address": { "@type": "PostalAddress", "addressCountry": "JP" } },
+  "publisher": { "@type": "Organization", "name": "트립콤파니" }
+}</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
+<style>
+  :root{
+    --accent:#1f6f5c; --accent-strong:#164e41; --accent-soft:#cfe3de;
+    --ink:#1f2523; --ink-soft:#5b655f; --bg:#f7f7f4; --panel:#ffffff;
+    --border:#e3e2dc; --money:#96692a; --money-soft:#f1e4cc; --money-line:#e3cfa0;
+    --warn:#b4451f; --warn-soft:#fdeee7; --warn-line:#f3cfc1;
+    --slot:#8a7ab8; --slot-soft:#f1eefa;
+  }
+  *{ box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+  body{ margin:0; background:var(--bg); color:var(--ink); line-height:1.65;
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  a{ color:var(--accent-strong); }
+  .wrap{ max-width:1000px; margin:0 auto; padding:0 24px; }
+  section{ padding:52px 0; scroll-margin-top:64px; }
+  h2{ font-size:1.45rem; font-weight:800; margin:0 0 4px; letter-spacing:-0.01em; }
+  .section-sub{ color:var(--ink-soft); font-size:0.92rem; margin:0 0 24px; }
+
+  .preview-bar{ background:#2b2f2d; color:#fff; font-size:0.84rem; padding:10px 24px; text-align:center; }
+  .preview-bar b{ color:#ffd9a0; }
+
+  .hero{ background:linear-gradient(150deg,var(--accent-strong) 0%,var(--accent) 62%,#2c8570 100%); color:#fff; padding:56px 0 48px; }
+  .hero .eyebrow{ font-size:0.8rem; font-weight:700; opacity:0.9; letter-spacing:0.02em; }
+  .hero h1{ font-size:2.4rem; font-weight:800; margin:10px 0 14px; letter-spacing:-0.02em; }
+  .hero .tagline{ font-size:1.08rem; max-width:52ch; margin:0; }
+  .toc-bar{ position:sticky; top:0; z-index:950; background:var(--panel); border-bottom:1px solid var(--border); }
+  .toc-bar .wrap{ display:flex; gap:8px; padding:10px 24px; overflow-x:auto; }
+  .toc-bar a{ flex:0 0 auto; color:var(--ink); background:var(--bg); border:1px solid var(--border);
+    border-radius:999px; padding:6px 14px; font-size:0.82rem; font-weight:700; text-decoration:none; white-space:nowrap; }
+  .toc-bar a:hover{ background:var(--accent-soft); color:var(--accent-strong); border-color:var(--accent-soft); }
+  .checked{ display:inline-block; margin-top:18px; font-size:0.78rem; background:rgba(0,0,0,0.18);
+    border-radius:6px; padding:4px 10px; }
+
+  .slot{ display:inline-flex; align-items:center; gap:6px; background:var(--slot-soft); color:var(--slot);
+    border:1px dashed var(--slot); border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
+  .slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+  .slot-hint{ font-weight:500; opacity:0.85; }
+
+  .tc{ margin:6px 0 0; font-size:0.94rem; color:var(--ink); font-weight:600; }
+  .tc-empty{ font-weight:400; }
+  .tc-warn{ color:var(--warn); }
+  .fact{ margin:6px 0 0; font-size:0.86rem; color:var(--ink-soft); padding-left:10px; border-left:2px solid var(--border); }
+
+  .timing{ background:var(--warn-soft); border-top:1px solid var(--warn-line); border-bottom:1px solid var(--warn-line); }
+  .timing h2{ color:var(--warn); }
+  .timing-list{ list-style:none; padding:0; margin:0; display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .timing-item{ background:#fff; border:1px solid var(--warn-line); border-radius:12px; padding:16px 18px; }
+  .timing-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .timing-target{ font-weight:700; }
+  .ttype{ font-size:0.72rem; font-weight:700; padding:3px 9px; border-radius:999px; }
+  .ttype-book{ background:#fde2d6; color:#a53b12; }
+  .ttype-tide{ background:#d8e8f6; color:#1c567f; }
+  .ttype-hours{ background:#f5e6c4; color:#8a6412; }
+  .ttype-closed{ background:#e6e3ef; color:#54497a; }
+  .ttype-transit{ background:#dcebe3; color:#1f6f5c; }
+
+  .area{ margin-bottom:34px; scroll-margin-top:64px; }
+  .area-name{ font-size:1.05rem; margin:0 0 12px; display:flex; align-items:baseline; gap:8px; }
+  .area-count{ font-size:0.8rem; color:var(--ink-soft); font-weight:500; }
+  .spot-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .spot, .stay-item, .rule{ background:var(--panel); border:1px solid var(--border); border-radius:12px; }
+  .stay-item, .rule{ padding:15px 17px; }
+  .spot{ padding:0; overflow:hidden; }
+  .spot-body{ padding:15px 17px; min-width:0; }
+  .spot.has-photo{ display:flex; flex-direction:column; }
+  .spot-photo{ width:100%; aspect-ratio:16/9; }
+  .spot-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+  .spot-name{ font-weight:700; }
+  .spot-alt{ font-size:0.78rem; color:var(--ink-soft); margin:3px 0 0; }
+  .grade{ font-size:0.74rem; font-weight:800; padding:3px 10px; border-radius:999px; }
+  .grade-must{ background:var(--accent-soft); color:var(--accent-strong); }
+  .grade-maybe{ background:#eeece4; color:#6b6555; }
+  .grade-reco{ background:#d8e8f6; color:#1c567f; }
+  .grade-skip{ background:#f0e4e0; color:#8d4b33; }
+  .grade-taste{ background:#ece4f6; color:#6b3fa0; }
+  .ts{ font-size:0.76rem; font-weight:700; background:#eceae2; border-radius:5px; padding:2px 7px; text-decoration:none; }
+  .map-link{ display:inline-flex; align-items:center; justify-content:center; width:22px; height:22px;
+    border-radius:999px; background:#eceae2; color:var(--ink-soft); flex-shrink:0; }
+  .map-link:hover{ background:var(--accent-soft); color:var(--accent-strong); }
+
+  /* 제휴 예약 버튼(클룩·마이리얼트립 — 스팟별, 트립닷컴 — 숙소 섹션 전체 1개) */
+  .book-actions{ display:flex; gap:6px; flex-wrap:wrap; margin-top:10px; }
+  .book-btn{ display:inline-flex; align-items:center; font-size:0.78rem; font-weight:700;
+    color:var(--money); background:var(--money-soft); border:1px solid var(--money-line);
+    border-radius:999px; padding:5px 12px; text-decoration:none; }
+  .book-btn:hover{ background:var(--money-line); }
+  .stay-cta{ margin-top:16px; display:flex; }
+  .stay-cta a{ display:inline-flex; align-items:center; gap:8px; font-size:0.92rem; font-weight:700;
+    color:#fff; background:var(--money); border-radius:10px; padding:12px 18px; text-decoration:none; }
+  .stay-cta a:hover{ background:#7c5522; }
+
+  .rule-list, .stay-list, .vi-list{ list-style:none; padding:0; margin:0; display:grid; gap:12px; }
+  .rule-list{ grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .rule-q{ margin:0; font-weight:700; font-size:0.95rem; }
+  .rule .tc{ font-weight:400; }
+  .stay-item .tc{ font-weight:500; }
+
+  table{ width:100%; border-collapse:collapse; font-size:0.9rem; background:var(--panel);
+    border:1px solid var(--border); border-radius:12px; overflow:hidden; }
+  th, td{ text-align:left; padding:11px 14px; border-bottom:1px solid var(--border); }
+  th{ background:#f2f1ec; font-size:0.8rem; color:var(--ink-soft); }
+  td.num{ text-align:right; font-variant-numeric:tabular-nums; font-weight:700; }
+  td.muted{ color:var(--ink-soft); font-weight:400; }
+  .diff{ font-size:0.82rem; color:var(--ink-soft); }
+  .diff.up{ color:var(--warn); font-weight:700; }
+
+  .vi-item{ display:flex; align-items:center; gap:10px; background:var(--panel);
+    border:1px solid var(--border); border-radius:10px; padding:10px 14px; }
+  .is-example{ opacity:0.72; }
+  .ex-tag{ font-size:0.7rem; background:#eceae2; color:var(--ink-soft); border-radius:5px; padding:2px 7px; margin-left:6px; }
+  .empty-note{ color:var(--ink-soft); font-size:0.9rem; background:var(--panel);
+    border:1px dashed var(--border); border-radius:12px; padding:18px; }
+
+  footer{ background:var(--accent-strong); color:#fff; padding:40px 0; font-size:0.88rem; }
+  footer a{ color:#fff; }
+
+  @media (max-width:820px){
+    .hero h1{ font-size:1.9rem; }
+    .timing-list, .spot-list, .rule-list{ grid-template-columns:1fr; }
+    table{ display:block; overflow-x:auto; }
+  }
+
+  .videos-section{ background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+  .vscroll-wrap{ position:relative; }
+  .vscroll{ display:flex; gap:14px; overflow-x:auto; scroll-snap-type:x proximity;
+    padding:4px 2px 14px; -webkit-overflow-scrolling:touch; scrollbar-width:thin; }
+  .vscroll::-webkit-scrollbar{ height:8px; }
+  .vscroll::-webkit-scrollbar-thumb{ background:var(--border); border-radius:8px; }
+  .vcard{ flex:0 0 240px; scroll-snap-align:start; background:var(--bg); border:1px solid var(--border);
+    border-radius:12px; overflow:hidden; cursor:pointer; text-align:left; padding:0; font:inherit; color:inherit; }
+  .vcard-thumb{ position:relative; aspect-ratio:16/9; background:#000; display:block; }
+  .vcard-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .vcard-play{ position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .vcard-play svg{ width:44px; height:44px; filter:drop-shadow(0 1px 4px rgba(0,0,0,0.5)); }
+  .vcard-body{ padding:11px 13px 13px; display:block; }
+  .vcard-title{ font-size:0.88rem; font-weight:700; margin:0 0 6px; line-height:1.35; display:-webkit-box;
+    -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+  .vcard-date{ display:block; font-size:0.74rem; color:var(--ink-soft); }
+  .vscroll-arrow{ position:absolute; top:38%; width:34px; height:34px; border-radius:999px; border:1px solid var(--border);
+    background:#fff; box-shadow:0 2px 6px rgba(0,0,0,0.12); display:flex; align-items:center; justify-content:center;
+    cursor:pointer; font-size:1.1rem; color:var(--ink); z-index:2; }
+  .vscroll-arrow.prev{ left:-6px; }
+  .vscroll-arrow.next{ right:-6px; }
+  @media (max-width:820px){ .vscroll-arrow{ display:none; } }
+
+  .vmodal{ position:fixed; inset:0; background:rgba(10,15,13,0.86); display:none; align-items:center;
+    justify-content:center; padding:24px; z-index:1000; }
+  .vmodal.open{ display:flex; }
+  .vmodal-box{ width:100%; max-width:860px; }
+  .vmodal-frame-wrap{ position:relative; width:100%; padding-top:56.25%; background:#000; border-radius:10px; overflow:hidden; }
+  .vmodal-frame-wrap iframe{ position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .vmodal-close{ display:block; margin:12px auto 0; background:rgba(255,255,255,0.14); color:#fff;
+    border:1px solid rgba(255,255,255,0.3); border-radius:999px; padding:7px 18px; font-size:0.85rem; cursor:pointer; }
+
+  .home-fab{ position:fixed; left:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; justify-content:center;
+    width:44px; height:44px; background:var(--accent-strong); color:#fff; text-decoration:none;
+    border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .home-fab:hover{ background:var(--accent); }
+  .share-fab{ position:fixed; right:18px; bottom:18px; z-index:900; display:inline-flex; align-items:center; gap:7px;
+    background:var(--accent-strong); color:#fff; border:none; cursor:pointer; font-family:inherit; font-size:0.84rem; font-weight:700;
+    padding:10px 16px; border-radius:999px; box-shadow:0 4px 14px rgba(22,78,65,0.35); }
+  .share-fab:hover{ background:var(--accent); }
+  @media (max-width:520px){ .share-fab .fab-text{ display:none; } .share-fab{ padding:12px; } }
+
+  /* ===== 쿠키 동의 배너 (메인 사이트 style.css와 동일) ===== */
+  .cookie-consent-banner{ position:fixed; left:0; right:0; bottom:0; z-index:3000; background:#ffffff;
+    border-top:1px solid var(--border); box-shadow:0 -4px 16px rgba(0,0,0,0.1); padding:14px 16px;
+    display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; }
+  .cookie-consent-text{ margin:0; flex:1 1 260px; min-width:200px; font-size:0.82rem; line-height:1.5; color:var(--ink); }
+  .cookie-consent-text a{ color:var(--accent); font-weight:600; }
+  .cookie-consent-actions{ display:flex; gap:8px; flex-shrink:0; }
+  .cookie-consent-btn{ min-height:40px; padding:9px 18px; border-radius:8px; border:1px solid var(--border);
+    font-size:0.85rem; font-weight:700; cursor:pointer; }
+  .cookie-consent-reject{ background:#ffffff; color:var(--ink); }
+  .cookie-consent-reject:hover{ background:#f2f2ef; }
+  .cookie-consent-accept{ background:var(--accent); border-color:var(--accent); color:#ffffff; }
+  .cookie-consent-accept:hover{ background:#185c4c; }
+  @media (max-width:480px){
+    .cookie-consent-banner{ flex-direction:column; align-items:stretch; }
+    .cookie-consent-actions{ justify-content:stretch; }
+    .cookie-consent-btn{ flex:1; }
+  }
+</style>
+</head>
+<body data-city-slug="jp-yokohama">
+
+<div class="preview-bar"><b>자동 생성 미리보기</b> — 구글시트가 바뀔 때마다 자동으로 다시 만들어집니다. 보라색 점선은 <b>아직 비어 있는 시트 칸</b>입니다.</div>
+
+<div class="hero">
+  <div class="wrap">
+    <p class="eyebrow">일본 · 요코하마</p>
+    <h1>요코하마, 뭘 보고 뭘 버릴까</h1>
+    <p class="tagline">도쿄 광역권의 대표 항구, 그리고 일본 근대화가 시작된 도시</p>
+    <p class="tagline" style="font-size:0.95rem; opacity:0.92;">야경, 중화요리, 이에케라멘 등 매니아들이 좋아할 것들이 여럿</p>
+    <span class="checked">정보 기준: 2026-09</span>
+    <div style="margin-top:10px;"><span class="slot"><span class="slot-field">Cities.hero_image_url</span><span class="slot-hint">도시 사진 없음 (헤더 배경)</span></span></div>
+  </div>
+</div>
+
+<nav class="toc-bar"><div class="wrap"><a href="#spots" data-toc-click="가볼 곳">가볼 곳</a><a href="#stay" data-toc-click="숙소">숙소</a></div></nav>
+
+
+<section id="videos" class="videos-section">
+  <div class="wrap">
+    <h2>트립콤파니가 다녀온 영상</h2>
+    <p class="section-sub">눌러서 바로 재생 · 옆으로 넘겨서 더 보기</p>
+    <div class="vscroll-wrap">
+      <button class="vscroll-arrow prev" type="button" aria-label="이전 영상" data-vscroll="prev">&#8249;</button>
+      <div class="vscroll" id="vscroll">
+        <button class="vcard" type="button" data-video-id="k0kdezoS5Xc" aria-label="영상 재생">
+          <span class="vcard-thumb">
+            <img src="https://img.youtube.com/vi/k0kdezoS5Xc/hqdefault.jpg" alt="🇯🇵 요코하마 여행을 0부터 제대로 알려드림" loading="lazy">
+            <span class="vcard-play"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="rgba(0,0,0,0.45)"/><path d="M9.5 7.5v9l8-4.5z" fill="#fff"/></svg></span>
+            
+          </span>
+          <span class="vcard-body">
+            <span class="vcard-title">🇯🇵 요코하마 여행을 0부터 제대로 알려드림</span>
+            
+          </span>
+        </button></div>
+      <button class="vscroll-arrow next" type="button" aria-label="다음 영상" data-vscroll="next">&#8250;</button>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<section id="spots" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>가볼 곳 판정 <span style="font-size:0.85rem; font-weight:500; color:var(--ink-soft);">(0/19곳 판정 완료)</span></h2>
+    <p class="section-sub">
+      <span class="grade grade-must">필수</span> 이거 안 보면 온 의미 없음 ·
+      <span class="grade grade-reco">권장</span> 그 구역 가면 꼭 들러야 함 ·
+      <span class="grade grade-maybe">시간 되면</span> 일정 빠듯하면 버려도 됨 ·
+      <span class="grade grade-skip">굳이</span> 그렇게 권장하지 않음 ·
+      <span class="grade grade-taste">취향별</span> 호불호 갈림, 취향 맞으면 가볼 만함
+    </p>
+    
+      <div class="area" id="area-1">
+        <h3 class="area-name">요코하마역 주변 <span class="area-count">1곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요시무라야 이에케 라멘</span>
+              
+              <a class="map-link" data-spot-click="요시무라야 이에케 라멘" href="https://www.google.com/maps/search/?api=1&amp;query=家系総本山%20吉村家%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yoshimuraya · 家系総本山 吉村家</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-2">
+        <h3 class="area-name">미나토미라이 <span class="area-count">7곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">아카렌가 창고</span>
+              
+              <a class="map-link" data-spot-click="아카렌가 창고" href="https://www.google.com/maps/search/?api=1&amp;query=横浜赤レンガ倉庫" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Red Brick Warehouse · 横浜赤レンガ倉庫</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">컵누들 뮤지엄 요코하마</span>
+              
+              <a class="map-link" data-spot-click="컵누들 뮤지엄 요코하마" href="https://www.google.com/maps/search/?api=1&amp;query=カップヌードルミュージアム%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Cup Noodles Museum Yokohama · カップヌードルミュージアム 横浜</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 코스모월드</span>
+              
+              <a class="map-link" data-spot-click="요코하마 코스모월드" href="https://www.google.com/maps/search/?api=1&amp;query=よこはまコスモワールド" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Cosmoworld · よこはまコスモワールド</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 에어캐빈</span>
+              
+              <a class="map-link" data-spot-click="요코하마 에어캐빈" href="https://www.google.com/maps/search/?api=1&amp;query=ヨコハマエアキャビン%20桜木町駅" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Air Cabin · ヨコハマエアキャビン</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">린코파크</span>
+              
+              <a class="map-link" data-spot-click="린코파크" href="https://www.google.com/maps/search/?api=1&amp;query=臨港パーク%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Rinko Park · 臨港パーク</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">닛폰마루 메모리얼파크</span>
+              
+              <a class="map-link" data-spot-click="닛폰마루 메모리얼파크" href="https://www.google.com/maps/search/?api=1&amp;query=日本丸メモリアルパーク%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Nippon Maru Memorial Park · 日本丸メモリアルパーク</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 호빵맨 어린이박물관</span>
+              
+              <a class="map-link" data-spot-click="요코하마 호빵맨 어린이박물관" href="https://www.google.com/maps/search/?api=1&amp;query=横浜アンパンマンこどもミュージアム" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Anpanman Children&#x27;s Museum · 横浜アンパンマンこどもミュージアム</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-3">
+        <h3 class="area-name">야마시타·오산바시 <span class="area-count">3곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">오산바시 국제여객터미널</span>
+              
+              <a class="map-link" data-spot-click="오산바시 국제여객터미널" href="https://www.google.com/maps/search/?api=1&amp;query=横浜港大さん橋国際客船ターミナル" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Osanbashi Yokohama International Passenger Terminal · 横浜港大さん橋国際客船ターミナル</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">야마시타 공원</span>
+              
+              <a class="map-link" data-spot-click="야마시타 공원" href="https://www.google.com/maps/search/?api=1&amp;query=山下公園%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yamashita Park · 山下公園</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 마린타워</span>
+              
+              <a class="map-link" data-spot-click="요코하마 마린타워" href="https://www.google.com/maps/search/?api=1&amp;query=横浜マリンタワー" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Marine Tower · 横浜マリンタワー</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-4">
+        <h3 class="area-name">차이나타운·모토마치 <span class="area-count">2곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 차이나타운</span>
+              
+              <a class="map-link" data-spot-click="요코하마 차이나타운" href="https://www.google.com/maps/search/?api=1&amp;query=横浜中華街" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Chinatown · 横浜中華街</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">모토마치 쇼핑거리</span>
+              
+              <a class="map-link" data-spot-click="모토마치 쇼핑거리" href="https://www.google.com/maps/search/?api=1&amp;query=元町ショッピングストリート%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Motomachi Shopping Street · 元町ショッピングストリート</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-5">
+        <h3 class="area-name">야마테 <span class="area-count">2곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">항구가 보이는 언덕 공원</span>
+              
+              <a class="map-link" data-spot-click="항구가 보이는 언덕 공원" href="https://www.google.com/maps/search/?api=1&amp;query=港の見える丘公園%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Harbor View Park · 港の見える丘公園</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">야마테 이탈리아산 정원</span>
+              
+              <a class="map-link" data-spot-click="야마테 이탈리아산 정원" href="https://www.google.com/maps/search/?api=1&amp;query=山手イタリア山庭園%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yamate Italian Garden · 山手イタリア山庭園</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-6">
+        <h3 class="area-name">간나이·노게 <span class="area-count">2곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">요코하마 스타디움</span>
+              
+              <a class="map-link" data-spot-click="요코하마 스타디움" href="https://www.google.com/maps/search/?api=1&amp;query=横浜スタジアム" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Yokohama Stadium · 横浜スタジアム</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li>
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">노게 술집거리</span>
+              
+              <a class="map-link" data-spot-click="노게 술집거리" href="https://www.google.com/maps/search/?api=1&amp;query=野毛飲み屋街%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Noge Bar District · 野毛飲み屋街</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-7">
+        <h3 class="area-name">혼모쿠 <span class="area-count">1곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">산케이엔</span>
+              
+              <a class="map-link" data-spot-click="산케이엔" href="https://www.google.com/maps/search/?api=1&amp;query=三溪園%20横浜" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Sankeien Garden · 三溪園</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+      <div class="area" id="area-8">
+        <h3 class="area-name">신요코하마 <span class="area-count">1곳</span></h3>
+        <ul class="spot-list">
+        <li class="spot">
+          
+          <div class="spot-body">
+            <div class="spot-head">
+              <span class="slot"><span class="slot-field">Spots.tc_grade</span></span>
+              <span class="spot-name">신요코하마 라멘박물관</span>
+              
+              <a class="map-link" data-spot-click="신요코하마 라멘박물관" href="https://www.google.com/maps/search/?api=1&amp;query=新横浜ラーメン博物館" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>
+            </div>
+            <p class="spot-alt">Shin-Yokohama Ramen Museum · 新横浜ラーメン博物館</p>
+            <p class="tc tc-empty"><span class="slot"><span class="slot-field">Spots.tc_note</span><span class="slot-hint">왜 이 등급인지 20자 내외</span></span></p>
+            
+            
+          </div>
+        </li></ul>
+      </div>
+  </div>
+</section>
+
+<section id="stay" style="background:var(--panel); border-top:1px solid var(--border); border-bottom:1px solid var(--border);">
+  <div class="wrap">
+    <h2>어느 구역에 묵을까</h2>
+    <p class="section-sub">호텔 하나를 찍어주지 않고 <strong>구역</strong>으로 답합니다.</p>
+    <p class="section-sub" style="margin-top:-14px;">
+      <span class="grade grade-must">추천</span> 고민되면 여기, 도시당 1곳만 ·
+      <span class="grade grade-maybe">조건부</span> 특정 조건일 때만 ·
+      <span class="grade grade-skip">비추천</span> 여기는 잡지 마세요
+    </p>
+    <ul class="stay-list">
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-maybe">조건부</span>
+          <span class="spot-name">요코하마역전</span>
+        </div>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-maybe">조건부</span>
+          <span class="spot-name">미나토미라이</span>
+        </div>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li>
+      <li class="stay-item">
+        <div class="spot-head">
+          <span class="grade grade-skip">비추천</span>
+          <span class="spot-name">니혼오도리</span>
+        </div>
+        <p class="tc tc-empty"><span class="slot"><span class="slot-field">Stay.tc_note</span><span class="slot-hint">이 구역을 고르는 이유 한 줄</span></span></p>
+      </li></ul>
+    
+  </div>
+</section>
+
+
+
+<footer>
+  <div class="wrap">
+    <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+    <p style="margin:0 0 8px; opacity:0.85;">일본의 다른 도시 가이드 → <a href="/city/jp-takamatsu/">다카마츠</a></p>
+    
+    <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
+  </div>
+</footer>
+
+<a class="home-fab" href="/" aria-label="지도로 돌아가기" title="지도로 돌아가기">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 11l9-8 9 8"></path><path d="M5 10v10a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V10"></path></svg>
+</a>
+
+<button class="share-fab" id="shareFab" type="button" aria-label="이 페이지 링크 공유하기">
+  <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+  <span class="fab-text" id="shareFabLabel">공유</span>
+</button>
+
+<div class="vmodal" id="vmodal"><div class="vmodal-box"><div class="vmodal-frame-wrap" id="vmodalFrame"></div><button class="vmodal-close" type="button" id="vmodalClose">닫기 ✕</button></div></div>
+
+<script>
+(function(){
+  var scroller = document.getElementById('vscroll');
+  document.querySelectorAll('[data-vscroll]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      if(!scroller) return;
+      var dir = btn.getAttribute('data-vscroll') === 'next' ? 1 : -1;
+      scroller.scrollBy({ left: dir * (scroller.clientWidth * 0.8), behavior: 'smooth' });
+    });
+  });
+  var modal = document.getElementById('vmodal');
+  var frameWrap = document.getElementById('vmodalFrame');
+  var closeBtn = document.getElementById('vmodalClose');
+  // autoplay=1로 강제 재생시키지 않습니다 — 유튜브 정책상 광고가 붙으려면
+  // 스크립트가 강제로 트는 게 아니라 방문자가 플레이어 안에서 직접 눌러야
+  // 하는 click-to-play여야 합니다(메인 지도 페이지 app.js의 openVideoModal과
+  // 동일한 이유). 모달이 열리면 유튜브 썸네일과 재생 버튼만 뜨고, 방문자가
+  // 그 안에서 한 번 더 눌러야 재생이 시작됩니다.
+  function openVideo(id){
+    if(!modal || !frameWrap || !id) return;
+    frameWrap.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + id + '?rel=0" title="영상 재생" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    modal.classList.add('open');
+  }
+  function closeVideo(){
+    if(!modal) return;
+    modal.classList.remove('open');
+    if(frameWrap) frameWrap.innerHTML = '';
+  }
+  document.querySelectorAll('.vcard').forEach(function(card){
+    card.addEventListener('click', function(){ openVideo(card.getAttribute('data-video-id')); });
+  });
+  if(closeBtn) closeBtn.addEventListener('click', closeVideo);
+  if(modal) modal.addEventListener('click', function(evt){ if(evt.target === modal) closeVideo(); });
+  document.addEventListener('keydown', function(evt){ if(evt.key === 'Escape') closeVideo(); });
+})();
+</script>
+<script>
+(function(){
+  var btn = document.getElementById('shareFab');
+  var label = document.getElementById('shareFabLabel');
+  if(!btn) return;
+  var timer = null;
+  function showFeedback(msg){
+    if(!label) return;
+    label.textContent = msg;
+    clearTimeout(timer);
+    timer = setTimeout(function(){ label.textContent = '공유'; }, 1600);
+  }
+  btn.addEventListener('click', function(){
+    var url = window.location.href;
+    var title = document.title;
+    if(navigator.share){
+      navigator.share({ title: title, url: url }).catch(function(){ /* 방문자가 공유창을 그냥 닫음 */ });
+      return;
+    }
+    if(navigator.clipboard){
+      navigator.clipboard.writeText(url).then(function(){ showFeedback('복사됨!'); }, function(){ showFeedback('복사 실패'); });
+    }
+  });
+})();
+</script>
+<script src="/cookie-consent.js"></script>
+<script>
+(function(){
+  var CITY_SLUG = document.body.getAttribute('data-city-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* 이 페이지에서 보내는 맞춤 이벤트 네 가지:
+   *   - spot_click       : 스팟 카드의 지도 아이콘을 눌렀을 때 (어느 명소에 관심 있는지)
+   *   - spot_video_click : 스팟 카드의 "영상에서 보기" 링크를 눌렀을 때
+   *   - toc_click        : 상단 목차(핵심조언/조건별팁/가볼곳/숙소)를 눌렀을 때
+   *   - affiliate_click  : 클룩·마이리얼트립 예약 버튼을 눌렀을 때 (메인페이지와 동일한 이벤트명이라
+   *                        GA4에서 광고 클릭 통계를 한 곳에서 같이 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var adEl = event.target.closest('[data-ad-network]');
+    if (adEl) {
+      trackEvent('affiliate_click', {
+        ad_network: adEl.dataset.adNetwork || '',
+        ad_placement: adEl.dataset.adPlacement || '',
+        ad_label: adEl.dataset.adLabel || '',
+        city_slug: CITY_SLUG,
+        link_url: adEl.href || ''
+      });
+      return;
+    }
+    var spotEl = event.target.closest('[data-spot-click]');
+    if (spotEl) {
+      trackEvent('spot_click', { spot_name: spotEl.dataset.spotClick || '', city_slug: CITY_SLUG });
+      return;
+    }
+    var tsEl = event.target.closest('[data-spot-video-click]');
+    if (tsEl) {
+      trackEvent('spot_video_click', {
+        spot_name: tsEl.dataset.spotVideoClick || '',
+        ts_label: tsEl.textContent || '',
+        city_slug: CITY_SLUG
+      });
+      return;
+    }
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        city_slug: CITY_SLUG
+      });
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
