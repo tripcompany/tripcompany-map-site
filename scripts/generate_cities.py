@@ -40,10 +40,10 @@ CSV_URLS = {
     # 탭을 만들고 '웹에 게시' CSV 링크를 받으면 이 자리에 채워 넣습니다. 빈 채로
     # 두는 동안은 국가 페이지가 하나도 만들어지지 않고, 기존 도시 페이지 생성에는
     # 전혀 영향이 없습니다.
-    'Countries': '',
-    'Regions': '',
-    'Season': '',
-    'Basics': '',
+    'Countries': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1916795477&single=true&output=csv',
+    'Regions': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=644300893&single=true&output=csv',
+    'Season': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1898476893&single=true&output=csv',
+    'Basics': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=2010151279&single=true&output=csv',
 }
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
