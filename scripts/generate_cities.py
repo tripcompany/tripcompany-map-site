@@ -23,6 +23,7 @@ import urllib.request
 SITE = 'https://tripcompany.world'
 REPO_ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT_ROOT = os.path.join(REPO_ROOT, 'city')
+OUT_ROOT_COUNTRY = os.path.join(REPO_ROOT, 'country')
 
 # "핵심_도시페이지" 구글시트 — 파일 > 공유 > 웹에 게시, 탭별 CSV 링크
 CSV_URLS = {
@@ -35,6 +36,14 @@ CSV_URLS = {
     'VideoIndex': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1318190129&single=true&output=csv',
     # Videos 탭: city_id / video_id 열이 있는 구글시트 탭입니다. (제목과 공개일은 유튜브에서 자동으로 가져옵니다)
     'Videos': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vS-HbwesUrsUo6wmYDv_pO2aKJULe-WsJgTPOyIE7CbRZ_VyJxchQGa5JIMZO0fVLPV-tzp-Rjlk_nh/pub?gid=1750048788&single=true&output=csv',
+    # 국가 페이지용 탭 4개 — 아직 시트에 만들어지지 않았으면 빈 문자열로 둡니다.
+    # 탭을 만들고 '웹에 게시' CSV 링크를 받으면 이 자리에 채워 넣습니다. 빈 채로
+    # 두는 동안은 국가 페이지가 하나도 만들어지지 않고, 기존 도시 페이지 생성에는
+    # 전혀 영향이 없습니다.
+    'Countries': '',
+    'Regions': '',
+    'Season': '',
+    'Basics': '',
 }
 
 COUNTRY_NAME = {'392': '일본', '840': '미국', '156': '중국'}
@@ -84,6 +93,11 @@ def is_example(*vals):
 def is_city_published(city):
     """Cities.published 칸이 Y/공개 등으로 표시돼 있으면 그 도시는 공개 상태입니다."""
     return (city.get('published', '') or '').strip().upper() in ('Y', 'YES', '공개', 'TRUE', '1')
+
+
+def is_country_published(country):
+    """Countries.published 칸이 Y/공개 등으로 표시돼 있으면 그 나라 페이지는 공개 상태입니다."""
+    return (country.get('published', '') or '').strip().upper() in ('Y', 'YES', '공개', 'TRUE', '1')
 
 
 def alt_names(en, local):
@@ -365,6 +379,105 @@ PAGE_CSS = '''
   }
 '''
 
+PAGE_CSS_COUNTRY = '''
+:root{
+  --paper:#f4f7f6; --surface:#ffffff; --sunk:#eaf0ee; --deep:#123d36;
+  --ink:#14201e; --ink2:#33423f; --muted:#5d6b68; --faint:#8a9794;
+  --rule:#dde4e2; --rule2:#c7d1ce;
+  --a:#00897a; --a2:#c85207; --a3:#2b5fb8;
+  --a-soft:#d6ece7; --a2-soft:#f7e2d3; --a3-soft:#dbe5f6;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+ font-family:"IBM Plex Sans KR","Apple SD Gothic Neo",system-ui,sans-serif;
+ font-size:15.5px;line-height:1.72;-webkit-font-smoothing:antialiased}
+.wrap{max-width:940px;margin:0 auto;padding-inline:20px}
+h1,h2,h3{font-family:"Gothic A1","Apple SD Gothic Neo",system-ui,sans-serif;font-weight:800;text-wrap:balance;margin:0;letter-spacing:-.02em}
+p{margin:0 0 .9em}
+a{color:inherit}
+
+.preview-bar{background:#2b2f2d;color:#fff;font-size:0.84rem;padding:10px 24px;text-align:center}
+.preview-bar b{color:#ffd9a0}
+
+nav{background:var(--surface);border-bottom:1px solid var(--rule);position:sticky;top:0;z-index:20}
+nav .wrap{display:flex;align-items:center;gap:14px;height:52px}
+.brand{font-family:"Gothic A1",sans-serif;font-weight:800;font-size:15px;letter-spacing:-.01em}
+.crumb{font-size:13px;color:var(--muted)}
+.crumb b{color:var(--ink);font-weight:500}
+.crumb a{color:var(--muted);text-decoration:none}
+.crumb a:hover{color:var(--ink)}
+
+.hero{background:var(--deep);color:#fff;padding-block:46px 40px}
+.hero .wrap{max-width:940px}
+.kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7fd7c4;font-weight:600;margin-bottom:14px}
+.hero h1{font-size:clamp(28px,5.6vw,44px);line-height:1.16;margin-bottom:18px;color:#fff}
+.verdict{font-size:17.5px;color:#cfe5df;max-width:600px;margin-bottom:28px}
+.hstats{display:flex;flex-wrap:wrap;gap:10px}
+.chip{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:7px 14px;font-size:13px;color:#eaf5f2}
+.chip b{font-family:"IBM Plex Mono",monospace;font-weight:600;color:#fff}
+
+section{padding-block:52px 0}
+.shead{margin-bottom:8px}
+h2{font-size:clamp(20px,3.6vw,27px);line-height:1.3}
+.lead{font-size:16.5px;color:var(--ink2);margin-bottom:24px;max-width:640px}
+strong{font-weight:600;color:var(--ink)}
+.hr{height:1px;background:var(--rule);margin-top:54px}
+
+.regions{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media(max-width:700px){.regions{grid-template-columns:1fr}}
+.rc{background:var(--surface);border:1px solid var(--rule);padding:20px 20px 18px;display:flex;flex-direction:column}
+.rc .rtop{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.rc h3{font-size:19px}
+.rc .cities{font-size:12.5px;color:var(--faint);margin-bottom:12px}
+.rc .who{font-size:14.5px;color:var(--ink2);margin-bottom:12px;flex:1}
+.rc .who b{color:var(--ink)}
+.rc .meta{display:flex;gap:14px;font-size:12px;color:var(--muted);border-top:1px solid var(--rule);padding-top:11px;flex-wrap:wrap}
+.rc .meta span{display:flex;gap:5px}
+.rc .meta b{color:var(--ink2);font-weight:500}
+
+.rules{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.rule{background:var(--surface);display:grid;grid-template-columns:200px 1fr;gap:18px;padding:15px 20px}
+@media(max-width:640px){.rule{grid-template-columns:1fr;gap:5px}}
+.rule .q{font-size:14px;color:var(--muted);font-weight:500}
+.rule .a{font-size:15px;color:var(--ink)}
+
+.group{margin-top:26px}
+.gname{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--rule)}
+.gname h3{font-size:15px}
+.cgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:8px}
+.city{background:var(--surface);border:1px solid var(--rule);padding:11px 13px;text-decoration:none;display:block;transition:border-color .12s}
+.city:hover{border-color:var(--a)}
+.city.soon{opacity:.55}
+.city .n{font-weight:600;font-size:14.5px;margin-bottom:3px;color:var(--ink)}
+.city .t{font-size:12px;color:var(--muted);line-height:1.5}
+.city .soon-badge{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;display:inline-block;margin-bottom:5px;background:var(--a2-soft);color:var(--a2)}
+
+.tw{overflow-x:auto;border:1px solid var(--rule);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.8px;min-width:520px}
+th,td{text-align:left;padding:11px 14px;border-bottom:1px solid var(--rule);vertical-align:top}
+thead th{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--faint);font-weight:600;background:var(--sunk)}
+tbody tr:last-child td{border-bottom:0}
+td.nm{font-weight:600;white-space:nowrap}
+td.vd b{color:var(--a);font-weight:600}
+
+.basics{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.bi{background:var(--surface);padding:15px 17px}
+.bi .k{font-family:"IBM Plex Mono",monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--faint);font-weight:600;margin-bottom:5px}
+.bi .v{font-size:14px;color:var(--ink2);line-height:1.6}
+
+.slot{ display:inline-flex; align-items:center; gap:6px; background:#f1eefa; color:#8a7ab8;
+  border:1px dashed #8a7ab8; border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
+.slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+.slot-hint{ font-weight:500; opacity:0.85; }
+
+.asof{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);margin-top:10px}
+
+footer{padding-block:40px 70px}
+footer p{font-size:13px;color:var(--faint)}
+footer a{color:var(--a);font-weight:600;text-decoration:none}
+footer a:hover{text-decoration:underline}
+'''
+
 SHARE_JS = '''
 (function(){
   var btn = document.getElementById('shareFab');
@@ -480,7 +593,7 @@ CITY_TRACKING_JS = '''
 '''
 
 
-def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities=None):
+def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities=None, country_page_url=''):
     city_id = city['city_id']
     slug = city_id.lower()
     name = city.get('city_name_ko', city_id)
@@ -832,6 +945,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
   <div class="wrap">
     <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
     {'<p style="margin:0 0 8px; opacity:0.85;">' + e(country) + '의 다른 도시 가이드 → ' + related_links + '</p>' if related_links else ''}
+    {'<p style="margin:0 0 8px; opacity:0.85;">' + e(country) + ' 전체 가이드 보기 → <a href="' + e(country_page_url) + '">' + e(country) + ' 여행 가이드</a></p>' if country_page_url else ''}
     <p style="margin:0; opacity:0.8;">지도에서 다른 도시 보기 → <a href="/">tripcompany.world</a></p>
   </div>
 </footer>
@@ -858,10 +972,190 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
     return page, slug
 
 
-def build_sitemap(published):
-    """공개(published) 상태인 도시들의 주소를 sitemap.xml에 자동으로 반영합니다.
-    사람이 매번 손으로 도시 한 줄씩 추가/삭제할 필요 없이, Cities.published 값만
-    바꾸면 이 파일이 그 다음 자동 빌드 때 알아서 최신 상태로 다시 만들어집니다.
+def build_country_page(country, regions, rules, cities_by_region, season, basics, video_count=0):
+    """국가 가이드 페이지 하나를 만듭니다. build_city_page와 원칙은 같습니다 —
+    시트에 있는 값만 그리고, 없는 값은 slot()으로 빈 자리 표시를 합니다.
+    이 나라에 대한 데이터가 어느 탭에도 하나도 없으면 페이지를 만들지 않고 건너뜁니다."""
+    cc = (country.get('country_code') or '').strip()
+    alpha2 = COUNTRY_ALPHA2.get(cc, '')
+    slug = alpha2.lower()
+    name = country.get('country_name_ko') or COUNTRY_NAME.get(cc, '') or cc
+
+    has_any = bool(
+        regions or rules or cities_by_region or season or basics
+        or country.get('hero_title') or country.get('tc_verdict')
+    )
+    if not slug or not has_any:
+        return None, slug
+
+    global _PUBLISHED
+    is_published = is_country_published(country)
+    _PUBLISHED = is_published
+
+    title_h1 = country.get('hero_title') or f'{name} 여행, 어디로 갈까'
+    verdict = country.get('tc_verdict', '')
+    checked = country.get('checked_at', '')
+
+    published_city_total = sum(
+        1 for lst in cities_by_region.values() for c in lst if c.get('published')
+    )
+
+    hstats = [f'<span class="chip">다루는 도시 <b>{published_city_total}곳</b></span>']
+    if video_count:
+        hstats.append(f'<span class="chip">영상 <b>{video_count}편+</b></span>')
+
+    regions_html = []
+    for r in regions:
+        rid = r.get('region_id', '')
+        member_cities = cities_by_region.get(rid, [])
+        city_names = ' · '.join(c['name'] for c in member_cities)
+        who = r.get('tc_who', '')
+        meta_bits = []
+        if r.get('flight_time'):
+            meta_bits.append(f'<span>인천 <b>{e(r["flight_time"])}</b></span>')
+        if r.get('recommend_nights'):
+            meta_bits.append(f'<span>추천 <b>{e(r["recommend_nights"])}</b></span>')
+        regions_html.append(f'''
+    <div class="rc">
+      <div class="rtop"><h3>{e(r.get('region_name_ko'))}</h3></div>
+      {'<div class="cities">' + e(city_names) + '</div>' if city_names else ''}
+      <p class="who">{('<b>' + e(who) + '</b>') if who else ('' if is_published else slot('Regions.tc_who', '이 권역은 이런 사람이 갑니다'))}</p>
+      {'<div class="meta">' + ''.join(meta_bits) + '</div>' if meta_bits else ''}
+    </div>''')
+
+    rules_html = []
+    for r in rules:
+        rec = r.get('recommendation (직접)', '')
+        rules_html.append(f'''
+    <div class="rule">
+      <div class="q">{e(r.get('condition (조건)'))}</div>
+      <div class="a">{e(rec) if rec else ('' if is_published else slot('Rules.recommendation', '이 조건이면 어디로 보낼 것인가'))}</div>
+    </div>''')
+
+    def _city_card(c):
+        if c.get('published'):
+            return f'''
+      <a class="city" href="/city/{e(c['slug'])}/">
+        <div class="n">{e(c['name'])}</div>
+        {'<div class="t">' + e(c.get('one_line', '')) + '</div>' if c.get('one_line') else ''}
+      </a>'''
+        return f'''
+      <div class="city soon">
+        <span class="soon-badge">준비 중</span>
+        <div class="n">{e(c['name'])}</div>
+      </div>'''
+
+    groups_html = []
+    for r in regions:
+        rid = r.get('region_id', '')
+        member_cities = cities_by_region.get(rid, [])
+        if not member_cities:
+            continue
+        cards = ''.join(_city_card(c) for c in member_cities)
+        groups_html.append(f'''
+    <div class="group">
+      <div class="gname"><h3>{e(r.get('region_name_ko'))}</h3></div>
+      <div class="cgrid">{cards}</div>
+    </div>''')
+    # region_id가 비어있는(아직 권역 배정 안 된) 도시들도 놓치지 않고 보여줍니다.
+    unassigned = cities_by_region.get('', [])
+    if unassigned:
+        cards = ''.join(_city_card(c) for c in unassigned)
+        groups_html.append(f'''
+    <div class="group">
+      <div class="gname"><h3>권역 미배정</h3></div>
+      <div class="cgrid">{cards}</div>
+    </div>''')
+
+    season_rows = ''.join(
+        f'<tr><td class="nm">{e(s.get("period"))}</td><td class="vd"><b>{e(s.get("recommend"))}</b></td>'
+        f'<td>{e(s.get("avoid"))}</td><td>{e(s.get("note"))}</td></tr>'
+        for s in season
+    )
+
+    basics_html = ''.join(
+        f'<div class="bi"><div class="k">{e(b.get("key"))}</div><div class="v">{e(b.get("value"))}</div></div>'
+        for b in basics
+    )
+
+    verdict_html = e(verdict) if verdict else ('' if is_published else slot('Countries.tc_verdict', '이 나라는 어떻게 고르라고 할 것인가, 한 문장'))
+
+    page = f'''<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- {'검색엔진에 공개된 페이지입니다 (Countries.published = Y).' if is_published else '아직 준비 단계라 검색엔진에는 노출하지 않습니다. Countries 탭의 published 열을 Y로 바꾸면 공개됩니다.'} -->
+<meta name="robots" content="{'index, follow' if is_published else 'noindex, nofollow'}">
+<title>{e(title_h1)} · 트립콤파니 여행지도</title>
+<meta name="description" content="{e(verdict) if verdict else e(name) + ' 여행, 어디로 갈지 도시별로 정리했습니다.'}">
+<link rel="canonical" href="{SITE}/country/{slug}/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="트립콤파니 여행지도">
+<meta property="og:title" content="{e(title_h1)}">
+<meta property="og:url" content="{SITE}/country/{slug}/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-54V354TPYY"></script>
+<script src="/analytics.js"></script>
+<style>{PAGE_CSS_COUNTRY}</style>
+</head>
+<body data-country-slug="{slug}">
+
+{'' if is_published else '<div class="preview-bar"><b>자동 생성 미리보기</b> — 아직 비공개 상태입니다. Countries 탭의 published 열을 Y로 바꾸기 전까지는 검색엔진에 노출되지 않고, 지도·도시 페이지에서도 연결되지 않습니다.</div>'}
+
+<nav><div class="wrap">
+  <span class="brand">트립콤파니 여행지도</span>
+  <span class="crumb"><a href="/">지도</a> › <b>{e(name)}</b></span>
+</div></nav>
+
+<div class="hero"><div class="wrap">
+  <div class="kicker">국가 가이드 · {e(name)}</div>
+  <h1>{e(title_h1)}</h1>
+  <p class="verdict">{verdict_html}</p>
+  <div class="hstats">{''.join(hstats)}</div>
+</div></div>
+
+<div class="wrap">
+
+{'<section><div class="shead"><h2>권역부터 고르세요</h2></div><p class="lead">도시를 하나씩 보면 끝이 없습니다. 큰 덩어리를 먼저 정하면 나머지가 쉬워집니다.</p><div class="regions">' + ''.join(regions_html) + '</div></section>' if regions else ''}
+
+{'<div class="hr"></div>' if regions and (rules or groups_html) else ''}
+
+{'<section><div class="shead"><h2>이런 경우라면</h2></div><p class="lead">조건이 정해져 있으면 답도 거의 정해집니다.</p><div class="rules">' + ''.join(rules_html) + '</div></section>' if rules else ''}
+
+{'<div class="hr"></div>' if rules and groups_html else ''}
+
+{'<section><div class="shead"><h2>도시 ' + str(published_city_total) + '곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>' + ''.join(groups_html) + '</section>' if groups_html else ''}
+
+
+{'<div class="hr"></div>' if groups_html and season else ''}
+
+{'<section><div class="shead"><h2>언제 가나</h2></div><p class="lead">시기가 먼저 정해져 있다면 이 표부터 보세요.</p><div class="tw"><table><thead><tr><th>시기</th><th>추천</th><th>피할 곳</th><th>한 줄</th></tr></thead><tbody>' + season_rows + '</tbody></table></div></section>' if season else ''}
+
+{'<div class="hr"></div>' if season and basics else ''}
+
+{'<section><div class="shead"><h2>공통으로 챙길 것</h2></div><p class="lead">도시와 상관없이 나라 전체에 해당하는 것만 모았습니다.</p><div class="basics">' + basics_html + '</div>' + ('<p class="asof">정보 기준: ' + e(checked) + '</p>' if checked else '') + '</section>' if basics else ''}
+
+</div>
+
+<footer><div class="wrap">
+  <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
+  <p style="margin:0; opacity:0.8;">지도에서 다른 나라 보기 → <a href="/">tripcompany.world</a></p>
+</div></footer>
+
+</body>
+</html>
+'''
+    return page, slug
+
+
+def build_sitemap(published, published_countries=None):
+    """공개(published) 상태인 도시/나라들의 주소를 sitemap.xml에 자동으로 반영합니다.
+    사람이 매번 손으로 도시 한 줄씩 추가/삭제할 필요 없이, Cities.published /
+    Countries.published 값만 바꾸면 이 파일이 그 다음 자동 빌드 때 알아서 최신
+    상태로 다시 만들어집니다.
     (그래서 이 파일은 항상 이 스크립트가 통째로 새로 씁니다 — 수동으로 고쳐도 다음 실행 때 덮어써집니다.)"""
     today = datetime.date.today().isoformat()
     entries = [
@@ -871,6 +1165,9 @@ def build_sitemap(published):
     for _cid, slug, checked in published:
         lastmod = checked.strip() if checked and checked.strip() else today
         entries.append((f'/city/{slug}/', lastmod, 'weekly', '0.7'))
+    for _cc, slug, checked in (published_countries or []):
+        lastmod = checked.strip() if checked and checked.strip() else today
+        entries.append((f'/country/{slug}/', lastmod, 'weekly', '0.8'))
 
     urls = []
     for path_part, lastmod, changefreq, priority in entries:
@@ -919,6 +1216,73 @@ def main(local_files=None):
     else:
         videos_all = []
 
+    def _optional_csv(key):
+        """국가 페이지용 탭은 아직 시트에 없을 수 있습니다. URL이 안 채워져 있으면
+        (테스트용 local_files에도 없으면) 조용히 빈 리스트를 돌려줍니다."""
+        url = CSV_URLS.get(key, '')
+        if local_files and key in local_files:
+            return fetch_csv(key, url, local_files)
+        if url.startswith('http'):
+            return fetch_csv(key, url, local_files)
+        return []
+
+    countries_all = _optional_csv('Countries')
+    regions_all = _optional_csv('Regions')
+    season_all = _optional_csv('Season')
+    basics_all = _optional_csv('Basics')
+
+    cities_by_country = {}
+    for c in cities:
+        ccc = (c.get('country_code') or '').strip()
+        if ccc:
+            cities_by_country.setdefault(ccc, []).append(c)
+
+    country_page_url = {}  # country_code -> 그 나라 페이지 절대경로(공개된 경우만)
+    published_countries = []
+    country_made = []
+    for country in countries_all:
+        ccc = (country.get('country_code') or '').strip()
+        if not ccc:
+            continue
+        c_regions = sorted(
+            [r for r in regions_all if (r.get('country_code') or '').strip() == ccc],
+            key=lambda r: r.get('region_name_ko', '')
+        )
+        c_alpha2 = COUNTRY_ALPHA2.get(ccc, '')
+        c_rules = [r for r in rules_all if (r.get('city_id') or '').strip().upper() == c_alpha2]
+        c_season = [s for s in season_all if (s.get('country_code') or '').strip() == ccc]
+        c_basics = [b for b in basics_all if (b.get('country_code') or '').strip() == ccc]
+
+        cities_by_region = {}
+        for c in cities_by_country.get(ccc, []):
+            rid = (c.get('region_id') or '').strip()
+            cities_by_region.setdefault(rid, []).append({
+                'city_id': c['city_id'],
+                'slug': c['city_id'].lower(),
+                'name': c.get('city_name_ko', c['city_id']),
+                'one_line': c.get('tc_one_line', ''),
+                'published': is_city_published(c),
+            })
+        for _lst in cities_by_region.values():
+            _lst.sort(key=lambda x: x['name'])
+
+        country_city_ids = {c['city_id'] for c in cities_by_country.get(ccc, [])}
+        video_count = sum(1 for v in videos_all if v.get('city_id') in country_city_ids)
+
+        c_page, c_slug = build_country_page(
+            country, c_regions, c_rules, cities_by_region, c_season, c_basics, video_count
+        )
+        if c_page is None:
+            continue
+        c_out_dir = os.path.join(OUT_ROOT_COUNTRY, c_slug)
+        os.makedirs(c_out_dir, exist_ok=True)
+        with open(os.path.join(c_out_dir, 'index.html'), 'w', encoding='utf-8') as f:
+            f.write(c_page)
+        country_made.append((ccc, c_slug))
+        if is_country_published(country):
+            published_countries.append((ccc, c_slug, country.get('checked_at', '')))
+            country_page_url[ccc] = f'/country/{c_slug}/'
+
     made = []
     skipped = []
     published = []
@@ -946,7 +1310,7 @@ def main(local_files=None):
         related_cities = [
             r for r in published_by_country.get(cc, []) if r['city_id'] != cid
         ]
-        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities)
+        page, slug = build_city_page(city, timing, spots, stay, rules, route, vindex, videos, related_cities, country_page_url.get(cc, ''))
         if page is None:
             skipped.append(cid)
             continue
@@ -960,7 +1324,7 @@ def main(local_files=None):
 
     sitemap_path = os.path.join(REPO_ROOT, 'sitemap.xml')
     with open(sitemap_path, 'w', encoding='utf-8') as f:
-        f.write(build_sitemap(published))
+        f.write(build_sitemap(published, published_countries))
 
     # 지도 화면(index.html/app.js)이 "이 도시는 안내 페이지가 있다"는 걸
     # 알 수 있도록, 공개된 도시의 city_id 목록만 따로 내보냅니다. 지도 쪽
@@ -975,7 +1339,12 @@ def main(local_files=None):
         print(f'  - {cid} -> city/{slug}/index.html (스팟 {n}개)')
     if skipped:
         print('건너뜀(아직 아무 탭도 안 채워짐):', ', '.join(skipped))
-    print('sitemap.xml 갱신 완료 (공개 도시', len(published), '개 포함)')
+    print('sitemap.xml 갱신 완료 (공개 도시', len(published), '개, 공개 국가', len(published_countries), '개 포함)')
+    if country_made:
+        print('국가 페이지 생성:', len(country_made), '개')
+        for ccc, c_slug in country_made:
+            pub_mark = '공개' if any(x[0] == ccc for x in published_countries) else '비공개(미리보기)'
+            print(f'  - {ccc} -> country/{c_slug}/index.html ({pub_mark})')
 
 
 if __name__ == '__main__':
