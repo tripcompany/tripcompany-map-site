@@ -409,6 +409,12 @@ nav .wrap{display:flex;align-items:center;gap:14px;height:52px}
 .crumb a{color:var(--muted);text-decoration:none}
 .crumb a:hover{color:var(--ink)}
 
+.toc-bar{position:sticky;top:52px;z-index:19;background:var(--surface);border-bottom:1px solid var(--rule)}
+.toc-bar .wrap{display:flex;gap:8px;padding:10px 20px;overflow-x:auto}
+.toc-bar a{flex:0 0 auto;color:var(--ink);background:var(--paper);border:1px solid var(--rule);
+  border-radius:999px;padding:6px 14px;font-size:0.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-bar a:hover{background:var(--a-soft);color:var(--a);border-color:var(--a-soft)}
+
 .hero{background:var(--deep);color:#fff;padding-block:46px 40px}
 .hero .wrap{max-width:940px}
 .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7fd7c4;font-weight:600;margin-bottom:14px}
@@ -602,6 +608,29 @@ CITY_TRACKING_JS = '''
       trackEvent('toc_click', {
         section_label: tocEl.dataset.tocClick || '',
         city_slug: CITY_SLUG
+      });
+    }
+  });
+})();
+'''
+
+# 국가 페이지용 목차(틀만) 클릭 추적 — 도시 페이지의 CITY_TRACKING_JS와 원리는 같지만,
+# 국가 페이지에는 아직 목차 클릭 말고 추적할 요소가 없어서 그 한 가지만 담았습니다.
+# 나중에 국가 페이지에도 다른 클릭 추적이 필요해지면 이 스크립트에 이어서 추가하면 됩니다.
+COUNTRY_TRACKING_JS = '''
+(function(){
+  var COUNTRY_SLUG = document.body.getAttribute('data-country-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* toc_click : 상단 목차를 눌렀을 때 (도시 페이지와 이벤트 이름을 맞춰서 GA4에서 함께 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        country_slug: COUNTRY_SLUG
       });
     }
   });
@@ -1127,12 +1156,31 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
         <div class="vbar-val">{_views_num(rv)}</div>
       </div>''' for rv in week_rows)
             viewstat_html = f'''
-<section class="viewstat"><div class="shead"><h2>시청자들은 어디를 보고 있나</h2></div>
+<section id="viewstat" class="viewstat"><div class="shead"><h2>시청자들은 어디를 보고 있나</h2></div>
 <p class="lead">다른 데서는 못 보는 숫자입니다. 트립콤파니 지도에서 실제로 눌린 횟수를 권역별로 모은 것입니다.</p>
 <div class="vmeta">{e(latest_week)} · {name} 도시 선택 {total_v}회</div>
 <div class="vbar-list">{bar_rows}</div>
 <p class="vfoot">이 숫자는 저희가 다루는 도시 안에서의 분포입니다. 영상이 없는 도시는 0이 아니라 <b>측정되지 않은 것</b>입니다.</p>
 </section>'''
+
+    # 목차(틀만) — 지금은 어떤 권역/도시가 채워져 있는지에 따라 자동으로 항목이
+    # 늘거나 줄어듭니다. 아직은 나라별로 빈 섹션이 많아 항목 수가 적지만, 시트를
+    # 계속 채워나가면 같은 코드가 그대로 항목을 더 보여줍니다 — 도시 페이지의
+    # toc_items 방식과 동일합니다.
+    toc_items = []
+    if regions:
+        toc_items.append(('regions', '권역'))
+    if rules:
+        toc_items.append(('rules', '조건별 팁'))
+    if groups_html:
+        toc_items.append(('cities', '도시'))
+    if season:
+        toc_items.append(('season', '시기'))
+    if basics:
+        toc_items.append(('basics', '기본 정보'))
+    if viewstat_html:
+        toc_items.append(('viewstat', '조회 통계'))
+    toc_html = ''.join(f'<a href="#{sec_id}" data-toc-click="{label}">{label}</a>' for sec_id, label in toc_items)
 
     page = f'''<!doctype html>
 <html lang="ko">
@@ -1171,26 +1219,28 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
   <div class="hstats">{''.join(hstats)}</div>
 </div></div>
 
+{'<nav class="toc-bar"><div class="wrap">' + toc_html + '</div></nav>' if toc_items else ''}
+
 <div class="wrap">
 
-{'<section><div class="shead"><h2>권역부터 고르세요</h2></div><p class="lead">도시를 하나씩 보면 끝이 없습니다. 큰 덩어리를 먼저 정하면 나머지가 쉬워집니다.</p><div class="regions">' + ''.join(regions_html) + '</div></section>' if regions else ''}
+{'<section id="regions"><div class="shead"><h2>권역부터 고르세요</h2></div><p class="lead">도시를 하나씩 보면 끝이 없습니다. 큰 덩어리를 먼저 정하면 나머지가 쉬워집니다.</p><div class="regions">' + ''.join(regions_html) + '</div></section>' if regions else ''}
 
 {'<div class="hr"></div>' if regions and (rules or groups_html) else ''}
 
-{'<section><div class="shead"><h2>이런 경우라면</h2></div><p class="lead">조건이 정해져 있으면 답도 거의 정해집니다.</p><div class="rules">' + ''.join(rules_html) + '</div></section>' if rules else ''}
+{'<section id="rules"><div class="shead"><h2>이런 경우라면</h2></div><p class="lead">조건이 정해져 있으면 답도 거의 정해집니다.</p><div class="rules">' + ''.join(rules_html) + '</div></section>' if rules else ''}
 
 {'<div class="hr"></div>' if rules and groups_html else ''}
 
-{'<section><div class="shead"><h2>도시 ' + str(published_city_total) + '곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>' + ''.join(groups_html) + '</section>' if groups_html else ''}
+{'<section id="cities"><div class="shead"><h2>도시 ' + str(published_city_total) + '곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>' + ''.join(groups_html) + '</section>' if groups_html else ''}
 
 
 {'<div class="hr"></div>' if groups_html and season else ''}
 
-{'<section><div class="shead"><h2>언제 가나</h2></div><p class="lead">시기가 먼저 정해져 있다면 이 표부터 보세요.</p><div class="tw"><table><thead><tr><th>시기</th><th>추천</th><th>피할 곳</th><th>한 줄</th></tr></thead><tbody>' + season_rows + '</tbody></table></div></section>' if season else ''}
+{'<section id="season"><div class="shead"><h2>언제 가나</h2></div><p class="lead">시기가 먼저 정해져 있다면 이 표부터 보세요.</p><div class="tw"><table><thead><tr><th>시기</th><th>추천</th><th>피할 곳</th><th>한 줄</th></tr></thead><tbody>' + season_rows + '</tbody></table></div></section>' if season else ''}
 
 {'<div class="hr"></div>' if season and basics else ''}
 
-{'<section><div class="shead"><h2>공통으로 챙길 것</h2></div><p class="lead">도시와 상관없이 나라 전체에 해당하는 것만 모았습니다.</p><div class="basics">' + basics_html + '</div>' + ('<p class="asof">정보 기준: ' + e(checked) + '</p>' if checked else '') + '</section>' if basics else ''}
+{'<section id="basics"><div class="shead"><h2>공통으로 챙길 것</h2></div><p class="lead">도시와 상관없이 나라 전체에 해당하는 것만 모았습니다.</p><div class="basics">' + basics_html + '</div>' + ('<p class="asof">정보 기준: ' + e(checked) + '</p>' if checked else '') + '</section>' if basics else ''}
 
 {'<div class="hr"></div>' if (basics or season or groups_html or rules or regions) and viewstat_html else ''}
 
@@ -1202,6 +1252,8 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
   <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
   <p style="margin:0; opacity:0.8;">지도에서 다른 나라 보기 → <a href="/">tripcompany.world</a></p>
 </div></footer>
+
+{'<script>' + COUNTRY_TRACKING_JS + '</script>' if toc_items else ''}
 
 </body>
 </html>
