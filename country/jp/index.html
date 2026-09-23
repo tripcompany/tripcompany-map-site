@@ -106,6 +106,20 @@ td.vd b{color:var(--a);font-weight:600}
 .slot{ display:inline-flex; align-items:center; gap:6px; background:#f1eefa; color:#8a7ab8;
   border:1px dashed #8a7ab8; border-radius:7px; padding:2px 9px; font-size:0.76rem; font-weight:600; }
 .slot-field{ font-family:ui-monospace,SFMono-Regular,Menlo,monospace; font-size:0.72rem; }
+
+.viewstat{background:var(--deep);color:#fff;padding:34px 30px 30px;border:1px solid var(--rule)}
+.viewstat h2{color:#fff}
+.viewstat .lead{color:#a9c4bd}
+.viewstat .vmeta{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.04em;color:#7fd7c4;margin-bottom:20px}
+.vbar-list{display:flex;flex-direction:column;gap:10px}
+.vbar-row{display:grid;grid-template-columns:92px 1fr 46px;align-items:center;gap:12px}
+.vbar-name{font-size:13.5px;color:#dce9e5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vbar-track{background:rgba(255,255,255,.13);height:19px;border-radius:3px;overflow:hidden}
+.vbar-fill{background:#7fd7c4;height:100%;border-radius:3px}
+.vbar-val{font-family:"IBM Plex Mono",monospace;font-size:13px;color:#fff;text-align:right}
+.viewstat .vfoot{margin-top:22px;padding-top:17px;border-top:1px solid rgba(255,255,255,.14);font-size:13px;color:#a9c4bd}
+.viewstat .vfoot b{color:#fff}
+@media(max-width:640px){.vbar-row{grid-template-columns:74px 1fr 40px;gap:8px}}
 .slot-hint{ font-weight:500; opacity:0.85; }
 
 .asof{font-family:"IBM Plex Mono",monospace;font-size:11.5px;color:var(--faint);margin-top:10px}
@@ -224,6 +238,10 @@ footer a:hover{text-decoration:underline}
 <div class="hr"></div>
 
 <section><div class="shead"><h2>공통으로 챙길 것</h2></div><p class="lead">도시와 상관없이 나라 전체에 해당하는 것만 모았습니다.</p><div class="basics"><div class="bi"><div class="k">전압/플러그</div><div class="v">100V, Type A(일자형 2핀) — 한국 220V 기기는 변압기 필요</div></div><div class="bi"><div class="k">통화</div><div class="v">엔화(JPY), 현금 비중 여전히 높은 편</div></div><div class="bi"><div class="k">카드</div><div class="v">대도시는 카드 거의 다 되지만 소규모 식당·시장은 현금만 받는 곳 있음</div></div><div class="bi"><div class="k">교통카드</div><div class="v">간토는 Suica/Pasmo, 시코쿠는 별도 지역 IC카드 — 통용 범위 다름, 확인 필요</div></div><div class="bi"><div class="k">유심/와이파이</div><div class="v">공항에서 포켓와이파이 or eSIM이 제일 무난</div></div></div></section>
+
+
+
+
 
 </div>
 
