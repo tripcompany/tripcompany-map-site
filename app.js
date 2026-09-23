@@ -38,11 +38,14 @@ const CONFIG = {
     baseUrl: "https://sheetdb.io/api/v1/YOUR_API_ID"
   },
 
-  // 세계 국경 데이터 (50m 해상도 — 110m보다 해안선/국경선이 훨씬 디테일합니다).
-  // jsDelivr가 npm 패키지를 그대로 서빙합니다. 참고로 50m 데이터에는 싱가포르 같은
-  // 작은 나라의 도형도 들어있어서, 110m에서는 아예 안 보이던 나라들도 자체 모양으로
-  // 표시됩니다(그래도 그것보다 더 작은 나라를 위해 map_center 수동 지정 기능은 남겨뒀습니다).
-  worldTopoUrl: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-50m.json",
+  // 세계 국경 데이터 (110m 해상도 — 파일 크기가 50m의 1/6~1/7 수준(약 650KB → 100KB)이라
+  // 지도가 훨씬 빨리 뜹니다. 대신 해안선/국경선이 그만큼 단순화되고, 싱가포르처럼
+  // 아주 작은 나라는 도형 자체가 빠져 있을 수 있습니다 — 그런 나라는 아래
+  // map_center 수동 지정 기능(및 tinyCountryZoom)으로 점 마커만 표시됩니다.
+  // 2026-09: 일본/중국/미국처럼 지금 다루는 나라들은 크기가 있어 해상도를
+  // 낮춰도 체감 차이가 거의 없다고 판단해 110m로 전환했습니다.
+  // jsDelivr가 npm 패키지를 그대로 서빙합니다.
+  worldTopoUrl: "https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json",
 
   map: {
     initialCenter: [18, 10],
