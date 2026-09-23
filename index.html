@@ -93,6 +93,7 @@
   <p id="site-stats" class="site-stats" aria-live="polite"></p>
 </header>
 
+
 <main class="layout">
   <section class="map-pane">
     <button id="back-btn" class="back-btn" type="button" title="내 위치 주변으로 이동">
@@ -292,6 +293,26 @@
 </section>
 
 <footer class="site-footer">
+  <!-- 아래 두 표시 사이는 scripts/generate_cities.py가 자동으로 다시 씁니다.
+       손으로 고쳐도 다음 자동 빌드 때 덮어써집니다. 표시 자체는 지우지 마세요. -->
+  <!-- GUIDE-NAV:START -->
+<nav class="guide-nav" aria-label="도시 가이드">
+  <h2 class="gn-title">도시 가이드</h2>
+  <ul class="gn-root">
+    <li class="gn-group">
+      <span class="gn-top">일본</span>
+      <div class="gn-panel">
+        <div class="gn-region">
+          <span class="gn-region-name">시코쿠</span>
+          <ul>
+            <li><a href="/city/jp-takamatsu/">다카마츠</a></li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>
+<!-- GUIDE-NAV:END -->
   <p>&copy; 2026 트립콤파니. 영상 데이터는 구글시트로 관리됩니다.</p>
   <p class="site-footer-links">
     <a href="privacy.html">개인정보처리방침</a>

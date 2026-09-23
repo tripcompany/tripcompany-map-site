@@ -1209,6 +1209,125 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
     return page, slug
 
 
+# ── 상단 "도시 가이드" 메뉴 ──────────────────────────────────────────────
+# 홈(index.html) 맨 아래 푸터에 공개된 도시로 가는 링크 목록을 만듭니다.
+#
+# 왜 필요한가: 지도는 자바스크립트로 그려지고 도시 버튼은 사용자가 지도를
+# 클릭해야 나타납니다. 구글 크롤러는 페이지를 열어보긴 해도 클릭은 하지
+# 않기 때문에, 지금까지 도시 페이지로 가는 '따라갈 수 있는 링크'가 사이트에
+# 한 개도 없었습니다. 이 메뉴가 그 링크를 만들어 줍니다.
+#
+# 중요: 링크는 처음부터 HTML에 들어 있고 CSS로 감췄다 보여주기만 합니다.
+# (호버할 때 자바스크립트로 만들어내면 크롤러가 또 못 봅니다.)
+#
+# 어떻게 묶나: 아래 NAV_GROUPS만 고치면 됩니다. by_region=True인 나라는
+# 권역(간토·시코쿠 등)으로 한 단계 더 나누고, False면 도시를 바로 나열합니다.
+# 태국을 추가할 때는 '764': {'label': '동남아', 'by_region': False} 처럼
+# 한 줄 넣으면 되고, 같은 label을 쓰면 여러 나라가 한 묶음이 됩니다.
+NAV_GROUPS = {
+    '392': {'label': '일본',   'by_region': True},
+    '156': {'label': '중화권', 'by_region': False},
+    '840': {'label': '미국',   'by_region': False},
+}
+NAV_GROUP_ORDER = ['392', '156', '840']
+
+NAV_START = '<!-- GUIDE-NAV:START -->'
+NAV_END = '<!-- GUIDE-NAV:END -->'
+
+
+def build_guide_nav(cities, regions_all):
+    """공개된 도시만 모아 상단 메뉴 HTML을 만듭니다. 공개 도시가 없으면 ''."""
+    region_name = {}
+    for r in regions_all:
+        rid = (r.get('region_id') or '').strip()
+        if rid:
+            region_name[rid] = (r.get('region_name_ko') or rid).strip()
+
+    # label -> {by_region, regions: {region_id: [city...]}, flat: [city...]}
+    groups = {}
+    order = []
+    for c in cities:
+        if not is_city_published(c):
+            continue
+        cc = (c.get('country_code') or '').strip()
+        conf = NAV_GROUPS.get(cc)
+        if not conf:
+            continue
+        label = conf['label']
+        if label not in groups:
+            groups[label] = {'by_region': conf['by_region'], 'regions': {}, 'flat': []}
+            order.append((NAV_GROUP_ORDER.index(cc) if cc in NAV_GROUP_ORDER else 99, label))
+        item = {
+            'slug': c['city_id'].lower(),
+            'name': (c.get('city_name_ko') or c['city_id']).strip(),
+        }
+        g = groups[label]
+        if conf['by_region']:
+            rid = (c.get('region_id') or '').strip()
+            g['regions'].setdefault(rid, []).append(item)
+        else:
+            g['flat'].append(item)
+
+    if not groups:
+        return ''
+
+    order.sort()
+    out = [NAV_START,
+           '<nav class="guide-nav" aria-label="도시 가이드">',
+           '  <h2 class="gn-title">도시 가이드</h2>',
+           '  <ul class="gn-root">']
+    for _rank, label in order:
+        g = groups[label]
+        out.append('    <li class="gn-group">')
+        out.append(f'      <span class="gn-top">{e(label)}</span>')
+        out.append('      <div class="gn-panel">')
+        if g['by_region']:
+            for rid in sorted(g['regions'], key=lambda k: region_name.get(k, k)):
+                cl = sorted(g['regions'][rid], key=lambda x: x['name'])
+                out.append('        <div class="gn-region">')
+                out.append(f'          <span class="gn-region-name">{e(region_name.get(rid, rid) or "기타")}</span>')
+                out.append('          <ul>')
+                for it in cl:
+                    out.append(f'            <li><a href="/city/{it["slug"]}/">{e(it["name"])}</a></li>')
+                out.append('          </ul>')
+                out.append('        </div>')
+        else:
+            out.append('        <div class="gn-region">')
+            out.append('          <ul>')
+            for it in sorted(g['flat'], key=lambda x: x['name']):
+                out.append(f'            <li><a href="/city/{it["slug"]}/">{e(it["name"])}</a></li>')
+            out.append('          </ul>')
+            out.append('        </div>')
+        out.append('      </div>')
+        out.append('    </li>')
+    out.append('  </ul>')
+    out.append('</nav>')
+    out.append(NAV_END)
+    return '\n'.join(out)
+
+
+def write_guide_nav(nav_html):
+    """index.html의 GUIDE-NAV 표시 구간을 새로 만든 메뉴로 갈아끼웁니다.
+    표시가 없으면(실수로 지웠으면) 아무것도 안 하고 알려만 줍니다."""
+    path = os.path.join(REPO_ROOT, 'index.html')
+    with open(path, encoding='utf-8') as f:
+        html = f.read()
+    if NAV_START not in html or NAV_END not in html:
+        print('  (!) index.html에 GUIDE-NAV 표시가 없어 상단 메뉴를 건너뜁니다.')
+        return False
+    head, rest = html.split(NAV_START, 1)
+    _old, tail = rest.split(NAV_END, 1)
+    block = nav_html if nav_html else (NAV_START + NAV_END)
+    new = head + block + tail
+    if new == html:
+        return False
+    with open(path, 'w', encoding='utf-8') as f:
+        f.write(new)
+    return True
+
+
+
+
 def build_sitemap(published, published_countries=None):
     """공개(published) 상태인 도시/나라들의 주소를 sitemap.xml에 자동으로 반영합니다.
     사람이 매번 손으로 도시 한 줄씩 추가/삭제할 필요 없이, Cities.published /
@@ -1386,6 +1505,9 @@ def main(local_files=None):
     with open(sitemap_path, 'w', encoding='utf-8') as f:
         f.write(build_sitemap(published, published_countries))
 
+    # 홈 상단 "도시 가이드" 메뉴도 같은 공개 목록으로 다시 만듭니다.
+    nav_changed = write_guide_nav(build_guide_nav(cities, regions_all))
+
     # 지도 화면(index.html/app.js)이 "이 도시는 안내 페이지가 있다"는 걸
     # 알 수 있도록, 공개된 도시의 city_id 목록만 따로 내보냅니다. 지도 쪽
     # Cities 탭과 이 시트(핵심_도시페이지) 둘 다 같은 city_id(예: JP-TOKYO)를
@@ -1400,6 +1522,8 @@ def main(local_files=None):
     if skipped:
         print('건너뜀(아직 아무 탭도 안 채워짐):', ', '.join(skipped))
     print('sitemap.xml 갱신 완료 (공개 도시', len(published), '개, 공개 국가', len(published_countries), '개 포함)')
+    print('상단 도시 가이드 메뉴:', '갱신됨' if nav_changed else '변경 없음')
+
     if country_made:
         print('국가 페이지 생성:', len(country_made), '개')
         for ccc, c_slug in country_made:
