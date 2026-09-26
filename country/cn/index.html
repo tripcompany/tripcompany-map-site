@@ -45,6 +45,12 @@ nav .wrap{display:flex;align-items:center;gap:14px;height:52px}
 .crumb a{color:var(--muted);text-decoration:none}
 .crumb a:hover{color:var(--ink)}
 
+.toc-bar{position:sticky;top:52px;z-index:19;background:var(--surface);border-bottom:1px solid var(--rule)}
+.toc-bar .wrap{display:flex;gap:8px;padding:10px 20px;overflow-x:auto}
+.toc-bar a{flex:0 0 auto;color:var(--ink);background:var(--paper);border:1px solid var(--rule);
+  border-radius:999px;padding:6px 14px;font-size:0.82rem;font-weight:700;text-decoration:none;white-space:nowrap}
+.toc-bar a:hover{background:var(--a-soft);color:var(--a);border-color:var(--a-soft)}
+
 .hero{background:var(--deep);color:#fff;padding-block:46px 40px}
 .hero .wrap{max-width:940px}
 .kicker{font-family:"IBM Plex Mono",monospace;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:#7fd7c4;font-weight:600;margin-bottom:14px}
@@ -146,6 +152,8 @@ footer a:hover{text-decoration:underline}
   <div class="hstats"><span class="chip">다루는 도시 <b>0곳</b></span></div>
 </div></div>
 
+<nav class="toc-bar"><div class="wrap"><a href="#cities" data-toc-click="도시">도시</a></div></nav>
+
 <div class="wrap">
 
 
@@ -156,7 +164,7 @@ footer a:hover{text-decoration:underline}
 
 
 
-<section><div class="shead"><h2>도시 0곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>
+<section id="cities"><div class="shead"><h2>도시 0곳</h2></div><p class="lead">권역별로 묶었습니다. 이름을 누르면 그 도시의 가이드로 갑니다.</p>
     <div class="group">
       <div class="gname"><h3>권역 미배정</h3></div>
       <div class="cgrid">
@@ -185,6 +193,26 @@ footer a:hover{text-decoration:underline}
   <p style="margin:0 0 8px; font-weight:700;">트립콤파니 여행지도</p>
   <p style="margin:0; opacity:0.8;">지도에서 다른 나라 보기 → <a href="/">tripcompany.world</a></p>
 </div></footer>
+
+<script>
+(function(){
+  var COUNTRY_SLUG = document.body.getAttribute('data-country-slug') || '';
+  function trackEvent(name, params){
+    if (typeof window.gtag !== 'function') return;
+    try { window.gtag('event', name, params || {}); } catch(e){ /* 통계 전송 실패가 화면 동작을 막지 않도록 무시 */ }
+  }
+  /* toc_click : 상단 목차를 눌렀을 때 (도시 페이지와 이벤트 이름을 맞춰서 GA4에서 함께 볼 수 있습니다) */
+  document.addEventListener('click', function(event){
+    var tocEl = event.target.closest('[data-toc-click]');
+    if (tocEl) {
+      trackEvent('toc_click', {
+        section_label: tocEl.dataset.tocClick || '',
+        country_slug: COUNTRY_SLUG
+      });
+    }
+  });
+})();
+</script>
 
 </body>
 </html>
