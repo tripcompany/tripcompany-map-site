@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>배경 지도 목업 · 트립콤파니 여행지도</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+<style>
+  :root{ --accent:#1f6f5c; --ink:#1f2523; --muted:#5b655f; --bg:#f7f7f4; --line:#e3e2dc; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif; }
+  header{ padding:16px 20px 12px; border-bottom:1px solid var(--line); background:#fff; }
+  h1{ font-size:1.05rem; margin:0 0 4px; }
+  .sub{ margin:0; font-size:0.85rem; color:var(--muted); line-height:1.5; }
+  .bar{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:12px 20px; background:#fff; border-bottom:1px solid var(--line); }
+  .bar button{ font:inherit; font-size:0.85rem; font-weight:700; padding:7px 14px; border-radius:999px;
+    border:1px solid var(--line); background:var(--bg); color:var(--ink); cursor:pointer; }
+  .bar button:hover{ border-color:var(--accent); color:var(--accent); }
+  .status{ margin-left:auto; font-size:0.8rem; font-weight:700; padding:6px 12px; border-radius:8px;
+    background:#eceae2; color:var(--muted); transition:background .2s,color .2s; }
+  .status.on{ background:#cfe3de; color:#164e41; }
+  #map{ height:calc(100vh - 150px); min-height:420px; width:100%; background:#eef1f0; }
+  /* 배경 지도가 켜지고 꺼질 때 부드럽게 나타나도록 */
+  .basemap-pane{ transition:opacity .35s ease; }
+  .basemap-pane.is-hidden{ opacity:0; }
+  /* 사이트와 같은 도시 점 모양 */
+  .city-icon{ position:relative; display:block; width:24px; height:24px; }
+  .city-dot{ position:absolute; box-sizing:border-box; border-radius:50%; border:2px solid #fff; box-shadow:0 1px 3px rgba(0,0,0,.35); }
+  .city-dot-trip{ left:2px; top:2px; width:20px; height:20px; background:#e8871e; }
+  .city-dot-trekom{ left:7px; top:7px; width:10px; height:10px; background:#3b6fd6; }
+  .city-tooltip{ font-weight:700; }
+  @media (max-width:640px){ #map{ height:calc(100vh - 210px); } .status{ margin-left:0; } }
+</style>
+</head>
+<body>
+<header>
+  <h1>배경 지도 목업 (2번 방식)</h1>
+  <p class="sub">세계 화면은 지금 사이트처럼 가볍게 두고, 나라·도시로 <b>확대 5단계 이상</b> 들어가면 도로·지명이 있는 배경 지도가 깔립니다. 실제 사이트에는 아직 적용되지 않은 테스트 페이지예요.</p>
+</header>
+<div class="bar">
+  <button data-go="world">세계</button>
+  <button data-go="japan">일본</button>
+  <button data-go="tokyo">도쿄</button>
+  <button data-go="takamatsu">다카마츠</button>
+  <button data-go="gc">그랜드캐니언</button>
+  <span class="status" id="status">배경 지도 꺼짐 · 세계 화면</span>
+</div>
+<div id="map"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+<script>
+(function(){
+  var BASEMAP_ZOOM = 5;               // 이 확대 단계부터 배경 지도가 깔림
+  var ACTIVE = { '392':1, '840':1, '156':1, '764':1, '704':1, '608':1 }; // 영상이 있는 나라(목업용)
+
+  var map = L.map('map', { zoomControl:false, minZoom:2, maxZoom:12, worldCopyJump:true })
+    .setView([18, 10], 2);
+  L.control.zoom({ position:'bottomright' }).addTo(map);
+
+  // 배경 지도: 확대했을 때만 붙였다 뗐다 합니다(세계 화면에선 아예 안 받아서 가벼움 유지).
+  map.createPane('basemap');
+  var basePane = map.getPane('basemap');
+  basePane.style.zIndex = 200;
+  basePane.classList.add('basemap-pane', 'is-hidden');
+  var basemap = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    pane:'basemap', subdomains:'abcd', maxZoom:19,
+    attribution:'&copy; OpenStreetMap contributors &copy; CARTO'
+  });
+
+  var countryLayer = null;
+  function styleFor(feature, zoomedIn){
+    var active = !!ACTIVE[String(feature.id)];
+    if (zoomedIn) {
+      // 확대 화면: 나라 색칠을 거의 걷어내서 배경 지도가 보이게
+      return { weight:0, fillColor: active ? '#1f6f5c' : '#dfe3e6', fillOpacity: active ? 0.06 : 0.0 };
+    }
+    return { weight:0.6, color:'#ffffff', fillColor: active ? '#1f6f5c' : '#dfe3e6', fillOpacity: active ? 0.85 : 0.45 };
+  }
+
+  var statusEl = document.getElementById('status');
+  var isOn = false;
+  function update(){
+    var zoomedIn = map.getZoom() >= BASEMAP_ZOOM;
+    if (zoomedIn !== isOn) {
+      isOn = zoomedIn;
+      if (zoomedIn) {
+        basemap.addTo(map);
+        requestAnimationFrame(function(){ basePane.classList.remove('is-hidden'); });
+      } else {
+        basePane.classList.add('is-hidden');
+        setTimeout(function(){ if (!isOn) map.removeLayer(basemap); }, 360);
+      }
+      if (countryLayer) countryLayer.setStyle(function(f){ return styleFor(f, zoomedIn); });
+    }
+    statusEl.textContent = zoomedIn
+      ? '배경 지도 켜짐 · 확대 ' + map.getZoom() + '단계'
+      : '배경 지도 꺼짐 · 확대 ' + map.getZoom() + '단계';
+    statusEl.classList.toggle('on', zoomedIn);
+  }
+  map.on('zoomend', update);
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+    .then(function(r){ return r.json(); })
+    .then(function(topo){
+      var geo = topojson.feature(topo, topo.objects.countries);
+      countryLayer = L.geoJSON(geo, { style:function(f){ return styleFor(f, false); } }).addTo(map);
+      countryLayer.bringToBack();
+      update();
+    });
+
+  // 도시 점(사이트와 같은 모양): 주황=트립콤파니, 파랑=여행하는트콤
+  var cities = [
+    ['도쿄', 35.681, 139.767, 1, 1], ['요코하마', 35.444, 139.638, 1, 0], ['다카마츠', 34.340, 134.047, 1, 1],
+    ['오사카', 34.693, 135.502, 1, 1], ['교토', 35.011, 135.768, 1, 0], ['후쿠오카', 33.590, 130.402, 1, 1],
+    ['삿포로', 43.062, 141.354, 1, 0], ['상하이', 31.230, 121.474, 1, 0],
+    ['그랜드캐니언 사우스림', 36.057, -112.140, 1, 1], ['라스베이거스', 36.170, -115.140, 1, 0],
+    ['자이언', 37.298, -113.026, 0, 1], ['LA', 34.052, -118.244, 1, 0]
+  ];
+  cities.forEach(function(c){
+    var inner = (c[3] ? '<span class="city-dot city-dot-trip"></span>' : '') + (c[4] ? '<span class="city-dot city-dot-trekom"></span>' : '');
+    L.marker([c[1], c[2]], {
+      icon: L.divIcon({ className:'city-icon-wrapper', html:'<span class="city-icon">' + inner + '</span>', iconSize:[24,24], iconAnchor:[12,12] })
+    }).addTo(map).bindTooltip(c[0], { className:'city-tooltip' });
+  });
+
+  var views = {
+    world:     [[18, 10], 2],
+    japan:     [[36.2, 137.5], 5],
+    tokyo:     [[35.68, 139.76], 10],
+    takamatsu: [[34.34, 134.05], 11],
+    gc:        [[36.1, -112.1], 10]
+  };
+  document.querySelectorAll('[data-go]').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var v = views[btn.getAttribute('data-go')];
+      map.flyTo(v[0], v[1], { duration: 1.2 });
+    });
+  });
+})();
+</script>
+</body>
+</html>
