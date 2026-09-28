@@ -1518,7 +1518,10 @@ def main(local_files=None):
         c_rules = [r for r in rules_all if (r.get('city_id') or '').strip().upper() == c_alpha2]
         c_season = [s for s in season_all if (s.get('country_code') or '').strip() == ccc]
         c_basics = [b for b in basics_all if (b.get('country_code') or '').strip() == ccc]
-        c_region_views = [v for v in region_views_all if (v.get('country_code') or '').strip() == ccc]
+        # RegionViews 탭의 country_code는 392 같은 번호로 적어도, jp 같은 두 글자
+        # 국가 코드로 적어도(대소문자 무관) 같은 나라로 인식합니다.
+        _cc_keys = {ccc, c_alpha2.upper()} - {''}
+        c_region_views = [v for v in region_views_all if (v.get('country_code') or '').strip().upper() in _cc_keys]
 
         cities_by_region = {}
         for c in cities_by_country.get(ccc, []):
