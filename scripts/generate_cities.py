@@ -88,6 +88,22 @@ def e(s):
     return html.escape(str(s or ''), quote=True)
 
 
+DIFFICULTY_CLASS = {
+    '쉬움': 'easy', '초급': 'easy', '하': 'easy',
+    '보통': 'mid', '중급': 'mid', '중': 'mid',
+    '어려움': 'hard', '상급': 'hard', '상': 'hard', '매우어려움': 'hard',
+}
+
+
+def _spot_col(row, base):
+    """row에서 머리글이 base이거나 'base (설명)'처럼 시작하는 칸의 값을 돌려줍니다."""
+    for k, v in row.items():
+        if k == base or k.startswith(base + ' ') or k.startswith(base + '('):
+            if (v or '').strip():
+                return v.strip()
+    return ''
+
+
 def is_example(*vals):
     return any('(예시)' in (v or '') for v in vals)
 
@@ -266,6 +282,12 @@ PAGE_CSS = '''
   .spot-head{ display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
   .spot-name{ font-weight:700; }
   .spot-alt{ font-size:0.78rem; color:var(--ink-soft); margin:3px 0 0; }
+  .trail-meta{ display:flex; flex-wrap:wrap; gap:6px; margin:8px 0 0; }
+  .tm{ font-size:0.74rem; font-weight:700; padding:3px 9px; border-radius:6px;
+    background:#eceae2; color:var(--ink-soft); }
+  .tm-easy{ background:var(--accent-soft); color:var(--accent-strong); }
+  .tm-mid{ background:var(--money-soft); color:var(--money); }
+  .tm-hard{ background:var(--warn-soft); color:var(--warn); }
   .grade{ font-size:0.74rem; font-weight:800; padding:3px 10px; border-radius:999px; }
   .grade-must{ background:var(--accent-soft); color:var(--accent-strong); }
   .grade-maybe{ background:#eeece4; color:#6b6555; }
@@ -728,6 +750,19 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
                 '<span class="spot-photo"><img src="' + e(photo) + '" alt="' + e(photo_alt) + '" loading="lazy"></span>'
                 if photo else ''
             )
+            # 자연 관광지(그랜드캐니언·요세미티·야쿠시마 등)용 선택 칸 — 코스마다
+            # 소요시간과 난이도를 적어두면 카드에 작은 표시로 붙습니다. 도시 스팟은
+            # 비워두면 지금과 똑같이 보입니다. 시트 머리글은 "duration"/"difficulty"
+            # 또는 "duration (소요시간)"처럼 뒤에 설명을 붙여도 인식합니다.
+            duration = _spot_col(s, 'duration')
+            difficulty = _spot_col(s, 'difficulty')
+            trail_bits = []
+            if duration:
+                trail_bits.append('<span class="tm">소요 ' + e(duration) + '</span>')
+            if difficulty:
+                lv = DIFFICULTY_CLASS.get(difficulty.replace(' ', ''), '')
+                trail_bits.append('<span class="tm' + (' tm-' + lv if lv else '') + '">난이도 ' + e(difficulty) + '</span>')
+            trail_html = ('<div class="trail-meta">' + ''.join(trail_bits) + '</div>') if trail_bits else ''
             cards.append(f'''
         <li class="spot{' has-photo' if photo else ''}">
           {photo_html}
@@ -739,6 +774,7 @@ def build_city_page(city, timing, spots, stay, rules, route, vindex, videos, rel
               {'<a class="map-link" data-spot-click="' + e(spot_name_ko) + '" href="' + e(map_url) + '" target="_blank" rel="noopener noreferrer" aria-label="구글지도에서 위치 보기" title="구글지도에서 위치 보기"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"></path><circle cx="12" cy="10" r="2.5"></circle></svg></a>' if map_url else ''}
             </div>
             {'<p class="spot-alt">' + e(alt) + '</p>' if alt else ''}
+            {trail_html}
             {'<p class="tc">' + e(note) + '</p>' if note else ('' if is_published else '<p class="tc tc-empty">' + slot('Spots.tc_note', '왜 이 등급인지 20자 내외') + '</p>')}
             {'<p class="fact">' + e(fact) + '</p>' if fact else ''}
             {(
