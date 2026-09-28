@@ -1422,23 +1422,25 @@ def build_sitemap(published, published_countries=None):
     Countries.published 값만 바꾸면 이 파일이 그 다음 자동 빌드 때 알아서 최신
     상태로 다시 만들어집니다.
     (그래서 이 파일은 항상 이 스크립트가 통째로 새로 씁니다 — 수동으로 고쳐도 다음 실행 때 덮어써집니다.)"""
-    today = datetime.date.today().isoformat()
+    # 주의: 예전엔 홈·privacy의 lastmod에 "오늘 날짜"를 넣었는데, 그러면 내용이
+    # 하나도 안 바뀌어도 날짜가 바뀌었다는 이유로 자동 갱신이 매일 커밋 → 넷리파이가
+    # 매일 배포했습니다(무료 플랜은 배포 1회마다 크레딧 15, 월 300이 한도라 하루 1번만
+    # 해도 한 달을 못 버팁니다). 그래서 날짜를 모르는 주소는 lastmod를 아예 빼서,
+    # 시트 내용이 실제로 바뀔 때만 sitemap.xml이 바뀌도록 했습니다.
     entries = [
-        ('/', today, 'weekly', '1.0'),
-        ('/privacy.html', today, 'monthly', '0.3'),
+        ('/', '', 'weekly', '1.0'),
+        ('/privacy.html', '', 'monthly', '0.3'),
     ]
     for _cid, slug, checked in published:
-        lastmod = checked.strip() if checked and checked.strip() else today
-        entries.append((f'/city/{slug}/', lastmod, 'weekly', '0.7'))
+        entries.append((f'/city/{slug}/', (checked or '').strip(), 'weekly', '0.7'))
     for _cc, slug, checked in (published_countries or []):
-        lastmod = checked.strip() if checked and checked.strip() else today
-        entries.append((f'/country/{slug}/', lastmod, 'weekly', '0.8'))
+        entries.append((f'/country/{slug}/', (checked or '').strip(), 'weekly', '0.8'))
 
     urls = []
     for path_part, lastmod, changefreq, priority in entries:
         urls.append(
             f'  <url>\n    <loc>{SITE}{path_part}</loc>\n'
-            f'    <lastmod>{e(lastmod)}</lastmod>\n'
+            + (f'    <lastmod>{e(lastmod)}</lastmod>\n' if lastmod else '') +
             f'    <changefreq>{changefreq}</changefreq>\n'
             f'    <priority>{priority}</priority>\n  </url>'
         )
