@@ -1315,7 +1315,7 @@ def build_country_page(country, regions, rules, cities_by_region, season, basics
 NAV_GROUPS = {
     '392': {'label': '일본',   'by_region': True},
     '156': {'label': '중화권', 'by_region': False},
-    '840': {'label': '미국',   'by_region': False},
+    '840': {'label': '미국',   'by_region': True},   # 캘리포니아 / 그랜드서클 / 뉴욕·동부 / 서북부
 }
 NAV_GROUP_ORDER = ['392', '156', '840']
 
